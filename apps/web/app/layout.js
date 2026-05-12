@@ -1,7 +1,9 @@
 import { Cairo } from 'next/font/google';
 import './globals.css';
-import Header from '../components/Header';
-import BottomNav from '../components/BottomNav';
+import dynamic from 'next/dynamic';
+
+const Header = dynamic(() => import('../components/Header'), { ssr: false });
+const BottomNav = dynamic(() => import('../components/BottomNav'), { ssr: false });
 
 const cairo = Cairo({ subsets: ['arabic', 'latin'] });
 
