@@ -44,6 +44,10 @@ services:
         value: 1
       - key: NODE_OPTIONS
         value: --max-old-space-size=450
+      - key: GENERATE_SOURCEMAP
+        value: "false"
+      - key: CI
+        value: "true"
 
 databases:
   # ─── PostgreSQL Free Tier (90 يوم) ─────────────────────────────────────────
