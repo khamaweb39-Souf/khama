@@ -25,10 +25,10 @@ interface StatItem {
 
 /* ─── Constants ──────────────────────────────────────────────────────── */
 const STATS: StatItem[] = [
-  { value: 12400, suffix: '+', label: 'Références de tissus' },
-  { value: 850,   suffix: '',  label: 'Fournisseurs vérifiés' },
-  { value: 47,    suffix: '',  label: 'Pays couverts' },
-  { value: 98,    suffix: '%', label: 'Satisfaction client' },
+  { value: 12400, suffix: '+', label: 'مرجع نسيجي' },
+  { value: 850,   suffix: '',  label: 'مورد معتمد' },
+  { value: 47,    suffix: '',  label: 'دولة مغطاة' },
+  { value: 98,    suffix: '%', label: 'رضا العملاء' },
 ];
 
 const FIBER_COLORS = [
@@ -40,8 +40,8 @@ const FIBER_COLORS = [
   'rgba(255,235,180,0.25)',
 ];
 
-const H1_LINE_1 = "L'excellence textile,";
-const H1_LINE_2 = "à portée de clic.";
+const H1_LINE_1 = "فخامة المنسوجات،";
+const H1_LINE_2 = "بلمسة زر واحدة.";
 
 /* ─── Hook: Counter Up ───────────────────────────────────────────────── */
 function useCounterUp(target: number, duration: number = 2200, start: boolean = false) {
@@ -194,7 +194,7 @@ function ScrollIndicator() {
         className="font-body text-xs tracking-[0.2em] uppercase"
         style={{ color: 'rgba(245,240,232,0.4)', letterSpacing: '0.18em' }}
       >
-        Découvrir
+        اكتشف المزيد
       </span>
       <div
         className="relative flex flex-col items-center"
@@ -508,7 +508,7 @@ export default function HeroSection() {
                 fontWeight: 500,
               }}
             >
-              Plateforme Textile Professionnelle N°1 au Maghreb &amp; Afrique
+              المنصة الاحترافية الأولى للمنسوجات في المغرب العربي وأفريقيا
             </span>
             <span
               style={{
@@ -573,10 +573,10 @@ export default function HeroSection() {
                 : 'none',
             }}
           >
-            Khama connecte les professionnels de l'industrie textile&nbsp;:
+            خامة تربط محترفي صناعة النسيج بذكاء&nbsp;:
             <br />
             <span style={{ color: 'rgba(245,240,232,0.45)' }}>
-              acheteurs, fournisseurs, designers et bureaux d'études.
+              المشترون، الموردون، المصممون، ومكاتب الدراسات.
             </span>
           </p>
 
@@ -608,7 +608,7 @@ export default function HeroSection() {
                 whiteSpace: 'nowrap',
               }}
             >
-              Explorer le Catalogue
+              استكشف الكتالوج
               <span
                 style={{ animation: reducedMotion ? 'none' : 'arrow-nudge 1.5s ease-in-out infinite' }}
                 aria-hidden="true"
@@ -632,7 +632,7 @@ export default function HeroSection() {
                 whiteSpace: 'nowrap',
               }}
             >
-              Publier une offre
+              انشر طلب عرض
             </a>
 
             {/* Text link */}
@@ -670,7 +670,7 @@ export default function HeroSection() {
                 }
               }}
             >
-              Découvrir Khama Pro
+              اكتشف خامة برو
               <span aria-hidden="true">↗</span>
               <span
                 className="hover-line"
@@ -780,7 +780,7 @@ export default function HeroSection() {
               color: 'rgba(201,168,76,0.5)',
             }}
           >
-            Textile · Soie · Laine · Coton
+            منسوجات · حرير · صوف · قطن
           </span>
         </div>
       </div>
