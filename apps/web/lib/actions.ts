@@ -60,7 +60,7 @@ export async function createRFQ(data: any) {
     const category = await prisma.category.findFirst();
     if (!category) throw new Error("No category found");
 
-    const rfq = await prisma.rfqRequest.create({
+    const rfq = await prisma.rFQRequest.create({
       data: {
         buyerId: user.id,
         categoryId: category.id,
@@ -94,7 +94,7 @@ export async function createRFQ(data: any) {
 
 export async function getActiveRFQs() {
   try {
-    const rfqs = await prisma.rfqRequest.findMany({
+    const rfqs = await prisma.rFQRequest.findMany({
       where: { status: 'SUBMITTED' },
       include: { buyer: true },
       orderBy: { createdAt: 'desc' }

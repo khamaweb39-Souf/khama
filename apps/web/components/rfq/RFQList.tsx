@@ -10,7 +10,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { ar } from 'date-fns/locale';
 
 /* ─── Mock Data ──────────────────────────────────────────────────────── */
-const ACTIVE_RFQS = [
+const MOCK_RFQS = [
   {
     id: 'RFQ-2026-001',
     title: 'مطلوب 5000 متر قماش بوبلين قطني ناعم',
