@@ -104,21 +104,23 @@ function AnimatedCounter({ stat, start, delay }: { stat: StatItem; start: boolea
   );
 }
 
-/* ─── Component: Animated H1 Letter by Letter ───────────────────────── */
+/* ─── Component: Animated H1 Word by Word (Fixed for Arabic) ───────── */
 function AnimatedH1({ line, baseDelay }: { line: string; baseDelay: number }) {
+  // Split by spaces to keep Arabic words connected
+  const words = line.split(' ');
   return (
     <span className="block">
-      {line.split('').map((char, i) => (
+      {words.map((word, i) => (
         <span
           key={i}
-          aria-hidden={char === ' ' ? undefined : undefined}
           className="letter-char"
           style={{
-            animationDelay: `${baseDelay + i * 42}ms`,
-            ...(char === ' ' ? { width: '0.28em', display: 'inline-block' } : {}),
+            animationDelay: `${baseDelay + i * 150}ms`,
+            display: 'inline-block',
+            marginRight: '0.25em'
           }}
         >
-          {char === ' ' ? '\u00A0' : char}
+          {word}&nbsp;
         </span>
       ))}
     </span>
