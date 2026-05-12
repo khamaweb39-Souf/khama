@@ -5,6 +5,7 @@ import ProductGrid from '../components/ProductGrid';
 import TrustedFactories from '../components/home/TrustedFactories';
 import LatestCourses from '../components/home/LatestCourses';
 import FilterSidebar from '../components/FilterSidebar';
+import HomeSections from '../components/home/HomeSections';
 
 export default function HomePage() {
   return (
@@ -33,6 +34,9 @@ export default function HomePage() {
       
       {/* Academy & Courses Section */}
       <LatestCourses />
+
+      {/* Advanced Editorial & Market Sections */}
+      <HomeSections />
     </div>
   );
 }
