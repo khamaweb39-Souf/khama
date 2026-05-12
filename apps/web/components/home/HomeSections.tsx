@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from 'react';
 import { 
   TrendingUp, ArrowRight, ArrowUpRight, ArrowDownRight, 
   Clock, CheckCircle2, Quote, Mail, Linkedin, Instagram, Twitter,
-  Zap, Package, Globe, BarChart3, Factory
+  Zap, Package, Globe, BarChart, Factory
 } from 'lucide-react';
 
 // ─── Sub-Components & Data ──────────────────────────────────────────────────
@@ -64,7 +64,7 @@ const MarketDashboard = () => (
           <div key={i} className="bg-white p-6 rounded-2xl border border-border shadow-sm flex flex-col gap-4">
             <div className="flex justify-between items-center">
               <span className="text-body-small font-bold text-charcoal">{item.label}</span>
-              <BarChart3 className="w-4 h-4 text-muted" />
+              <BarChart className="w-4 h-4 text-muted" />
             </div>
             <div className="flex items-baseline gap-2">
               <span className="text-2xl font-bold text-burgundy">{item.price}</span>
