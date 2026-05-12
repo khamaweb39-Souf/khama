@@ -31,7 +31,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <div className="group bg-white rounded-2xl border border-border overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
       {/* Image Container with Overlay */}
-      <div className="relative aspect-[4/5] overflow-hidden bg-ecru">
+      <div className="relative aspect-[4/5] w-full overflow-hidden bg-ecru">
         <img 
           src={image} 
           alt={name} 

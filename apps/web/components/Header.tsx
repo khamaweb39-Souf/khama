@@ -129,17 +129,17 @@ export default function Header() {
   };
 
   return (
-    <div className="fixed top-0 inset-x-0 w-full z-[100] font-body">
+    <div className="fixed top-0 left-0 right-0 w-full z-[100] font-body">
       <TopBar />
       
       <header 
         className={`
-          bg-white transition-all duration-500 relative w-full
+          bg-white transition-all duration-500 relative w-full border-b border-border/50
           ${isScrolled ? 'h-14 shadow-lg' : 'h-20 shadow-sm'}
         `}
         onMouseLeave={() => setActiveMenu(null)}
       >
-        <div className="max-w-7xl mx-auto h-full px-4 flex items-center justify-between w-full">
+        <div className="max-w-7xl mx-auto h-full px-4 flex items-center justify-between w-full gap-4">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group shrink-0">
             <div className="relative w-10 h-10 overflow-hidden rounded-lg flex items-center justify-center">
