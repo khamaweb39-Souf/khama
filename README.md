@@ -63,6 +63,11 @@ khama/
 - **Monetization**: Split-revenue model between the platform and trainers.
 - **Progress Tracking**: Real-time lesson tracking and curriculum management.
 
+### 🤖 AI Concierge (The Brain)
+- **Smart RFQ Analysis**: Automated price estimation and technical specification analysis.
+- **Multi-Engine Support**: Integrated with OpenAI (GPT), Groq (Llama 3), and a deterministic fallback Rule-Engine.
+- **Automated Clarifications**: AI-driven suggestions for buyers to improve their request quality.
+
 ---
 
 ## ⚙️ Setup & Installation (التثبيت والتشغيل)
