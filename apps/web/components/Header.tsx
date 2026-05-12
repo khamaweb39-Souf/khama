@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import * as Icons from 'lucide-react';
 import Button from './ui/Button';
+import SearchBar from './SearchBar';
 
 const { 
   Search, Menu, X, Bell, Globe, ChevronDown, 
@@ -173,14 +174,9 @@ export default function Header() {
             <Link href="/academy" className="text-label text-charcoal hover:text-gold transition-colors">أكاديمية خامة</Link>
           </nav>
 
-          {/* Search Bar */}
-          <div className="flex-1 max-w-md relative hidden md:block">
-            <input 
-              type="text" 
-              placeholder="ابحث عن ألياف، موردين، أو عروض..." 
-              className="w-full bg-ecru/50 border-none rounded-full h-10 px-12 text-sm focus:ring-2 focus:ring-gold/30 outline-none transition-all"
-            />
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
+          {/* Search Bar Container */}
+          <div className="flex-1 max-w-xl hidden md:block">
+            <SearchBar />
           </div>
 
           {/* User Actions */}
