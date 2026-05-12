@@ -4,8 +4,8 @@ import React from 'react';
 import Link from 'next/link';
 import { 
   LayoutDashboard, Package, ShoppingBag, 
-  MessageSquare, BarChart3, Settings, 
-  PlusCircle, LogOut, Bell, UserCircle
+  MessageSquare, BarChart, Settings, 
+  PlusCircle, LogOut, Bell, User
 } from 'lucide-react';
 
 export default function SupplierDashboardLayout({
@@ -75,7 +75,7 @@ export default function SupplierDashboardLayout({
                   <p className="text-[11px] font-bold text-charcoal group-hover:text-gold transition-colors">Tissage de Lyon</p>
                   <p className="text-[9px] text-muted">حساب مصنع معتمد</p>
                </div>
-               <UserCircle className="w-8 h-8 text-muted group-hover:text-gold transition-colors" />
+               <User className="w-8 h-8 text-muted group-hover:text-gold transition-colors" />
             </Link>
           </div>
         </header>

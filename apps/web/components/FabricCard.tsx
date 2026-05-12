@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { 
-  Eye, Heart, FileSpreadsheet, Share2, 
-  CheckCircle2, Globe, Star, Info,
+  Eye, Heart, FileText, Share2, 
+  CheckCircle, Globe, Star, Info,
   ChevronRight, ArrowUpRight
 } from 'lucide-react';
 import { FabricCardProps } from '../types/fabric';
@@ -93,7 +93,7 @@ export default function FabricCard(props: FabricCardProps) {
             <Eye className="w-5 h-5" />
           </button>
           <button className="p-3 bg-white text-burgundy rounded-full hover:bg-gold hover:text-white transition-all transform hover:scale-110 shadow-xl">
-            <FileSpreadsheet className="w-5 h-5" />
+            <FileText className="w-5 h-5" />
           </button>
           <button className="p-3 bg-white text-burgundy rounded-full hover:bg-gold hover:text-white transition-all transform hover:scale-110 shadow-xl">
             <Heart className="w-5 h-5" />
@@ -120,7 +120,7 @@ export default function FabricCard(props: FabricCardProps) {
               <img src={supplier.avatar} alt={supplier.name} className="object-cover" />
             </div>
             <span className="text-[11px] text-muted flex items-center gap-1">
-              {supplier.name} {supplier.isVerified && <CheckCircle2 className="w-3 h-3 text-success" />}
+              {supplier.name} {supplier.isVerified && <CheckCircle className="w-3 h-3 text-success" />}
             </span>
             <span className="text-[11px] text-muted ml-auto flex items-center gap-1">
               {origin.flag} {origin.country}

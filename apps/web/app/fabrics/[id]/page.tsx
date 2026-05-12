@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Download, Share2, Heart, Star, MapPin, 
-  Wind, Droplets, ShieldCheck, Thermometer,
+  Wind, Droplets, Shield, Thermometer,
   ChevronRight, ArrowLeft, MessageSquare, 
   Calendar, Package, Info, CheckCircle
 } from 'lucide-react';
@@ -177,7 +177,7 @@ export default function FabricDetailPage({ params }: { params: { id: string } })
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <TechItem label="الجراماج (GSM)" value="285 g/m² (±5%)" icon={Wind} />
               <TechItem label="العرض (Laize)" value="150 cm" icon={ArrowLeft} />
-              <TechItem label="السماكة" value="0.85 mm" icon={ShieldCheck} />
+              <TechItem label="السماكة" value="0.85 mm" icon={Shield} />
               <TechItem label="تقلص الغسيل" value="< 2.0%" icon={Droplets} />
               <TechItem label="مقاومة الشد" value="450 N / 5cm" icon={Thermometer} />
               <TechItem label="ثبات اللون" value="4.5 / 5.0" icon={Info} />
@@ -224,7 +224,7 @@ export default function FabricDetailPage({ params }: { params: { id: string } })
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8" dir="rtl">
                <div className="p-6 bg-success/5 rounded-2xl border border-success/20">
                   <h4 className="text-success font-bold mb-4 flex items-center gap-2">
-                    <ShieldCheck className="w-5 h-5" /> الشهادات المعتمدة
+                    <Shield className="w-5 h-5" /> الشهادات المعتمدة
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {['GOTS (2025)', 'OEKO-TEX Std 100', 'ISO 9001'].map(c => (

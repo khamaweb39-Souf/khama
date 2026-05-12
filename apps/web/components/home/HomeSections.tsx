@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from 'react';
 import { 
   TrendingUp, ArrowRight, ArrowUpRight, ArrowDownRight, 
-  Clock, CheckCircle2, Quote, Mail, Linkedin, Instagram, Twitter,
+  Clock, CheckCircle, Quote, Mail, Linkedin, Instagram, Twitter,
   Zap, Package, Globe, BarChart, Factory
 } from 'lucide-react';
 
