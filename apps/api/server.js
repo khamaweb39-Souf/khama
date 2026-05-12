@@ -20,6 +20,8 @@ const reviewsRoutes = require('./routes/reviews');
 const adminRoutes = require('./routes/admin');
 const coursesRoutes = require('./routes/courses');
 const aiRoutes = require('./routes/ai');
+const healthRoutes = require('./routes/health');
+const { startKeepAlive } = require('./utils/keepAlive');
 
 const app = express();
 const server = http.createServer(app);
@@ -68,6 +70,7 @@ app.use('/api/v1/reviews', reviewsRoutes);
 app.use('/api/v1/admin', adminRoutes);
 app.use('/api/v1/courses', coursesRoutes);
 app.use('/api/v1/ai', aiRoutes);
+app.use('/api/v1/health', healthRoutes);
 
 // ─── Socket.io Logic ──────────────────────────────────────────────────────────
 io.on('connection', (socket) => {
@@ -119,7 +122,8 @@ app.use((err, req, res, next) => {
 });
 
 // ─── Start Server ─────────────────────────────────────────────────────────────
-server.listen(PORT, '0.0.0.0', () => {
-  console.log(`🚀 Khama API running on port ${PORT}`);
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT} (Socket.io enabled)`);
+  startKeepAlive();
   console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
 });

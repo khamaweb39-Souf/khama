@@ -1,0 +1,21 @@
+name: Keep Khama Alive
+
+on:
+  schedule:
+    # تشغيل كل 14 دقيقة لضمان بقاء Render نشطاً
+    - cron: '*/14 * * * *'
+  workflow_dispatch: # السماح بالتشغيل اليدوي للتحقق
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping API Health Check
+        run: |
+          curl -f https://khama-api.onrender.com/api/v1/health || exit 1
+          echo "API is alive and healthy!"
+      
+      - name: Ping Web Frontend
+        run: |
+          curl -f https://khama-frontend-v1.onrender.com || exit 1
+          echo "Frontend is alive!"
