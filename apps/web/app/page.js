@@ -1,4 +1,4 @@
-import HeroBanner from '../components/home/HeroBanner';
+import HeroSection from '../components/home/HeroSection';
 import QuickCategories from '../components/home/QuickCategories';
 import B2BToggle from '../components/home/B2BToggle';
 import ProductGrid from '../components/ProductGrid';
@@ -9,8 +9,8 @@ import FilterSidebar from '../components/FilterSidebar';
 export default function HomePage() {
   return (
     <div className="flex flex-col w-full overflow-x-hidden">
-      {/* Hero Banner (Slider) */}
-      <HeroBanner />
+      {/* Cinematic Hero Section */}
+      <HeroSection />
       
       {/* Quick Categories Section */}
       <QuickCategories />
