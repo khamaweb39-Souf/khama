@@ -438,6 +438,12 @@ model Message {
   isRead         Boolean      @default(false)
   
   createdAt      DateTime     @default(now())
+
+  @@index([conversationId])
+  @@index([senderId])
+  @@map("messages")
+}
+
 // ═══════════════════════════════════════
 // أكاديمية خامة (Academy & Courses)
 // ═══════════════════════════════════════
@@ -523,9 +529,4 @@ model Enrollment {
   @@unique([userId, courseId])
   @@index([userId])
   @@map("enrollments")
-}
-
-  @@index([conversationId])
-  @@index([senderId])
-  @@map("messages")
 }
