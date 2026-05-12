@@ -25,28 +25,21 @@ services:
       - key: ALLOWED_ORIGINS
         value: https://khama.onrender.com
 
-  # ─── Web Frontend (Render Static Site - مجاني 100%) ────────────────────────
+  # ─── Web Frontend (Render Web Service) ───────────────────────────
   - type: web
     name: khama-web
-    env: static
+    env: node
+    plan: free
+    region: frankfurt
     buildCommand: cd apps/web && npm install && npm run build
-    staticPublishPath: apps/web/out
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
-    headers:
-      - path: /static/*
-        name: Cache-Control
-        value: public, max-age=31536000, immutable
-      - path: /*
-        name: Cache-Control
-        value: public, max-age=0, must-revalidate
+    startCommand: cd apps/web && npm start
     envVars:
       - key: NEXT_PUBLIC_API_URL
         value: https://khama-api.onrender.com
       - key: NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
         sync: false
+      - key: PORT
+        value: 3000
 
 databases:
   # ─── PostgreSQL Free Tier (90 يوم) ─────────────────────────────────────────
