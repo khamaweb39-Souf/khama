@@ -5,18 +5,40 @@
 ---
 
 ## 🚀 Technical Overview (نظرة عامة تقنية)
-Khama is a high-performance Monorepo architecture designed to bridge the gap between B2B (Factories/Importers) and B2C (Consumers/Tailors). Optimized for **Render Free Tier** and high-scale local deployment.
+Khama is a high-performance Monorepo architecture designed to bridge the gap between B2B (Factories/Importers) and B2C (Consumers/Tailors). Optimized for **Render Full-Stack Deployment** with a premium cinematic user experience.
 
 ### 🛠️ Tech Stack (التقنيات المستخدمة)
-- **Framework**: [Next.js 14](https://nextjs.org/) (App Router, ISR, Server Components).
+- **Framework**: [Next.js 14](https://nextjs.org/) (App Router, Server Actions, ISR).
 - **Backend**: Node.js & Express (High performance, Scalable).
 - **Monorepo Tooling**: [Turborepo](https://turbo.build/).
 - **Database**: PostgreSQL with [Prisma ORM](https://www.prisma.io/).
 - **Real-time**: [Socket.io](https://socket.io/) for Live Chat.
 - **State Management**: [Zustand](https://github.com/pmndrs/zustand).
-- **Styling**: Tailwind CSS with custom Khama Brand Design System.
-- **Cloud Media**: [Cloudinary](https://cloudinary.com/) (Auto-optimization, Blur placeholders).
-- **Security**: JWT (Access + Refresh Tokens) & Password Hashing.
+- **Styling**: Vanilla CSS & Tailwind CSS with Khama Luxury Brand System.
+- **Security**: JWT & Role-Based Access Control (RBAC).
+
+---
+
+## ✨ Recent Major Updates (آخر التحديثات الجوهرية)
+
+### 🎬 Cinematic UI & Global Localization
+- **Arabic First Approach**: Full localization of the homepage, hero sections, and dashboards with high-end Arabic typography.
+- **Word-Level Animations**: Optimized text reveal animations to ensure perfect Arabic script connectivity (no broken ligatures).
+- **Build Stability**: Resolved critical PostCSS encoding issues (UTF-8) and React Error #130 by implementing stable local SVG icons.
+
+### 📦 Supplier Add-Product Wizard (معالج إضافة المنتجات)
+- **4-Step Professional Flow**: A high-end onboarding system for suppliers to list technical fabrics.
+- **Technical Precision**: Capture granular data: Composition (%), Weight (GSM), Width (Laize), and Weave types.
+- **Commercial Terms**: Integrated MOQ, Lead Time, and Certification management (GOTS, ISO, OEKO-TEX).
+
+### 🤝 B2B RFQ Procurement Engine (نظام طلبات العروض)
+- **Buyer-Side Wizard**: Multi-step flow for buyers to launch international tenders.
+- **Smart Targeting**: Ability to target verified suppliers by geographic region or certification status.
+- **Real-time Marketplace**: Public RFQ directory with live stats, countdown timers, and urgency indicators.
+
+### 🔗 Full-Stack Database Integration
+- **Server Actions Architecture**: All wizards (Product & RFQ) are now connected to the **PostgreSQL** database via **Prisma**.
+- **Data Persistence**: Real-world data submission with automatic cache revalidation for a seamless UX.
 
 ---
 
@@ -24,62 +46,13 @@ Khama is a high-performance Monorepo architecture designed to bridge the gap bet
 ```text
 khama/
 ├── apps/
-│   ├── api/          # Express Backend (PostgreSQL, Prisma, Socket.io)
-│   ├── web/          # Next.js 14 Frontend (Marketplace & Dashboard)
-│   └── mobile/       # Expo/React Native App (Future Implementation)
+│   ├── api/          # Express Backend (Prisma, Socket.io)
+│   ├── web/          # Next.js 14 (Marketplace, Dashboards, Server Actions)
+│   └── mobile/       # Expo/React Native App (Coming Soon)
 ├── packages/
-│   ├── ui/           # Shared UI Component Library
+│   ├── ui/           # Shared Component Library
 │   └── shared/       # Shared Utilities & Types
-└── docker-compose.yml # Local DB Environment (PostgreSQL)
 ```
-
----
-
-## ✨ Features Implemented (الميزات المنفذة حالياً)
-
-### 🔐 Authentication & Security
-- **JWT System**: Secure login with 15m Access Tokens and 7d Refresh Tokens.
-- **Budget OTP**: In-memory OTP system for cost-free identity verification.
-- **RBAC**: Role-Based Access Control (CONSUMER, SELLER, FACTORY, IMPORTER, ADMIN).
-
-### 📦 Product & Inventory
-- **Advanced Listing**: Filters by Wilaya, Made in Algeria, Category, and Price.
-- **Image Pipeline**: Auto-resize and compression via Cloudinary.
-- **Smart Inventory**: Automatic stock decrement and low-stock alerts.
-
-### 🤝 B2B & B2C Commerce
-- **B2B RFQ System**: Request for Quotes for bulk orders with technical specs.
-- **B2C Orders**: Multi-store checkout (orders are automatically split by seller).
-- **Real-time Chat**: Live negotiation between buyers and suppliers using WebSockets.
-
-### 🏆 Trust & Governance
-- **Dynamic Badge Engine**: Automatic badges (Verified, On Time, Gold Customer).
-- **Ratings & Reviews**: Verified purchase verification for trust building.
-- **Admin Dashboard**: Verification center for stores and product moderation.
-
-### 🎓 Khama Academy (New!)
-- **Course Infrastructure**: Multi-chapter/lesson recorded and live courses.
-- **Automated Certificates**: Digital, verifiable certificates issued upon 100% completion.
-- **Monetization**: Split-revenue model between the platform and trainers.
-- **Progress Tracking**: Real-time lesson tracking and curriculum management.
-
-### 🎨 Premium Design System (The Aesthetic)
-- **Parisian Couture Palette**: Deep Ecru, Spun Gold, and Textile Indigo.
-- **Expert Typography**: Sophisticated hierarchy using *Cormorant Garamond* (Display) and *Inter* (Body).
-- **Responsive Systems**: Intelligent scaling for all devices with high-end micro-interactions.
-- **Professional Identity**: Official Khama brand integration across the platform.
-
-### 🤖 AI & Search Intelligence (The Brain)
-- **Smart Tech Search**: Advanced search bar that understands textile vocabulary (GSM, GOTS, Pantone) with real-time categorized suggestions.
-- **Image Search UI**: Ready-to-integrate visual search interface for fabric pattern matching.
-- **AI Concierge**: Automated RFQ analysis and price estimation using multi-engine support (OpenAI, Groq).
-- **Search History**: Localized search tracking for a personalized B2B experience.
-
-### 🔍 Expert Filtering System
-- **Technical Specs**: Granular filters for GSM (Weight), Width, and Tensile Strength.
-- **Finishes & Treatments**: Dedicated filters for DWR, Anti-UV, Flame Retardant (M1/M2), and more.
-- **Traceability**: Origin tracking by country and supply chain distance (KM).
-- **Certifications**: One-click filtering for GOTS, OEKO-TEX, ISO, and REACH compliance.
 
 ---
 
@@ -87,33 +60,22 @@ khama/
 
 ### 1. Prerequisites
 - Node.js 18+
-- Docker (for PostgreSQL)
+- PostgreSQL Instance
 
-### 2. Environment Variables (.env)
-Create an `.env` file in `apps/api/`:
-```env
-DATABASE_URL="postgresql://postgres:password123@localhost:5440/khama?schema=public"
-JWT_SECRET="your_secret"
-JWT_REFRESH_SECRET="your_refresh_secret"
-CLOUDINARY_CLOUD_NAME="your_name"
-CLOUDINARY_API_KEY="your_key"
-CLOUDINARY_API_SECRET="your_secret"
-```
-
-### 3. Run Development
+### 2. Run Development
 ```bash
 npm install
-docker-compose up -d   # Start Database
-npx turbo run dev      # Run API & Web simultaneously
+npx prisma generate --schema=apps/api/prisma/schema.prisma
+npm run dev
 ```
 
 ---
 
 ## 🗺️ Roadmap (خارطة الطريق)
-- [ ] Integration with Local Payment Gateways (BaridiMob/CIB).
-- [ ] Shipping Logistics API (Yassir/Zimail integration).
-- [ ] Mobile App launch on Play Store.
-- [ ] AI-powered fabric pattern matching.
+- [ ] **Chat System Integration**: Linking the RFQ engine with a real-time negotiation chat.
+- [ ] **Payment Gateway**: BaridiMob & CIB integration for Algerian market.
+- [ ] **Shipping Logistics**: Automated weight calculation and carrier assignment.
+- [ ] **AI Search**: Image-to-Fabric visual matching system.
 
 ---
 
