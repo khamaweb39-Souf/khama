@@ -1,0 +1,9 @@
+{
+  "name": "@khama/ui",
+  "version": "1.0.0",
+  "main": "./index.js",
+  "private": true,
+  "dependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}

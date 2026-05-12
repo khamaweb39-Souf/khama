@@ -1,0 +1,443 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ═══════════════════════════════════════
+// المستخدمون
+// ═══════════════════════════════════════
+model User {
+  id          String    @id @default(cuid())
+  phone       String    @unique
+  email       String?   @unique
+  password    String
+  fullName    String
+  avatar      String?   // Cloudinary URL
+  userType    UserType
+  wilaya      String
+  isVerified  Boolean   @default(false)
+  isActive    Boolean   @default(true)
+  language    String    @default("ar")
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime? // Soft delete
+
+  store       Store?
+  orders      Order[]
+  badges      UserBadge[]
+  wishlist    WishlistItem[]
+  wallet      Wallet?
+  reviews     Review[]
+  rfqRequests RFQRequest[]
+  conversations Conversation[] @relation("UserConversations")
+  messages      Message[]
+
+  @@index([phone])
+  @@index([userType])
+  @@index([wilaya])
+  @@map("users")
+}
+
+enum UserType {
+  CONSUMER
+  SELLER
+  FACTORY
+  IMPORTER
+  DESIGNER
+  TRAINER
+  ADMIN
+}
+
+// ═══════════════════════════════════════
+// المتاجر
+// ═══════════════════════════════════════
+model Store {
+  id             String   @id @default(cuid())
+  userId         String   @unique
+  user           User     @relation(fields: [userId], references: [id])
+  name           String
+  slug           String   @unique
+  logo           String?
+  banner         String?
+  description    String?
+  commercialReg  String?
+  specialization String[]
+  isVerified     Boolean  @default(false)
+  rating         Float    @default(0)
+  reviewCount    Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  products Product[]
+  orders   Order[]
+  rfqResponses RFQResponse[]
+
+  @@index([slug])
+  @@index([isVerified])
+  @@map("stores")
+}
+
+// ═══════════════════════════════════════
+// التصنيفات (3 مستويات)
+// ═══════════════════════════════════════
+model Category {
+  id        String     @id @default(cuid())
+  name      Json       // { ar, fr, en }
+  slug      String     @unique
+  icon      String?
+  parentId  String?
+  parent    Category?  @relation("CategoryTree", fields: [parentId], references: [id])
+  children  Category[] @relation("CategoryTree")
+  level     Int        // 1, 2, 3
+  sortOrder Int        @default(0)
+  isActive  Boolean    @default(true)
+
+  products   Product[]
+  attributes CategoryAttribute[]
+
+  @@index([parentId])
+  @@index([level])
+  @@index([isActive])
+  @@map("categories")
+}
+
+model CategoryAttribute {
+  id           String   @id @default(cuid())
+  categoryId   String
+  category     Category @relation(fields: [categoryId], references: [id])
+  name         Json     // { ar, fr, en }
+  type         String   // select, multiselect, range, boolean, color
+  options      Json?    // للـ select/multiselect
+  unit         String?  // gsm, mm, cm
+  isFilterable Boolean  @default(true)
+  isRequired   Boolean  @default(false)
+
+  @@index([categoryId])
+  @@map("category_attributes")
+}
+
+// ═══════════════════════════════════════
+// المنتجات
+// ═══════════════════════════════════════
+model Product {
+  id                String   @id @default(cuid())
+  storeId           String
+  store             Store    @relation(fields: [storeId], references: [id])
+  categoryId        String
+  category          Category @relation(fields: [categoryId], references: [id])
+  sku               String
+  title             Json     // { ar, fr?, en? }
+  description       String?
+  images            String[] // Cloudinary URLs
+  video             String?
+  // السعر
+  pricingType       String   @default("FIXED") // FIXED, TIERED, RFQ_ONLY
+  price             Float?
+  tieredPricing     Json?    // [{ min, max, price }]
+  // المخزون
+  stock             Int      @default(0)
+  lowStockThreshold Int      @default(5)
+  // الخصائص
+  attributes        Json?    // Dynamic attributes
+  badges            String[] // MADE_IN_ALGERIA, etc
+  // الحالة
+  status            String   @default("DRAFT") // DRAFT, ACTIVE, PAUSED, DELETED
+  acceptsCustom     Boolean  @default(false)
+  // الإحصائيات
+  viewCount         Int      @default(0)
+  wishlistCount     Int      @default(0)
+  soldCount         Int      @default(0)
+  rating            Float    @default(0)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  deletedAt         DateTime?
+
+  variants     ProductVariant[]
+  orderItems   OrderItem[]
+  wishlistedBy WishlistItem[]
+  reviews      Review[]
+
+  @@unique([storeId, sku])
+  @@index([categoryId])
+  @@index([status])
+  @@index([storeId])
+  @@index([createdAt])
+  @@map("products")
+}
+
+model ProductVariant {
+  id        String  @id @default(cuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  sku       String
+  color     String?
+  size      String?
+  stock     Int     @default(0)
+  price     Float?
+  image     String?
+
+  @@index([productId])
+  @@map("product_variants")
+}
+
+// ═══════════════════════════════════════
+// الطلبات
+// ═══════════════════════════════════════
+model Order {
+  id            String    @id @default(cuid())
+  orderNumber   String    @unique
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+  storeId       String
+  store         Store     @relation(fields: [storeId], references: [id])
+  // التوصيل
+  customerName  String
+  customerPhone String
+  address       String
+  wilaya        String
+  commune       String?
+  // المالية
+  subtotal      Float
+  shippingCost  Float     @default(0)
+  discount      Float     @default(0)
+  total         Float
+  paymentMethod String    // COD, BARIDIMOB, CIB
+  paymentStatus String    @default("PENDING") // PENDING, PAID, FAILED, REFUNDED
+  // الحالة
+  status        String    @default("PENDING") // PENDING, CONFIRMED, PROCESSING, SHIPPED, DELIVERED, CANCELLED
+  trackingCode  String?
+  notes         String?
+  shippedAt     DateTime?
+  deliveredAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  items OrderItem[]
+
+  @@index([userId])
+  @@index([storeId])
+  @@index([status])
+  @@index([orderNumber])
+  @@index([createdAt])
+  @@map("orders")
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  variantId String?
+  quantity  Int
+  price     Float
+  subtotal  Float
+
+  @@index([orderId])
+  @@index([productId])
+  @@map("order_items")
+}
+
+// ═══════════════════════════════════════
+// المحفظة والمالية
+// ═══════════════════════════════════════
+model Wallet {
+  id             String  @id @default(cuid())
+  userId         String  @unique
+  user           User    @relation(fields: [userId], references: [id])
+  balance        Float   @default(0)
+  pendingBalance Float   @default(0)
+  totalEarnings  Float   @default(0)
+
+  transactions Transaction[]
+
+  @@map("wallets")
+}
+
+model Transaction {
+  id          String   @id @default(cuid())
+  walletId    String
+  wallet      Wallet   @relation(fields: [walletId], references: [id])
+  type        String   // CREDIT, DEBIT, COMMISSION, WITHDRAWAL
+  amount      Float
+  description String?
+  reference   String?
+  createdAt   DateTime @default(now())
+
+  @@index([walletId])
+  @@index([type])
+  @@index([createdAt])
+  @@map("transactions")
+}
+
+// ═══════════════════════════════════════
+// الشارات
+// ═══════════════════════════════════════
+model Badge {
+  id          String      @id @default(cuid())
+  code        String      @unique
+  name        Json        // { ar, fr, en }
+  description String?
+  icon        String?
+  color       String
+  type        String      // MANUAL, AUTOMATIC
+  criteria    Json?
+  isRevocable Boolean     @default(false)
+
+  users UserBadge[]
+
+  @@map("badges")
+}
+
+model UserBadge {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id])
+  badgeId   String
+  badge     Badge     @relation(fields: [badgeId], references: [id])
+  grantedAt DateTime  @default(now())
+  expiresAt DateTime?
+
+  @@unique([userId, badgeId])
+  @@index([userId])
+  @@map("user_badges")
+}
+
+// ═══════════════════════════════════════
+// المفضلات
+// ═══════════════════════════════════════
+model WishlistItem {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  productId  String
+  product    Product  @relation(fields: [productId], references: [id])
+  priceAtAdd Float
+  addedAt    DateTime @default(now())
+
+  @@unique([userId, productId])
+  @@index([userId])
+  @@map("wishlist_items")
+}
+
+// ═══════════════════════════════════════
+// التقييمات
+// ═══════════════════════════════════════
+model Review {
+  id         String   @id @default(cuid())
+  productId  String
+  product    Product  @relation(fields: [productId], references: [id])
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  rating     Int      // 1-5
+  title      String?
+  comment    String?
+  images     String[]
+  isVerified Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  @@index([productId])
+  @@index([userId])
+  @@index([rating])
+  @@map("reviews")
+}
+
+// ═══════════════════════════════════════
+// طلبات عروض الأسعار (RFQ) - B2B
+// ═══════════════════════════════════════
+
+model RFQRequest {
+  id              String      @id @default(cuid())
+  buyerId         String
+  buyer           User        @relation(fields: [buyerId], references: [id])
+  
+  categoryId      String
+  productType     String
+  specifications  Json        // المواصفات الفنية
+  description     String?
+  
+  quantity        Int
+  unit            String      // متر، كيلو، قطعة، رول
+  
+  referenceImages String[]
+  
+  deliveryDate    DateTime?
+  urgency         String      @default("NORMAL") // NORMAL, URGENT, FLEXIBLE
+  
+  status          String      @default("SUBMITTED") // SUBMITTED, ACCEPTED, CLOSED
+  
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  
+  responses       RFQResponse[]
+
+  @@index([buyerId])
+  @@index([status])
+  @@map("rfq_requests")
+}
+
+model RFQResponse {
+  id              String      @id @default(cuid())
+  rfqId           String
+  rfq             RFQRequest  @relation(fields: [rfqId], references: [id])
+  supplierId      String
+  supplier        Store       @relation(fields: [supplierId], references: [id])
+  
+  unitPrice       Float
+  totalPrice      Float
+  deliveryDate    DateTime
+  notes           String?
+  attachments     String[]
+  
+  status          String      @default("PENDING") // PENDING, ACCEPTED, REJECTED
+  
+  createdAt       DateTime    @default(now())
+
+  @@index([rfqId])
+  @@index([supplierId])
+  @@map("rfq_responses")
+}
+
+// ═══════════════════════════════════════
+// نظام المحادثات (Chat System)
+// ═══════════════════════════════════════
+
+model Conversation {
+  id          String    @id @default(cuid())
+  participants User[]   @relation("UserConversations")
+  
+  lastMessage  String?
+  lastMessageAt DateTime @default(now())
+  
+  messages     Message[]
+  
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@map("conversations")
+}
+
+model Message {
+  id             String       @id @default(cuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
+  
+  senderId       String
+  sender         User         @relation(fields: [senderId], references: [id])
+  
+  text           String?
+  image          String?      
+  file           String?      
+  
+  isRead         Boolean      @default(false)
+  
+  createdAt      DateTime     @default(now())
+
+  @@index([conversationId])
+  @@index([senderId])
+  @@map("messages")
+}
