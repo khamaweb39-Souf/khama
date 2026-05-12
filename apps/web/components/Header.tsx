@@ -29,7 +29,7 @@ const TopBar = () => (
       </div>
       <span className="cursor-pointer hover:text-white">دج (DZD)</span>
       <div className="h-3 w-px bg-white/10 mx-1" />
-      <Link to="/login" className="hover:text-gold transition-colors">دخول المهنيين</Link>
+      <Link href="/login" className="hover:text-gold transition-colors">دخول المهنيين</Link>
     </div>
   </div>
 );
@@ -46,7 +46,7 @@ const MegaMenu = ({ isOpen, content }: { isOpen: boolean, content: any }) => (
           <ul className="flex flex-col gap-2">
             {section.items.map((item: any, i: number) => (
               <li key={i}>
-                <Link to={item.link} className="text-body-small hover:text-gold hover:translate-x-1 inline-block transition-all">
+                <Link href={item.link} className="text-body-small hover:text-gold hover:translate-x-1 inline-block transition-all">
                   {item.label}
                   {item.badge && <span className="ml-2 bg-gold/10 text-gold-dark text-[9px] px-1.5 py-0.5 rounded uppercase">{item.badge}</span>}
                 </Link>
@@ -141,7 +141,7 @@ export default function Header() {
       >
         <div className="max-w-7xl mx-auto h-full px-4 flex items-center justify-between gap-8">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group shrink-0">
+          <Link href="/" className="flex items-center gap-3 group shrink-0">
             <div className="relative w-10 h-10 overflow-hidden rounded-lg bg-burgundy flex items-center justify-center">
                <img src="/images/logo.png" alt="Khama" className="w-8 h-8 object-contain brightness-0 invert" />
             </div>
@@ -170,7 +170,7 @@ export default function Header() {
               <div className={`absolute bottom-0 left-0 w-full h-0.5 bg-gold transition-all duration-300 ${activeMenu === 'marketplace' ? 'scale-x-100' : 'scale-x-0'}`} />
             </div>
 
-            <Link to="/academy" className="text-label text-charcoal hover:text-gold transition-colors">أكاديمية خامة</Link>
+            <Link href="/academy" className="text-label text-charcoal hover:text-gold transition-colors">أكاديمية خامة</Link>
           </nav>
 
           {/* Search Bar */}
@@ -217,9 +217,9 @@ export default function Header() {
                <button onClick={() => setIsMobileMenuOpen(false)}><X /></button>
             </div>
             <ul className="flex flex-col gap-6">
-               <li><Link to="/cat" className="text-subheading">الكتالوج</Link></li>
-               <li><Link to="/market" className="text-subheading">السوق</Link></li>
-               <li><Link to="/academy" className="text-subheading">الأكاديمية</Link></li>
+               <li><Link href="/cat" className="text-subheading">الكتالوج</Link></li>
+               <li><Link href="/market" className="text-subheading">السوق</Link></li>
+               <li><Link href="/academy" className="text-subheading">الأكاديمية</Link></li>
                <li className="pt-6 border-t"><Button variant="primary" fullWidth>انشر عرضاً</Button></li>
             </ul>
          </div>
