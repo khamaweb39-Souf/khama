@@ -31,7 +31,7 @@ export default function SupplierDashboardLayout({
             { label: 'إدارة المنتجات', icon: Package, href: '/dashboard/supplier/products' },
             { label: 'الطلبات والعينات', icon: ShoppingBag, href: '/dashboard/supplier/orders' },
             { label: 'الرسائل والـ RFQ', icon: MessageSquare, href: '/dashboard/supplier/messages' },
-            { label: 'التحليلات', icon: BarChart3, href: '/dashboard/supplier/analytics' },
+            { label: 'التحليلات', icon: BarChart, href: '/dashboard/supplier/analytics' },
           ].map((item) => (
             <Link 
               key={item.href} 
