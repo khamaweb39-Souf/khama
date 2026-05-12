@@ -2,12 +2,13 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { 
-  Search, Menu, X, Bell, User, Globe, ChevronDown, 
-  TrendingUp, FileText, ShoppingBag, BookOpen, ExternalLink,
-  PlusCircle
-} from 'lucide-react';
+import * as Icons from 'lucide-react';
 import Button from './ui/Button';
+
+const { 
+  Search, Menu, X, Bell, Globe, ChevronDown, 
+  TrendingUp, ExternalLink, PlusCircle 
+} = Icons;
 
 // ─── Sub-Components ──────────────────────────────────────────────────────────
 
@@ -16,9 +17,8 @@ const TopBar = () => (
     <div className="flex items-center gap-4">
       <span className="font-bold tracking-widest uppercase">Khama Pro Platform <span className="text-gold ml-1">v1.2</span></span>
       <div className="hidden lg:flex items-center gap-2 overflow-hidden border-l border-white/10 pl-4 ml-4">
-        <TrendingUp className="w-3 h-3 text-gold" />
-        <div className="animate-marquee whitespace-nowrap">
-          <span>الاتجاهات: طلب متزايد على الكتان العضوي (+24%) • أسعار البوليستر مستقرة • مجموعة ربيع 2026 متوفرة الآن</span>
+        <div className="whitespace-nowrap">
+          <span>• طلب متزايد على الكتان العضوي (+24%) • أسعار البوليستر مستقرة • مجموعة ربيع 2026 متوفرة الآن</span>
         </div>
       </div>
     </div>
