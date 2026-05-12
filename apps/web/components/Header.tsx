@@ -143,7 +143,7 @@ export default function Header() {
         <div className="max-w-7xl mx-auto h-full px-4 flex items-center justify-between w-full gap-4">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group shrink-0">
-            <div className="relative w-10 h-10 overflow-hidden rounded-lg flex items-center justify-center">
+            <div className={`relative overflow-hidden rounded-lg flex items-center justify-center transition-all duration-300 ${isScrolled ? 'w-12 h-12' : 'w-20 h-20'}`}>
                <img src="/images/logo.png" alt="Khama" className="w-full h-full object-contain" />
             </div>
             <span className={`text-display !text-xl text-burgundy transition-all duration-300 font-bold ${isScrolled ? 'scale-90' : 'scale-100'}`}>خامة</span>
