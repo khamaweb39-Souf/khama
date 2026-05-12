@@ -13,6 +13,7 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   productionBrowserSourceMaps: false,
+  transpilePackages: ['lucide-react'],
 }
 
 module.exports = nextConfig
