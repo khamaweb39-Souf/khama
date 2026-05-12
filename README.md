@@ -69,10 +69,17 @@ khama/
 - **Responsive Systems**: Intelligent scaling for all devices with high-end micro-interactions.
 - **Professional Identity**: Official Khama brand integration across the platform.
 
-### 🤖 AI Concierge (The Brain)
-- **Smart RFQ Analysis**: Automated price estimation and technical specification analysis.
-- **Multi-Engine Support**: Integrated with OpenAI (GPT), Groq (Llama 3), and a deterministic fallback Rule-Engine.
-- **Automated Clarifications**: AI-driven suggestions for buyers to improve their request quality.
+### 🤖 AI & Search Intelligence (The Brain)
+- **Smart Tech Search**: Advanced search bar that understands textile vocabulary (GSM, GOTS, Pantone) with real-time categorized suggestions.
+- **Image Search UI**: Ready-to-integrate visual search interface for fabric pattern matching.
+- **AI Concierge**: Automated RFQ analysis and price estimation using multi-engine support (OpenAI, Groq).
+- **Search History**: Localized search tracking for a personalized B2B experience.
+
+### 🔍 Expert Filtering System
+- **Technical Specs**: Granular filters for GSM (Weight), Width, and Tensile Strength.
+- **Finishes & Treatments**: Dedicated filters for DWR, Anti-UV, Flame Retardant (M1/M2), and more.
+- **Traceability**: Origin tracking by country and supply chain distance (KM).
+- **Certifications**: One-click filtering for GOTS, OEKO-TEX, ISO, and REACH compliance.
 
 ---
 
