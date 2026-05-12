@@ -63,6 +63,12 @@ khama/
 - **Monetization**: Split-revenue model between the platform and trainers.
 - **Progress Tracking**: Real-time lesson tracking and curriculum management.
 
+### 🎨 Premium Design System (The Aesthetic)
+- **Parisian Couture Palette**: Deep Ecru, Spun Gold, and Textile Indigo.
+- **Expert Typography**: Sophisticated hierarchy using *Cormorant Garamond* (Display) and *Inter* (Body).
+- **Responsive Systems**: Intelligent scaling for all devices with high-end micro-interactions.
+- **Professional Identity**: Official Khama brand integration across the platform.
+
 ### 🤖 AI Concierge (The Brain)
 - **Smart RFQ Analysis**: Automated price estimation and technical specification analysis.
 - **Multi-Engine Support**: Integrated with OpenAI (GPT), Groq (Llama 3), and a deterministic fallback Rule-Engine.
