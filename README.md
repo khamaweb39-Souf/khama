@@ -57,6 +57,12 @@ khama/
 - **Ratings & Reviews**: Verified purchase verification for trust building.
 - **Admin Dashboard**: Verification center for stores and product moderation.
 
+### 🎓 Khama Academy (New!)
+- **Course Infrastructure**: Multi-chapter/lesson recorded and live courses.
+- **Automated Certificates**: Digital, verifiable certificates issued upon 100% completion.
+- **Monetization**: Split-revenue model between the platform and trainers.
+- **Progress Tracking**: Real-time lesson tracking and curriculum management.
+
 ---
 
 ## ⚙️ Setup & Installation (التثبيت والتشغيل)

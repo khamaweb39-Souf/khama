@@ -18,6 +18,7 @@ const chatRoutes = require('./routes/chat');
 const cronRoutes = require('./routes/cron');
 const reviewsRoutes = require('./routes/reviews');
 const adminRoutes = require('./routes/admin');
+const coursesRoutes = require('./routes/courses');
 
 const app = express();
 const server = http.createServer(app);
@@ -64,6 +65,7 @@ app.use('/api/v1/chat', chatRoutes);
 app.use('/api/v1/cron', cronRoutes);
 app.use('/api/v1/reviews', reviewsRoutes);
 app.use('/api/v1/admin', adminRoutes);
+app.use('/api/v1/courses', coursesRoutes);
 
 // ─── Socket.io Logic ──────────────────────────────────────────────────────────
 io.on('connection', (socket) => {

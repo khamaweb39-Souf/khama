@@ -35,6 +35,8 @@ model User {
   rfqRequests RFQRequest[]
   conversations Conversation[] @relation("UserConversations")
   messages      Message[]
+  courses       Course[]
+  enrollments   Enrollment[]
 
   @@index([phone])
   @@index([userType])
@@ -436,6 +438,92 @@ model Message {
   isRead         Boolean      @default(false)
   
   createdAt      DateTime     @default(now())
+// ═══════════════════════════════════════
+// أكاديمية خامة (Academy & Courses)
+// ═══════════════════════════════════════
+
+model Course {
+  id              String    @id @default(cuid())
+  trainerId       String
+  trainer         User      @relation(fields: [trainerId], references: [id])
+  
+  title           Json      // { ar, fr?, en? }
+  description     String
+  thumbnail       String
+  previewVideo    String?   // Cloudinary URL
+  
+  category        String    // SEWING, LEATHER, DESIGN, etc
+  level           String    // BEGINNER, INTERMEDIATE, ADVANCED
+  language        String    @default("ar")
+  
+  type            String    // RECORDED, LIVE
+  
+  price           Float
+  discountPrice   Float?
+  
+  enrollmentCount Int       @default(0)
+  rating          Float     @default(0)
+  reviewCount     Int       @default(0)
+  
+  status          String    @default("DRAFT")
+  
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  
+  chapters        Chapter[]
+  enrollments     Enrollment[]
+
+  @@index([trainerId])
+  @@index([category])
+  @@index([status])
+  @@map("courses")
+}
+
+model Chapter {
+  id        String   @id @default(cuid())
+  courseId  String
+  course    Course   @relation(fields: [courseId], references: [id])
+  title     String
+  sortOrder Int
+  
+  lessons   Lesson[]
+
+  @@index([courseId])
+  @@map("chapters")
+}
+
+model Lesson {
+  id        String   @id @default(cuid())
+  chapterId String
+  chapter   Chapter  @relation(fields: [chapterId], references: [id])
+  title     String
+  type      String   // VIDEO, TEXT, QUIZ
+  content   String   // URL or text
+  duration  Int?     // بالثواني
+  isFree    Boolean  @default(false)
+  sortOrder Int
+
+  @@index([chapterId])
+  @@map("lessons")
+}
+
+model Enrollment {
+  id              String    @id @default(cuid())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id])
+  courseId        String
+  course          Course    @relation(fields: [courseId], references: [id])
+  
+  progress        Json      @default("[]") // [lessonId, ...]
+  completedAt     DateTime?
+  certificateUrl  String?
+  
+  createdAt       DateTime  @default(now())
+
+  @@unique([userId, courseId])
+  @@index([userId])
+  @@map("enrollments")
+}
 
   @@index([conversationId])
   @@index([senderId])
