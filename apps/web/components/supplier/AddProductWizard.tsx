@@ -4,15 +4,19 @@ import React, { useState } from 'react';
 import { 
   Check, ChevronLeft, ChevronRight, Upload, 
   Info, Package, Settings as SettingsIcon, 
-  Truck, Eye, Save, X 
+  Truck, Eye, Save, X, Loader2
 } from 'lucide-react';
+import { addProduct } from '@/lib/actions';
+import { useRouter } from 'next/navigation';
 
 /* ─── Types ──────────────────────────────────────────────────────────── */
 type Step = 1 | 2 | 3 | 4;
 
 /* ─── Main Component ─────────────────────────────────────────────────── */
 export default function AddProductWizard() {
+  const router = useRouter();
   const [currentStep, setCurrentStep] = useState<Step>(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     ref: '',
@@ -41,6 +45,19 @@ export default function AddProductWizard() {
 
   const handlePrev = () => {
     if (currentStep > 1) setCurrentStep((prev) => (prev - 1) as Step);
+  };
+
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
+    const result = await addProduct(formData);
+    setIsSubmitting(false);
+    
+    if (result.success) {
+      alert("تمت إضافة المنتج بنجاح!");
+      router.push('/dashboard/supplier/products');
+    } else {
+      alert("حدث خطأ أثناء إضافة المنتج: " + result.error);
+    }
   };
 
   return (
@@ -107,10 +124,12 @@ export default function AddProductWizard() {
             </button>
           ) : (
             <button
-              className="bg-charcoal text-white px-10 py-4 rounded-xl font-bold flex items-center gap-3 hover:bg-obsidian shadow-lg transition-all hover:-translate-y-0.5"
+              onClick={handleSubmit}
+              disabled={isSubmitting}
+              className="bg-charcoal text-white px-10 py-4 rounded-xl font-bold flex items-center gap-3 hover:bg-obsidian shadow-lg transition-all hover:-translate-y-0.5 disabled:opacity-50"
             >
+              {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />}
               نشر المنتج
-              <Save className="w-5 h-5" />
             </button>
           )}
         </div>

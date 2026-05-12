@@ -4,15 +4,19 @@ import React, { useState } from 'react';
 import { 
   Check, ChevronLeft, ChevronRight, FileText, 
   DollarSign, Target, Send, ShieldCheck, 
-  Globe, Info, Clock, AlertCircle
+  Globe, Info, Clock, AlertCircle, Loader2
 } from 'lucide-react';
+import { createRFQ } from '@/lib/actions';
+import { useRouter } from 'next/navigation';
 
 /* ─── Types ──────────────────────────────────────────────────────────── */
 type Step = 1 | 2 | 3 | 4;
 
 /* ─── Main Component ─────────────────────────────────────────────────── */
 export default function CreateRFQWizard() {
+  const router = useRouter();
   const [currentStep, setCurrentStep] = useState<Step>(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     fabricType: '',
     composition: '',
@@ -41,6 +45,19 @@ export default function CreateRFQWizard() {
 
   const handlePrev = () => {
     if (currentStep > 1) setCurrentStep((prev) => (prev - 1) as Step);
+  };
+
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
+    const result = await createRFQ(formData);
+    setIsSubmitting(false);
+    
+    if (result.success) {
+      alert("تم إطلاق طلب العرض بنجاح!");
+      router.push('/dashboard/buyer/rfq');
+    } else {
+      alert("حدث خطأ أثناء إطلاق طلب العرض: " + result.error);
+    }
   };
 
   return (
@@ -106,10 +123,12 @@ export default function CreateRFQWizard() {
             </button>
           ) : (
             <button
-              className="bg-gold text-white px-10 py-4 rounded-xl font-bold flex items-center gap-3 hover:bg-gold-dark shadow-lg shadow-gold/20 transition-all hover:-translate-y-0.5"
+              onClick={handleSubmit}
+              disabled={isSubmitting}
+              className="bg-gold text-white px-10 py-4 rounded-xl font-bold flex items-center gap-3 hover:bg-gold-dark shadow-lg shadow-gold/20 transition-all hover:-translate-y-0.5 disabled:opacity-50"
             >
+              {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}
               نشر طلب العرض الآن
-              <Send className="w-5 h-5" />
             </button>
           )}
         </div>
