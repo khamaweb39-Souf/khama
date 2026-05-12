@@ -1,7 +1,7 @@
 import HeroBanner from '../components/home/HeroBanner';
 import QuickCategories from '../components/home/QuickCategories';
 import B2BToggle from '../components/home/B2BToggle';
-import FeaturedProducts from '../components/home/FeaturedProducts';
+import ProductGrid from '../components/ProductGrid';
 import TrustedFactories from '../components/home/TrustedFactories';
 import LatestCourses from '../components/home/LatestCourses';
 
@@ -18,7 +18,7 @@ export default function HomePage() {
       <B2BToggle />
       
       {/* Featured Products Grid */}
-      <FeaturedProducts />
+      <ProductGrid />
       
       {/* Trusted Factories Carousel */}
       <TrustedFactories />
