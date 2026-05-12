@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
     <html lang="ar" dir="rtl">
       <body className={cairo.className}>
         <Header />
-        <main className="min-h-screen bg-gray-50 pb-20">
+        <main className="min-h-screen bg-gray-50 pt-32 pb-20">
           {children}
         </main>
         <BottomNav />

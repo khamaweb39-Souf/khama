@@ -129,23 +129,23 @@ export default function Header() {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full z-[100] font-body">
+    <div className="fixed top-0 inset-x-0 w-full z-[100] font-body">
       <TopBar />
       
       <header 
         className={`
-          bg-white transition-all duration-500 relative
+          bg-white transition-all duration-500 relative w-full
           ${isScrolled ? 'h-14 shadow-lg' : 'h-20 shadow-sm'}
         `}
         onMouseLeave={() => setActiveMenu(null)}
       >
-        <div className="max-w-7xl mx-auto h-full px-4 flex items-center justify-between gap-8">
+        <div className="max-w-7xl mx-auto h-full px-4 flex items-center justify-between w-full">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group shrink-0">
-            <div className="relative w-10 h-10 overflow-hidden rounded-lg bg-burgundy flex items-center justify-center">
-               <img src="/images/logo.png" alt="Khama" className="w-8 h-8 object-contain brightness-0 invert" />
+            <div className="relative w-10 h-10 overflow-hidden rounded-lg flex items-center justify-center">
+               <img src="/images/logo.png" alt="Khama" className="w-full h-full object-contain" />
             </div>
-            <span className={`text-display !text-xl text-burgundy transition-all duration-300 ${isScrolled ? 'scale-90' : 'scale-100'}`}>خامة</span>
+            <span className={`text-display !text-xl text-burgundy transition-all duration-300 font-bold ${isScrolled ? 'scale-90' : 'scale-100'}`}>خامة</span>
           </Link>
 
           {/* Desktop Navigation */}
