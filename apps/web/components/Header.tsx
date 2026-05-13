@@ -122,6 +122,7 @@ export default function Header() {
           { label: 'مقارن الأقمشة الذكي', link: '/dashboard/buyer/compare' }
         ]},
         { title: 'خدمات الموردين', items: [
+          { label: 'لوحة تحكم المورد', link: '/dashboard/supplier', badge: 'PRO' },
           { label: 'إضافة منتج جديد', link: '/dashboard/supplier/products/new', badge: 'إدراج' },
           { label: 'إدارة المتجر الرقمي', link: '/dashboard/supplier' },
           { label: 'معرض الموردين (Showroom)', link: '/supplier/tissage-de-lyon' },
