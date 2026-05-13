@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { 
-  Instagram, Twitter, Linkedin, Facebook, 
+  Camera, Send, Briefcase, Globe, 
   Mail, Phone, MapPin, ExternalLink,
   ChevronLeft
 } from 'lucide-react';
@@ -28,7 +28,7 @@ export default function Footer() {
               أول منصة رقمية في الجزائر متخصصة في سلاسل إمداد الصناعات النسيجية والجلود. نربط بين المبدعين، المصنعين والموردين لخلق قيمة مضافة للإنتاج الوطني.
             </p>
             <div className="flex gap-4">
-              {[Instagram, Twitter, Linkedin, Facebook].map((Icon, i) => (
+              {[Camera, Send, Briefcase, Globe].map((Icon, i) => (
                 <a key={i} href="#" className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-gold hover:text-charcoal transition-all">
                   <Icon className="w-5 h-5" />
                 </a>
