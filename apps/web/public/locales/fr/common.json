@@ -32,5 +32,10 @@
   "europe": "Europe",
   "search_placeholder_1": "Rechercher par type de tissu... ex: Sergé de laine",
   "recent_searches": "Dernières recherches",
+  "trending_searches": "Tendances actuelles",
+  "technical_glossary": "Glossaire technique",
+  "voice_search": "Recherche vocale",
+  "visual_search": "Recherche par image",
+  "search_for": "Rechercher",
   "start_typing": "Commencez à taper..."
 }

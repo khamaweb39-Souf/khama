@@ -32,6 +32,11 @@
   "europe": "أوروبا",
   "search_placeholder_1": "ابحث عن نوع القماش... مثلاً: كتان",
   "recent_searches": "عمليات البحث الأخيرة",
+  "trending_searches": "الأكثر بحثاً الآن",
+  "technical_glossary": "المصطلحات التقنية",
+  "voice_search": "بحث صوتي",
+  "visual_search": "بحث بالصور",
+  "search_for": "البحث عن",
   "start_typing": "ابدأ الكتابة لرؤية الاقتراحات...",
   "categories": {
     "fabrics": "الأقمشة والمنسوجات",
