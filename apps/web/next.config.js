@@ -12,8 +12,7 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  productionBrowserSourceMaps: false,
-  transpilePackages: ['lucide-react'],
+  transpilePackages: ['lucide-react', 'styled-jsx'],
 }
 
 module.exports = nextConfig

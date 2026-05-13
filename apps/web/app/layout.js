@@ -7,6 +7,8 @@ const BottomNav = dynamic(() => import('../components/BottomNav'), { ssr: false 
 
 const cairo = Cairo({ subsets: ['arabic', 'latin'] });
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: {
     default: 'خامة - منصة الصناعات النسيجية والجلود',
