@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Allow: /catalogue
+Allow: /fournisseurs
+Allow: /actualites
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /api
+
+Sitemap: https://khama.dz/sitemap.xml

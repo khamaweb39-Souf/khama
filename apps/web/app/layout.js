@@ -8,8 +8,39 @@ const BottomNav = dynamic(() => import('../components/BottomNav'), { ssr: false 
 const cairo = Cairo({ subsets: ['arabic', 'latin'] });
 
 export const metadata = {
-  title: 'خامة - منصة الصناعات النسيجية والجلود',
-  description: 'سوق متكامل للأقمشة، الجلود، والآلات الصناعية في الجزائر',
+  title: {
+    default: 'خامة - منصة الصناعات النسيجية والجلود',
+    template: '%s | خامة'
+  },
+  description: 'سوق متكامل للأقمشة، الجلود، والآلات الصناعية في الجزائر. ابحث عن موردين، قارن الأقمشة، وانشر طلبات الشراء.',
+  keywords: ['تنسوجات', 'أقمشة', 'خامة', 'B2B', 'sourcing textile', 'Algeria', 'GOTS', 'OEKO-TEX', 'قماش احترافي', 'موردو المنسوجات'],
+  authors: [{ name: 'Khama Team' }],
+  creator: 'Khama',
+  publisher: 'Khama',
+  openGraph: {
+    type: 'website',
+    locale: 'ar_DZ',
+    url: 'https://khama.dz',
+    siteName: 'خامة - Khama',
+    images: [
+      {
+        url: 'https://khama.dz/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Khama Platform',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'خامة - منصة الصناعات النسيجية والجلود',
+    description: 'سوق متكامل للأقمشة، الجلود، والآلات الصناعية في الجزائر',
+    images: ['https://khama.dz/og-image.jpg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 import { I18nProvider } from '../components/I18nProvider';
