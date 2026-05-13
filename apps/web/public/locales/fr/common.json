@@ -1,0 +1,20 @@
+{
+  "welcome": "Bienvenue sur Khama",
+  "dashboard": "Tableau de bord",
+  "buyer": "Acheteur",
+  "supplier": "Fournisseur",
+  "search": "Rechercher...",
+  "notifications": "Notifications",
+  "messages": "Messages",
+  "settings": "Paramètres",
+  "logout": "Déconnexion",
+  "language": "Langue",
+  "saved_searches": "Recherches sauvegardées",
+  "favorites": "Favoris",
+  "rfq": "Appels d'offres",
+  "orders": "Commandes",
+  "analytics": "Analyses",
+  "compare": "Comparer",
+  "view_all": "Voir tout",
+  "actions": "Actions"
+}

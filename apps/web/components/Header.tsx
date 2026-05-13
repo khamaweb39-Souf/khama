@@ -5,6 +5,7 @@ import Link from 'next/link';
 import * as Icons from 'lucide-react';
 import Button from './ui/Button';
 import SearchBar from './SearchBar';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const { 
   Search, Menu, X, Bell, Globe, ChevronDown, 
@@ -24,10 +25,7 @@ const TopBar = () => (
       </div>
     </div>
     <div className="flex items-center gap-4">
-      <div className="flex items-center gap-1 cursor-pointer hover:text-white">
-        <Globe className="w-3 h-3" />
-        <span>AR / FR</span>
-      </div>
+      <LanguageSwitcher />
       <span className="cursor-pointer hover:text-white">دج (DZD)</span>
       <div className="h-3 w-px bg-white/10 mx-1" />
       <Link href="/dashboard/buyer" className="hover:text-gold transition-colors flex items-center gap-1">

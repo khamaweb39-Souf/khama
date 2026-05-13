@@ -12,15 +12,19 @@ export const metadata = {
   description: 'سوق متكامل للأقمشة، الجلود، والآلات الصناعية في الجزائر',
 };
 
+import { I18nProvider } from '../components/I18nProvider';
+
 export default function RootLayout({ children }) {
   return (
     <html lang="ar" dir="rtl">
       <body className={cairo.className}>
-        <Header />
-        <main className="min-h-screen bg-gray-50 pt-32 pb-20">
-          {children}
-        </main>
-        <BottomNav />
+        <I18nProvider>
+          <Header />
+          <main className="min-h-screen bg-gray-50 pt-32 pb-20">
+            {children}
+          </main>
+          <BottomNav />
+        </I18nProvider>
       </body>
     </html>
   );

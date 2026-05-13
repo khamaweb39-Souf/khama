@@ -301,7 +301,29 @@ body {
   100% { transform: translateX(-100%); }
 }
 
+
 .animate-marquee {
   display: inline-block;
   animation: marquee 20s linear infinite;
+}
+
+/* ─── i18n & RTL Support ────────────────────────────────────────────── */
+
+[dir="rtl"] .rtl-flip {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .rtl-mirror {
+  transform: scaleX(-1);
+}
+
+/* Ensure numbers and technical codes remain LTR */
+[dir="rtl"] .ltr-force {
+  direction: ltr;
+  display: inline-block;
+}
+
+/* Smooth transition for language switching */
+.lang-transition {
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
