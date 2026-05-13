@@ -28,7 +28,6 @@ services:
   # ─── Web Frontend (Render Web Service) ───────────────────────────
   - type: web
     name: khama-frontend-v1
-    rootDir: apps/web
     env: node
     plan: free
     region: frankfurt
