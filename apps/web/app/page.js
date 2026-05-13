@@ -11,8 +11,7 @@ import HowItWorks from '../components/home/HowItWorks';
 import PartnersMarquee from '../components/home/PartnersMarquee';
 import NewsletterSection from '../components/home/NewsletterSection';
 import SEOHead, { getHomeSchema } from '../components/SEOHead';
-
-const HomeSections = dynamic(() => import('../components/home/HomeSections'), { ssr: false });
+import { TrendsSection, MarketDashboard, ActiveRFQs, Testimonials } from '../components/home/HomeSections';
 
 export default function HomePage() {
   return (
@@ -24,24 +23,34 @@ export default function HomePage() {
       {/* Quick Categories Section */}
       <QuickCategories />
       
-      {/* B2B / Wholesale Toggle */}
-      <B2BToggle />
-      
-      {/* Main Catalog Section with Sidebar */}
-      <div className="max-w-7xl mx-auto w-full px-4 flex flex-col lg:flex-row gap-10 py-16">
-        <aside className="hidden lg:block w-[320px] shrink-0">
-          <FilterSidebar />
-        </aside>
-        <main className="flex-1 min-w-0">
-          <ProductGrid />
-        </main>
-      </div>
-      
-      {/* Why Khama? */}
+      {/* Why Khama? (Dark Luxury) */}
       <WhyKhama />
 
-      {/* How it Works? */}
+      {/* How it Works? (Dark Luxury) */}
       <HowItWorks />
+
+      {/* Trends Section (Editorial Dark) */}
+      <TrendsSection />
+
+      {/* Main Catalog Section (Light Luxury) */}
+      <section className="bg-ecru/30 py-24" id="catalog">
+        <div className="max-w-7xl mx-auto w-full px-4 flex flex-col lg:flex-row gap-10">
+          <aside className="hidden lg:block w-[300px] shrink-0">
+            <div className="sticky top-32">
+              <FilterSidebar />
+            </div>
+          </aside>
+          <main className="flex-1 min-w-0">
+            <ProductGrid />
+          </main>
+        </div>
+      </section>
+
+      {/* Market Intelligence Dashboard */}
+      <MarketDashboard />
+
+      {/* Active RFQs Section */}
+      <ActiveRFQs />
 
       {/* Trusted Factories Carousel */}
       <TrustedFactories />
@@ -52,8 +61,8 @@ export default function HomePage() {
       {/* Academy & Courses Section */}
       <LatestCourses />
 
-      {/* Advanced Editorial & Market Sections */}
-      <HomeSections />
+      {/* Social Proof: Testimonials */}
+      <Testimonials />
 
       {/* Newsletter */}
       <NewsletterSection />
