@@ -5,9 +5,10 @@ import { ShieldCheck, MapPin, Package, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
 const SUPPLIERS = [
-  { id: 1, name: 'نسيج ليون - Lyon Textiles', country: 'فرنسا', city: 'ليون', rating: 4.9, image: 'https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?q=80&w=400&auto=format&fit=crop', products: 156 },
-  { id: 2, name: 'مصنع الأوراسي للجلود', country: 'الجزائر', city: 'سطيف', rating: 4.7, image: 'https://images.unsplash.com/photo-1558444479-c8af50e90c58?q=80&w=400&auto=format&fit=crop', products: 84 },
-  { id: 3, name: 'حرير الشرق الفاخر', country: 'تونس', city: 'القيروان', rating: 5.0, image: 'https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?q=80&w=400&auto=format&fit=crop', products: 210 },
+  { id: 1, name: 'مجموعة الأطلس للنسيج', country: 'الجزائر', city: 'تلمسان', rating: 4.9, image: 'https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?q=80&w=400&auto=format&fit=crop', products: 156, verified: true },
+  { id: 2, name: 'مدابغ جيجل الكبرى', country: 'الجزائر', city: 'جيجل', rating: 4.8, image: 'https://images.unsplash.com/photo-1590736962236-455b76662497?q=80&w=400&auto=format&fit=crop', products: 42, verified: true },
+  { id: 3, name: 'تجهيزات الشرق للنسيج والآلات', country: 'الجزائر', city: 'سطيف', rating: 4.7, image: 'https://images.unsplash.com/photo-1582142306909-195724d339aa?q=80&w=400&auto=format&fit=crop', products: 28, verified: true },
+  { id: 4, name: 'قرطاج للمنسوجات الفاخرة', country: 'تونس', city: 'تونس العاصمة', rating: 5.0, image: 'https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?q=80&w=400&auto=format&fit=crop', products: 210, verified: true },
 ];
 
 export default function SuppliersPage() {

@@ -20,9 +20,9 @@ export default function Footer() {
               أول منصة رقمية متكاملة في المغرب العربي وأفريقيا لربط محترفي صناعة النسيج والأزياء بذكاء واحترافية.
             </p>
             <div className="flex gap-4">
-               <a href="#" className="p-3 bg-white/5 rounded-xl hover:bg-gold hover:text-charcoal transition-all"><Globe className="w-5 h-5" /></a>
-               <a href="#" className="p-3 bg-white/5 rounded-xl hover:bg-gold hover:text-charcoal transition-all"><Share2 className="w-5 h-5" /></a>
-               <a href="#" className="p-3 bg-white/5 rounded-xl hover:bg-gold hover:text-charcoal transition-all"><MessageSquare className="w-5 h-5" /></a>
+               <a href="https://khama.dz" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-xl hover:bg-gold hover:text-charcoal transition-all"><Globe className="w-5 h-5" /></a>
+               <a href="https://linkedin.com/company/khama" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-xl hover:bg-gold hover:text-charcoal transition-all"><Share2 className="w-5 h-5" /></a>
+               <a href="https://wa.me/213550000000" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-xl hover:bg-gold hover:text-charcoal transition-all"><MessageSquare className="w-5 h-5" /></a>
             </div>
           </div>
 

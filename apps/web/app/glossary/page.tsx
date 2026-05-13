@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import { GLOSSARY_DATA, GlossaryEntry } from '@/data/glossary';
 
-const CATEGORIES = ['Toutes', 'Fibres', 'Armures', 'Finitions', 'Commerce', 'Certifications', 'Machines'];
+const CATEGORIES = ['الكل', 'الألياف', 'التراكيب', 'التجهيز', 'التجارة', 'الشهادات', 'الآلات'];
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
 export default function GlossaryPage() {
@@ -46,7 +46,7 @@ export default function GlossaryPage() {
   }, [searchQuery, activeCategory, activeLetter]);
 
   return (
-    <div className="min-h-screen bg-[#FDFCFB] pb-20 pt-10" dir="ltr">
+    <div className="min-h-screen bg-[#FDFCFB] pb-20 pt-10" dir="rtl">
       <style jsx global>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Amiri:wght@400;700&display=swap');
         .font-serif-premium { font-family: 'Cormorant Garamond', serif; }
@@ -56,12 +56,12 @@ export default function GlossaryPage() {
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         
         {/* Header */}
-        <div className="mb-16 space-y-4 text-center">
-           <h1 className="text-5xl font-black text-burgundy tracking-tight font-serif-premium">Glossaire Textile</h1>
-           <p className="text-muted font-medium max-w-2xl mx-auto italic text-lg">
-             "Le savoir est le premier pas vers l'excellence." — Explorez plus de 50 termes techniques, fibres et certifications.
-           </p>
-        </div>
+         <div className="mb-16 space-y-4 text-center">
+            <h1 className="text-5xl font-black text-burgundy tracking-tight font-serif-premium">قاموس المصطلحات التقنية</h1>
+            <p className="text-muted font-medium max-w-2xl mx-auto italic text-lg font-arabic-premium">
+              "المعرفة هي الخطوة الأولى نحو التميز." — استكشف أكثر من 50 مصطلحاً فنياً في صناعة المنسوجات والجلود.
+            </p>
+         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
@@ -70,28 +70,28 @@ export default function GlossaryPage() {
             
             {/* Search */}
             <div className="relative group">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted group-focus-within:text-accent transition-colors" />
+              <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted group-focus-within:text-accent transition-colors" />
               <input 
                 type="text"
-                placeholder="Rechercher un terme..."
+                placeholder="ابحث عن مصطلح..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-4 bg-white border border-border rounded-2xl outline-none focus:border-accent shadow-sm transition-all"
+                className="w-full pr-12 pl-4 py-4 bg-white border border-border rounded-2xl outline-none focus:border-accent shadow-sm transition-all"
               />
             </div>
 
             {/* Categories */}
             <div className="bg-white rounded-3xl p-6 shadow-sm border border-border">
               <h3 className="text-xs font-bold text-charcoal uppercase tracking-widest mb-4 flex items-center gap-2">
-                <Filter className="w-4 h-4 text-accent" /> Catégories
+                <Filter className="w-4 h-4 text-accent" /> الأقسام
               </h3>
               <div className="space-y-1">
                 {CATEGORIES.map(cat => (
                   <button
                     key={cat}
                     onClick={() => setActiveCategory(cat)}
-                    className={`w-full text-left px-4 py-2 rounded-xl text-sm transition-all ${
-                      activeCategory === cat ? 'bg-accent text-white font-bold' : 'text-muted hover:bg-gray-50'
+                    className={`w-full text-right px-4 py-2 rounded-xl text-sm transition-all ${
+                      activeCategory === 'الكل' && cat === 'الكل' || activeCategory === cat ? 'bg-accent text-white font-bold' : 'text-muted hover:bg-gray-50'
                     }`}
                   >
                     {cat}
@@ -122,7 +122,7 @@ export default function GlossaryPage() {
             {favorites.length > 0 && (
               <div className="bg-gold/5 rounded-3xl p-6 border border-gold/20">
                 <h3 className="text-xs font-bold text-gold-dark uppercase tracking-widest mb-4 flex items-center gap-2">
-                  <Star className="w-4 h-4 fill-gold text-gold" /> Mes Favoris
+                  <Star className="w-4 h-4 fill-gold text-gold" /> مفضلاتي
                 </h3>
                 <div className="space-y-2">
                   {favorites.map(id => {
@@ -170,7 +170,7 @@ export default function GlossaryPage() {
                          {term.definition.fr}
                        </p>
                        <div className="flex items-center gap-2 text-accent font-bold text-xs pt-2">
-                          Détails <ChevronRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                          التفاصيل <ChevronRight className="w-3 h-3 group-hover:-translate-x-1 transition-transform rotate-180" />
                        </div>
                     </div>
                  </div>

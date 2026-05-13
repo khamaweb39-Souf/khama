@@ -53,11 +53,11 @@ function filterReducer(state: FilterState, action: Action): FilterState {
 }
 
 // ─── 2. Data Definitions ─────────────────────────────────────────────────────
-const FIBER_TYPES = ['Coton Organic', 'Laine Mérinos', 'Soie', 'Lin', 'Polyester Recyclé', 'Nylon', 'Viscose'];
-const TREATMENTS = ['DWR (Imperméable)', 'Anti-UV', 'Anti-bactérien', 'Ignifuge (M1/M2)', 'Anti-froissement'];
+const FIBER_TYPES = ['قطن عضوي', 'صوف ميرينو', 'حرير', 'كتان', 'بوليستر معاد تدويره', 'نايلون', 'فيسكوز'];
+const TREATMENTS = ['مقاوم للماء (DWR)', 'مضاد للأشعة البنفسجية', 'مضاد للبكتيريا', 'مقاوم للحريق', 'مضاد للتجعد'];
 const CERTIFICATIONS = ['GOTS', 'OEKO-TEX Standard 100', 'ISO 9001', 'REACH', 'BCI Cotton', 'Bluesign'];
-const ORIGINS = ['France', 'Italie', 'Turquie', 'Chine', 'Inde', 'Maroc'];
-const DELIVERIES = ['En Stock', 'Précommande', '< 1 Semaine', '1-3 Mois'];
+const ORIGINS = ['الجزائر', 'تونس', 'المغرب', 'فرنسا', 'إيطاليا', 'تركيا', 'الصين'];
+const DELIVERIES = ['في المخزن', 'طلب مسبق', 'أقل من أسبوع', '1-3 أشهر'];
 
 // ─── 3. Sub-components ───────────────────────────────────────────────────────
 const Accordion = ({ title, children, defaultOpen = false }: { title: string, children: React.ReactNode, defaultOpen?: boolean }) => {
@@ -108,16 +108,16 @@ export default function FilterSidebar() {
   };
 
   return (
-    <div className="w-full lg:w-[320px] bg-white border border-border rounded-xl shadow-sm flex flex-col h-fit sticky top-28 font-body">
+    <div className="w-full lg:w-[320px] bg-white border border-border rounded-xl shadow-sm flex flex-col h-fit sticky top-28 font-body" dir="rtl">
       
       {/* Header */}
       <div className="p-5 border-b border-border/60 flex items-center justify-between bg-ecru/30 rounded-t-xl">
         <div className="flex items-center gap-2 text-burgundy">
           <Filter className="w-5 h-5" />
-          <h2 className="text-subheading !text-lg mb-0 font-bold">Filtres Experts</h2>
+          <h2 className="text-subheading !text-lg mb-0 font-bold">فلاتر الخبراء</h2>
         </div>
         <span className="bg-white border border-gold/30 text-gold text-label px-2 py-1 rounded">
-          {getActiveCount()} actifs
+          {getActiveCount()} نشط
         </span>
       </div>
 
@@ -132,9 +132,9 @@ export default function FilterSidebar() {
           {/* Add more chips mapping here as needed */}
           <button 
             onClick={() => dispatch({ type: 'CLEAR_ALL' })}
-            className="text-[11px] text-muted hover:text-red-500 underline ml-auto"
+            className="text-[11px] text-muted hover:text-red-500 underline mr-auto"
           >
-            Effacer tout
+            مسح الكل
           </button>
         </div>
       )}
@@ -143,7 +143,7 @@ export default function FilterSidebar() {
       <div className="px-5 overflow-y-auto max-h-[calc(100vh-280px)] custom-scrollbar">
         
         {/* 1. Fibre */}
-        <Accordion title="Type de Fibre" defaultOpen={true}>
+        <Accordion title="نوع الألياف" defaultOpen={true}>
           <div className="flex flex-col gap-1">
             {FIBER_TYPES.map(fiber => (
               <Checkbox 
@@ -157,12 +157,12 @@ export default function FilterSidebar() {
         </Accordion>
 
         {/* 2. Specs Techniques */}
-        <Accordion title="Caractéristiques (GSM & Largeur)">
+        <Accordion title="المواصفات (الوزن والعرض)">
           <div className="flex flex-col gap-5 pt-2">
             <div>
               <div className="flex justify-between text-caption text-muted mb-2">
-                <span>Poids (GSM)</span>
-                <span className="text-burgundy">{state.gsm[0]}g - {state.gsm[1]}g</span>
+                <span>الوزن (GSM)</span>
+                <span className="text-burgundy">{state.gsm[0]}ج - {state.gsm[1]}ج</span>
               </div>
               <input 
                 type="range" min="50" max="800" step="10" 
@@ -173,8 +173,8 @@ export default function FilterSidebar() {
             </div>
             <div>
               <div className="flex justify-between text-caption text-muted mb-2">
-                <span>Largeur (cm)</span>
-                <span className="text-burgundy">{state.width[0]}cm - {state.width[1]}cm</span>
+                <span>العرض (سم)</span>
+                <span className="text-burgundy">{state.width[0]}سم - {state.width[1]}سم</span>
               </div>
               <input 
                 type="range" min="90" max="320" step="5" 
@@ -187,7 +187,7 @@ export default function FilterSidebar() {
         </Accordion>
 
         {/* 3. Traitements */}
-        <Accordion title="Traitements & Finitions">
+        <Accordion title="المعالجات والتجهيزات">
           <div className="flex flex-col gap-1">
             {TREATMENTS.map(t => (
               <Checkbox 
@@ -200,7 +200,7 @@ export default function FilterSidebar() {
         </Accordion>
 
         {/* 4. Certifications */}
-        <Accordion title="Certifications">
+        <Accordion title="الشهادات">
           <div className="flex flex-wrap gap-2">
             {CERTIFICATIONS.map(cert => {
               const isActive = state.certifications.includes(cert);
@@ -219,7 +219,7 @@ export default function FilterSidebar() {
         </Accordion>
 
         {/* 5. Origine */}
-        <Accordion title="Origine & Traçabilité">
+        <Accordion title="المنشأ والتتبع">
           <div className="flex flex-col gap-1">
             {ORIGINS.map(origin => (
               <Checkbox 
@@ -232,12 +232,12 @@ export default function FilterSidebar() {
         </Accordion>
 
         {/* 6. Commercial */}
-        <Accordion title="Conditions Commerciales">
+        <Accordion title="الشروط التجارية">
           <div className="flex flex-col gap-4">
             <div>
                <div className="flex justify-between text-caption text-muted mb-2">
-                <span>MOQ (Minimum)</span>
-                <span className="font-bold">{state.moq} mètres</span>
+                <span>أقل كمية (MOQ)</span>
+                <span className="font-bold">{state.moq} متر</span>
               </div>
               <input 
                 type="range" min="10" max="10000" step="10" 
@@ -248,7 +248,7 @@ export default function FilterSidebar() {
             </div>
             
             <div className="pt-2 border-t border-border/50">
-               <span className="text-caption text-muted block mb-3">Délai de livraison</span>
+               <span className="text-caption text-muted block mb-3">مدة التوصيل</span>
                <div className="flex flex-col gap-1">
                  {DELIVERIES.map(d => (
                    <Checkbox 
@@ -269,10 +269,10 @@ export default function FilterSidebar() {
           onClick={handleShare}
           className="flex items-center justify-center gap-2 flex-1 border border-border text-charcoal rounded hover:bg-gray-50 transition-colors py-2 text-sm font-medium"
         >
-          <Share2 className="w-4 h-4" /> Partager
+          <Share2 className="w-4 h-4" /> مشاركة
         </button>
         <button className="flex items-center justify-center gap-2 flex-1 bg-burgundy text-white rounded hover:bg-gold transition-colors py-2 text-sm font-medium">
-          <Save className="w-4 h-4" /> Sauvegarder
+          <Save className="w-4 h-4" /> حفظ الفلتر
         </button>
       </div>
 

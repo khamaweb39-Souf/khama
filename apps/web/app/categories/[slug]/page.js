@@ -2,7 +2,8 @@
 import { useState, useEffect } from 'react';
 import ProductCard from '../../../components/listing/ProductCard';
 import FilterSidebar from '../../../components/listing/FilterSidebar';
-import { Search, LayoutGrid, List, ChevronDown } from 'lucide-react';
+import { Search, LayoutGrid, List, ChevronDown, AlertCircle } from 'lucide-react';
+import { MOCK_PRODUCTS } from '../../../data/mockDatabase';
 
 export default function CategoryListingPage({ params }) {
   const [products, setProducts] = useState([]);
@@ -21,9 +22,19 @@ export default function CategoryListingPage({ params }) {
 
       const res = await fetch(`http://localhost:3005/api/v1/products?${queryParams}`);
       const data = await res.json();
-      setProducts(data.products || []);
+      
+      let fetchedProducts = data.products || [];
+      
+      // FALLBACK: If backend is empty or fails, use MOCK_PRODUCTS filtered by category
+      if (fetchedProducts.length === 0) {
+        fetchedProducts = MOCK_PRODUCTS.filter(p => p.category === params.slug);
+      }
+
+      setProducts(fetchedProducts);
     } catch (e) {
       console.error('Fetch error:', e);
+      // FALLBACK on error
+      setProducts(MOCK_PRODUCTS.filter(p => p.category === params.slug));
     } finally {
       setLoading(false);
     }
@@ -94,11 +105,18 @@ export default function CategoryListingPage({ params }) {
                <p className="text-gray-400 text-sm mt-2">حاول تغيير الفلاتر أو البحث عن شيء آخر</p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
-               {products.map(product => (
-                 <ProductCard key={product.id} product={product} />
-               ))}
-            </div>
+            <>
+              {/* Demo Mode Badge */}
+              <div className="bg-gold/5 border border-gold/20 p-4 rounded-2xl mb-6 flex items-center gap-3">
+                 <AlertCircle className="w-5 h-5 text-gold" />
+                 <p className="text-xs font-bold text-gold-dark">يتم عرض بيانات تجريبية (Demo Mode) لمحاكاة العرض النهائي.</p>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+                 {products.map(product => (
+                   <ProductCard key={product.id} product={product} />
+                 ))}
+              </div>
+            </>
           )}
         </main>
       </div>
