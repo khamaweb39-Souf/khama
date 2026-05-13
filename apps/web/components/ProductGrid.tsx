@@ -157,9 +157,9 @@ const ProductGrid = () => {
         </button>
       </div>
 
-      <div className="flex overflow-x-auto lg:grid lg:grid-cols-3 gap-8 no-scrollbar pb-8 -mx-4 px-4 md:mx-0 md:px-0">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 horizontal-scroll-mobile">
         {MOCK_FABRICS.map((fabric) => (
-          <div key={fabric.id} className="min-w-[320px] lg:min-w-0">
+          <div key={fabric.id} className="min-w-[85vw] sm:min-w-0 snap-center">
             <FabricCard {...fabric} />
           </div>
         ))}

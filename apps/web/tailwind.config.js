@@ -9,9 +9,8 @@ module.exports = {
     extend: {
       colors: {
         burgundy: {
-          DEFAULT: '#5C1D1D', // A real burgundy
-          dark: '#3D1414',
-          light: '#7A2626',
+          DEFAULT: '#2D3561',
+          dark: '#1A1A2E',
         },
         gold: {
           DEFAULT: '#C9A84C',
@@ -22,9 +21,9 @@ module.exports = {
         'off-white': '#FEFCF8',
         charcoal: '#1A1A2E',
         grege: '#9E8E7E',
-        success: '#4A7C59',
-        warning: '#C4713A',
-        error: '#B23B3B',
+        sage: '#4A7C59',
+        sienna: '#C4713A',
+        garance: '#B23B3B',
       },
       fontFamily: {
         display: ['var(--font-display)', 'serif'],

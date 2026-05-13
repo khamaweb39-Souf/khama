@@ -2,245 +2,232 @@
 
 import React, { useState } from 'react';
 import { 
-  Eye, Heart, FileText, Share2, 
-  CheckCircle, Globe, Star, Info,
-  ChevronDown, ChevronUp, Clock, Package,
-  TrendingUp, Award, Layers, Ruler, Palette,
-  Plus, Minus, ArrowLeftRight
+  Heart, ShieldCheck, MapPin, Wind, 
+  Layers, Package, Calendar, Plus, 
+  ChevronDown, ArrowRight, Star
 } from 'lucide-react';
 import { FabricCardProps } from '../types/fabric';
 
 export default function FabricCard(props: FabricCardProps) {
   const { 
-    name, image, collection, certifications, sustainabilityScore, 
-    createdAt, supplier, origin, composition, technicalSpecs, 
-    commercial, viewVariant = 'grid' 
+    name, image, collection, certifications, 
+    supplier, origin, composition, technicalSpecs, 
+    commercial 
   } = props;
 
-  const [isHovered, setIsHovered] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
-  // Helper for "New" badge logic (within 30 days)
-  const isNew = (new Date().getTime() - new Date(createdAt).getTime()) < (30 * 24 * 60 * 60 * 1000);
+  // GSM scale helper
+  const getGsmLevel = (gsm: number) => {
+    if (gsm < 100) return { label: 'خفيف جداً', width: '20%' };
+    if (gsm < 200) return { label: 'خفيف', width: '40%' };
+    if (gsm < 300) return { label: 'متوسط', width: '60%' };
+    if (gsm < 450) return { label: 'ثقيل', width: '80%' };
+    return { label: 'ثقيل جداً', width: '100%' };
+  };
+
+  const gsmLevel = getGsmLevel(technicalSpecs.gsm);
 
   return (
     <div 
       className={`
-        group relative bg-white border border-ecru/50 transition-all duration-500 overflow-hidden
-        ${viewVariant === 'grid' ? 'rounded-[2rem] flex flex-col' : 'rounded-2xl flex flex-row h-[450px]'}
-        hover:shadow-[0_20px_50px_rgba(201,168,76,0.15)] hover:border-gold/30 hover:-translate-y-2
+        group relative flex flex-col bg-white rounded-[2rem] border-2 border-burgundy/5 overflow-hidden transition-all duration-500
+        ${isHovered ? 'shadow-[0_20px_50px_rgba(201,168,76,0.15)] -translate-y-2 border-gold/20' : 'shadow-sm'}
       `}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      dir="rtl"
     >
-      {/* ─── 1. IMAGE SECTION (60%) ─── */}
-      <div className={`relative overflow-hidden bg-ecru ${viewVariant === 'grid' ? 'h-[280px] w-full' : 'w-2/5 h-full'}`}>
+      {/* ─── Visual Section (60%) ─── */}
+      <div className="relative aspect-[4/5] w-full overflow-hidden bg-ecru">
         <img 
           src={image} 
           alt={name} 
-          className={`w-full h-full object-cover transition-transform duration-[1.5s] ease-out ${isHovered ? 'scale-110' : 'scale-100'}`}
+          className={`w-full h-full object-cover transition-transform duration-1000 ${isHovered ? 'scale-110' : 'scale-100'}`}
         />
         
-        {/* Glassmorphism Badges (Top Left) */}
-        <div className="absolute top-4 left-4 flex flex-col gap-2 z-10">
-          <div className="bg-white/20 backdrop-blur-md border border-white/30 text-white text-[10px] font-black px-3 py-1.5 rounded-full shadow-xl uppercase tracking-widest">
+        {/* Top Badges */}
+        <div className="absolute top-5 right-5 flex flex-col gap-2 z-10">
+          <div className="bg-white/20 backdrop-blur-md border border-white/30 text-white text-[10px] font-black px-4 py-1.5 rounded-full shadow-lg">
             {collection}
           </div>
-          {isNew && (
-            <div className="bg-gold/90 backdrop-blur-md text-white text-[10px] font-black px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1.5 animate-pulse">
-              <Star className="w-3 h-3 fill-white" /> NEW
-            </div>
-          )}
+          <div className="bg-gold text-white text-[10px] font-black px-4 py-1.5 rounded-full shadow-lg flex items-center gap-1 animate-pulse">
+            جديد <Star className="w-3 h-3 fill-white" />
+          </div>
         </div>
 
-        {/* Favorite Button (Top Right) */}
+        {/* Wishlist Button */}
         <button 
-          onClick={(e) => { e.stopPropagation(); setIsFavorite(!isFavorite); }}
+          onClick={(e) => { e.stopPropagation(); setIsLiked(!isLiked); }}
           className={`
-            absolute top-4 right-4 p-2.5 rounded-full backdrop-blur-md border transition-all z-10
-            ${isFavorite ? 'bg-gold border-gold text-white scale-110 shadow-lg shadow-gold/30' : 'bg-white/20 border-white/30 text-white hover:bg-white hover:text-burgundy'}
+            absolute top-5 left-5 p-3 rounded-full backdrop-blur-md transition-all duration-300 z-10
+            ${isLiked ? 'bg-burgundy text-white scale-110' : 'bg-white/20 text-white border border-white/30 hover:bg-white hover:text-burgundy'}
           `}
         >
-          <Heart className={`w-4 h-4 ${isFavorite ? 'fill-white' : ''} transition-transform active:scale-125`} />
+          <Heart className={`w-5 h-5 ${isLiked ? 'fill-current' : ''}`} />
         </button>
 
-        {/* Certifications (Bottom on Image) */}
-        <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end z-10">
-          <div className="flex gap-1.5">
-            {certifications.map(cert => (
-              <div key={cert} className="bg-white/10 backdrop-blur-md border border-white/20 p-1.5 rounded-lg shadow-lg group/cert hover:bg-white/30 transition-all">
-                <div className="flex items-center gap-1">
-                   <Award className="w-3 h-3 text-white" />
-                   <span className="text-[8px] font-black text-white uppercase hidden group-hover/cert:block">{cert}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          {/* Sustainability Dot Indicator */}
-          <div className="flex gap-1 mb-1">
-            {[...Array(5)].map((_, i) => (
-              <div 
-                key={i} 
-                className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${i < sustainabilityScore ? 'bg-gold shadow-[0_0_8px_var(--gold)] scale-110' : 'bg-white/30'}`} 
-              />
-            ))}
-          </div>
+        {/* Bottom Certifications (Glassmorphism) */}
+        <div className="absolute bottom-5 left-5 right-5 flex gap-2">
+          {certifications.map(cert => (
+            <div key={cert} className="flex items-center gap-1 bg-white/10 backdrop-blur-xl border border-white/20 px-3 py-1.5 rounded-xl shadow-inner">
+               <ShieldCheck className="w-3.5 h-3.5 text-green-400" />
+               <span className="text-[10px] font-black text-white uppercase tracking-wider">{cert}</span>
+            </div>
+          ))}
         </div>
 
-        {/* Image Vignette Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 opacity-60 pointer-events-none" />
+        {/* Glass Overlay on Hover */}
+        <div className={`absolute inset-0 bg-burgundy/10 backdrop-blur-[1px] transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
       </div>
 
-      {/* ─── 2. CONTENT SECTION ─── */}
-      <div className={`p-6 flex flex-col flex-1 bg-white relative`}>
-        
-        {/* Fabric Title & Origin */}
-        <div className="mb-4">
-          <div className="flex items-start justify-between gap-4 mb-2">
-            <h3 className="text-xl font-black text-charcoal leading-tight group-hover:text-gold transition-colors line-clamp-2">
+      {/* ─── Content Section ─── */}
+      <div className="p-6 flex flex-col flex-1 gap-5 bg-white relative">
+        {/* Product Identity */}
+        <div className="space-y-2">
+          <div className="flex justify-between items-start">
+            <h3 className="text-xl font-black text-charcoal group-hover:text-gold transition-colors leading-tight">
               {name}
-              <span className="block text-[10px] text-muted font-normal mt-1 italic">Sergé de Soie Lyonnaise</span>
+              <span className="block text-xs font-medium text-muted mt-1 opacity-60">Sergé de Soie Lyonnaise</span>
             </h3>
-            <div className="flex flex-col items-end shrink-0">
-               <span className="text-lg" title={origin.country}>{origin.flag}</span>
-               <div className="flex items-center gap-1 mt-1">
-                  <Layers className="w-3 h-3 text-gold" />
-                  <span className="text-[10px] font-black text-muted uppercase tracking-tighter">{technicalSpecs.weave}</span>
+            <div className="flex flex-col items-end gap-1">
+               <div className="flex items-center gap-1.5 bg-ecru/50 px-2 py-1 rounded-lg">
+                  <Wind className="w-3.5 h-3.5 text-gold" />
+                  <span className="text-[10px] font-bold text-charcoal">{technicalSpecs.weave}</span>
                </div>
             </div>
           </div>
 
           {/* Supplier Info */}
-          <div className="flex items-center gap-2 py-3 border-y border-ecru/30">
-            <div className="relative w-7 h-7 rounded-full overflow-hidden border border-gold/20 shadow-sm">
-              <img src={supplier.avatar} alt={supplier.name} className="object-cover w-full h-full" />
-            </div>
-            <span className="text-[11px] font-bold text-charcoal flex items-center gap-1">
-              {supplier.name} {supplier.isVerified && <CheckCircle className="w-3 h-3 text-success fill-success/10" />}
-            </span>
-          </div>
-        </div>
-
-        {/* Composition Proportional Bars */}
-        <div className="mb-6">
-          <p className="text-[9px] font-black text-muted uppercase tracking-widest mb-2 flex justify-between">
-            <span>التركيبة الأساسية</span>
-            <span>{composition[0].percentage}% {composition[0].fiber}</span>
-          </p>
-          <div className="h-1.5 w-full bg-ecru/30 rounded-full flex overflow-hidden">
-            {composition.map((comp, idx) => (
-              <div 
-                key={idx} 
-                style={{ width: `${comp.percentage}%`, backgroundColor: comp.color }}
-                className="h-full transition-all duration-1000 group-hover:brightness-110"
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* ─── 3. TECHNICAL SPECS (Expandable) ─── */}
-        <div className={`mb-6 transition-all duration-500 overflow-hidden ${isExpanded ? 'max-h-60' : 'max-h-0'}`}>
-          <div className="grid grid-cols-2 gap-4 p-4 bg-gray-50 rounded-2xl border border-ecru/50">
-             <div className="space-y-1">
-                <p className="text-[9px] text-muted font-black uppercase">الوزن (GSM)</p>
-                <div className="flex items-center gap-2">
-                   <div className="flex-1 h-1 bg-gray-200 rounded-full overflow-hidden">
-                      <div className="h-full bg-burgundy rounded-full" style={{ width: `${(technicalSpecs.gsm / 400) * 100}%` }} />
-                   </div>
-                   <span className="text-xs font-bold text-charcoal">{technicalSpecs.gsm}</span>
-                </div>
+          <div className="flex items-center gap-3 py-2 border-b border-gray-50">
+             <div className="relative w-8 h-8 rounded-full border-2 border-ecru overflow-hidden shadow-sm">
+                <img src={supplier.avatar} alt={supplier.name} className="object-cover w-full h-full" />
              </div>
-             <div className="space-y-1">
-                <p className="text-[9px] text-muted font-black uppercase">العرض (Laize)</p>
-                <div className="flex items-center gap-1 text-xs font-bold text-charcoal">
-                   <Ruler className="w-3 h-3 text-gold" /> {technicalSpecs.width} cm
-                </div>
-             </div>
-             <div className="col-span-2 space-y-1 pt-2 border-t border-gray-200/50">
-                <p className="text-[9px] text-muted font-black uppercase">الألوان المتاحة</p>
-                <div className="flex items-center gap-1.5">
-                   {technicalSpecs.colorsAvailable.slice(0, 6).map((c, i) => (
-                     <div key={i} className="w-4 h-4 rounded-full border border-white shadow-sm ring-1 ring-ecru" style={{ backgroundColor: c }} />
-                   ))}
-                   {technicalSpecs.totalColors > 6 && (
-                     <span className="text-[10px] font-black text-muted ml-1">+{technicalSpecs.totalColors - 6} ألوان</span>
-                   )}
-                </div>
+             <div className="flex flex-col">
+                <span className="text-[11px] font-black text-charcoal flex items-center gap-1">
+                   {supplier.name} {origin.flag}
+                </span>
+                <span className="text-[9px] text-muted font-bold flex items-center gap-1">
+                   <MapPin className="w-2.5 h-2.5" /> {origin.country}
+                </span>
              </div>
           </div>
         </div>
-        
-        <button 
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="flex items-center justify-center gap-1 w-full text-[9px] font-black text-gold uppercase tracking-[0.2em] mb-4 hover:opacity-70 transition-opacity"
-        >
-          {isExpanded ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
-          {isExpanded ? 'إغلاق التفاصيل' : 'المواصفات التقنية'}
-        </button>
 
-        {/* ─── 4. COMMERCIAL SECTION ─── */}
-        <div className="mt-auto pt-4 border-t border-ecru/30">
-          <div className="flex items-end justify-between mb-5">
-            <div className="flex flex-col">
-              <div className="flex items-baseline gap-1.5">
-                <span className="text-3xl font-black text-burgundy">{typeof commercial.price === 'number' ? commercial.price.toFixed(2) : '---'}</span>
-                <span className="text-xs font-bold text-muted uppercase">{commercial.currency} / {commercial.unit}</span>
-              </div>
-              <p className="text-[10px] text-muted font-bold mt-1 flex items-center gap-1">
-                <TrendingUp className="w-3 h-3 text-success" /> متوسط سعر السوق المحلي
-              </p>
-            </div>
-            <div className="flex flex-col items-end gap-1">
-              <div className="flex items-center gap-1 text-[11px] font-bold text-charcoal bg-ecru/30 px-3 py-1 rounded-full border border-ecru/50">
-                <Package className="w-3 h-3 text-gold" /> {commercial.moq} {commercial.unit}
-              </div>
-              <div className="flex items-center gap-1 text-[9px] text-muted mt-1">
-                <Clock className="w-3 h-3" /> 2-4 أسابيع
-              </div>
-            </div>
-          </div>
-
-          <div className="flex gap-2.5">
-            <button className="flex-1 bg-burgundy text-white py-4 rounded-2xl text-[11px] font-black uppercase tracking-widest hover:bg-gold transition-all shadow-xl shadow-burgundy/10 active:scale-95">
-              طلب عينة فنية
-            </button>
-            <button className="w-14 h-14 border-2 border-ecru rounded-2xl flex items-center justify-center text-charcoal hover:bg-ecru transition-all active:scale-90" title="إضافة للمقارنة">
-              <ArrowLeftRight className="w-5 h-5" />
-            </button>
-          </div>
+        {/* Composition Bars */}
+        <div className="space-y-1.5">
+           <div className="flex h-2 w-full bg-gray-100 rounded-full overflow-hidden shadow-inner">
+              {composition.map((comp, i) => (
+                <div 
+                  key={i} 
+                  style={{ width: `${comp.percentage}%`, backgroundColor: comp.color }} 
+                  className="h-full first:rounded-r-full last:rounded-l-full transition-all duration-1000"
+                />
+              ))}
+           </div>
+           <div className="flex flex-wrap gap-x-4 gap-y-1">
+              {composition.map((comp, i) => (
+                <span key={i} className="text-[10px] font-black text-muted flex items-center gap-1">
+                   <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: comp.color }} />
+                   {comp.percentage}% {comp.fiber}
+                </span>
+              ))}
+           </div>
         </div>
 
-        {/* Vertical Stock Status Strip */}
-        <div className={`
-          absolute top-0 right-0 w-1 h-full
-          ${commercial.stockStatus === 'IN_STOCK' ? 'bg-success' : 'bg-warning'}
-        `} />
+        {/* Expandable Technical Specs */}
+        <div className="bg-gray-50/50 rounded-2xl overflow-hidden transition-all duration-500">
+           <button 
+             onClick={() => setIsExpanded(!isExpanded)}
+             className="w-full flex items-center justify-between p-4 hover:bg-ecru/30 transition-colors"
+           >
+              <div className="flex items-center gap-2">
+                 <Layers className="w-4 h-4 text-gold" />
+                 <span className="text-[11px] font-black text-charcoal">المواصفات التقنية</span>
+              </div>
+              <ChevronDown className={`w-4 h-4 text-muted transition-transform duration-500 ${isExpanded ? 'rotate-180' : ''}`} />
+           </button>
+           
+           <div className={`transition-all duration-500 ${isExpanded ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'}`}>
+              <div className="p-4 pt-0 space-y-4">
+                 {/* GSM Scale */}
+                 <div className="space-y-2">
+                    <div className="flex justify-between text-[9px] font-black text-muted uppercase tracking-widest">
+                       <span>الوزن: {technicalSpecs.gsm} GSM</span>
+                       <span>{gsmLevel.label}</span>
+                    </div>
+                    <div className="h-1.5 w-full bg-gray-200 rounded-full overflow-hidden">
+                       <div 
+                         className="h-full bg-gold rounded-full transition-all duration-1000 delay-300" 
+                         style={{ width: isExpanded ? gsmLevel.width : '0%' }} 
+                       />
+                    </div>
+                 </div>
+
+                 <div className="grid grid-cols-2 gap-4">
+                    <div className="p-3 bg-white rounded-xl border border-ecru/50">
+                       <p className="text-[9px] text-muted font-black uppercase mb-1">العرض (Laize)</p>
+                       <p className="text-xs font-black text-charcoal">{technicalSpecs.width} سم</p>
+                    </div>
+                    <div className="p-3 bg-white rounded-xl border border-ecru/50">
+                       <p className="text-[9px] text-muted font-black uppercase mb-1">الألوان المتاحة</p>
+                       <div className="flex items-center gap-1.5 mt-1">
+                          {technicalSpecs.colorsAvailable.slice(0, 3).map((c, i) => (
+                            <div key={i} className="w-3.5 h-3.5 rounded-full ring-1 ring-gray-200" style={{ backgroundColor: c }} />
+                          ))}
+                          <span className="text-[9px] font-black text-gold">+{technicalSpecs.totalColors - 3}</span>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+
+        {/* Commercial Section */}
+        <div className="pt-4 border-t border-dashed border-ecru space-y-5">
+           <div className="flex items-end justify-between">
+              <div className="space-y-1">
+                 <span className="text-[9px] text-muted font-black uppercase tracking-widest">سعر المتر التقريبي</span>
+                 <div className="flex items-baseline gap-1.5">
+                    <span className="text-3xl font-black text-burgundy">{commercial.price}</span>
+                    <span className="text-xs font-black text-muted">DZD / م</span>
+                 </div>
+              </div>
+              <div className="flex flex-col items-end gap-2">
+                 <div className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-xl border border-ecru shadow-sm">
+                    <Package className="w-3.5 h-3.5 text-gold" />
+                    <span className="text-[10px] font-black text-charcoal">MOQ: {commercial.moq}م</span>
+                 </div>
+                 {/* Delivery Timeline Indicator */}
+                 <div className="flex items-center gap-2">
+                    <Calendar className="w-3 h-3 text-muted" />
+                    <div className="w-16 h-1 bg-gray-100 rounded-full overflow-hidden">
+                       <div className="h-full bg-success/40 w-2/3" />
+                    </div>
+                    <span className="text-[9px] font-black text-muted whitespace-nowrap">~ {commercial.leadTimeWeeks || 2} أسابيع</span>
+                 </div>
+              </div>
+           </div>
+
+           <div className="flex gap-3">
+              <button className="flex-1 bg-gold text-white py-4 rounded-2xl text-[11px] font-black shadow-[0_10px_20px_rgba(201,168,76,0.2)] hover:bg-gold-dark hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+                 طلب عينة
+                 <Plus className="w-4 h-4" />
+              </button>
+              <button className="px-5 border-2 border-ecru text-charcoal rounded-2xl text-[11px] font-black hover:border-gold hover:text-gold transition-all flex items-center justify-center">
+                 مقارنة
+              </button>
+           </div>
+        </div>
       </div>
-    </div>
-  );
-}
 
-export function FabricCardSkeleton() {
-  return (
-    <div className="bg-white rounded-[2rem] border border-ecru/50 overflow-hidden flex flex-col h-[600px] animate-pulse">
-       <div className="h-[280px] bg-gray-200" />
-       <div className="p-6 flex-1 space-y-6">
-          <div className="space-y-2">
-             <div className="h-6 bg-gray-200 rounded-full w-3/4" />
-             <div className="h-4 bg-gray-100 rounded-full w-1/2" />
-          </div>
-          <div className="h-10 bg-gray-100 rounded-2xl" />
-          <div className="space-y-2">
-             <div className="h-1.5 bg-gray-200 rounded-full" />
-             <div className="h-3 bg-gray-100 rounded-full w-1/4" />
-          </div>
-          <div className="mt-auto pt-4 border-t border-ecru/30 flex justify-between items-end">
-             <div className="h-10 bg-gray-200 rounded-xl w-32" />
-             <div className="h-10 bg-gray-100 rounded-xl w-24" />
-          </div>
-       </div>
+      {/* Stock Status Line */}
+      <div className={`
+        absolute bottom-0 left-0 w-full h-1.5
+        ${commercial.stockStatus === 'IN_STOCK' ? 'bg-green-500' : 'bg-gold'}
+      `} />
     </div>
   );
 }

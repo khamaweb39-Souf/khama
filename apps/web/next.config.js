@@ -12,12 +12,8 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  // تقليل استهلاك الذاكرة أثناء البناء لتجنب انهيار الـ Context
-  experimental: {
-    webpackBuildWorker: true,
-    parallelServerCompiles: true,
-    serverComponentsExternalPackages: ['lucide-react'],
-  },
+  productionBrowserSourceMaps: false,
+  transpilePackages: ['lucide-react'],
 }
 
 module.exports = nextConfig
