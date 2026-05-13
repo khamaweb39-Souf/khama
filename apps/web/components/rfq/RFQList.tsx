@@ -149,7 +149,7 @@ export default function RFQList() {
                   <div className="flex flex-wrap gap-4 text-xs text-muted font-medium">
                     <span className="flex items-center gap-1"><Briefcase className="w-3.5 h-3.5" /> {rfq.buyer?.fullName || rfq.buyer}</span>
                     <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5" /> {rfq.location || 'الجزائر'}</span>
-                    <span className="flex items-center gap-1"><Layers className="w-3.5 h-3.5" /> {rfq.category?.name?.ar || rfq.category}</span>
+                    <span className="flex items-center gap-1"><Layers className="w-3.5 h-3.5" /> {rfq.category?.name?.ar || rfq.category?.name || rfq.category}</span>
                   </div>
                 </div>
 

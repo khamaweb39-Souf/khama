@@ -34,7 +34,7 @@ const TopBar = ({ t }: { t: any }) => (
         {t('dashboard')}
       </Link>
       <div className="h-3 w-px bg-white/10 mx-1" />
-      <Link href="/login" className="hover:text-gold transition-colors">{t('logout')}</Link>
+      <Link href="/account" className="hover:text-gold transition-colors">{t('logout')}</Link>
     </div>
   </div>
 );
@@ -128,10 +128,10 @@ export default function Header() {
           { label: 'الأدوات التقنية للمحترفين', link: '/tools' }
         ]},
         { title: 'الموردون', items: [
-          { label: 'موردون جزائريون معتمدون', link: '/suppliers/dz' },
-          { label: 'مراكز التوزيع الكبرى', link: '/distributors' },
-          { label: 'المتاجر الرسمية', link: '/brands' },
-          { label: 'نظام توثيق الموردين', link: '/verification' }
+          { label: 'موردون جزائريون معتمدون', link: '/suppliers' },
+          { label: 'مراكز التوزيع الكبرى', link: '/suppliers' },
+          { label: 'المتاجر الرسمية', link: '#' },
+          { label: 'نظام توثيق الموردين', link: '#' }
         ]}
       ],
       promo: {
