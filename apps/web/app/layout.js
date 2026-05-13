@@ -46,6 +46,7 @@ export const metadata = {
 };
 
 import { I18nProvider } from '../components/I18nProvider';
+import Footer from '../components/Footer';
 
 export default function RootLayout({ children }) {
   return (
@@ -53,9 +54,10 @@ export default function RootLayout({ children }) {
       <body className={cairo.className}>
         <I18nProvider>
           <Header />
-          <main className="min-h-screen bg-gray-50 pt-32 pb-20">
+          <main className="min-h-screen bg-gray-50 pt-32">
             {children}
           </main>
+          <Footer />
           <BottomNav />
         </I18nProvider>
       </body>
