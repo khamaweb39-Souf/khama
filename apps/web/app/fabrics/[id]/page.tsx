@@ -129,7 +129,7 @@ export default function FabricDetailPage({ params }: { params: { id: string } })
               <div>
                 <p className="text-label text-muted mb-1">السعر للمتر</p>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-display !text-3xl text-burgundy">{pricePerMeter.toFixed(2)}</span>
+                  <span className="text-display !text-3xl text-burgundy">{parseFloat(fabricData.price).toFixed(2)}</span>
                   <span className="text-body-small text-muted font-bold">€ / متر</span>
                 </div>
               </div>
@@ -152,7 +152,7 @@ export default function FabricDetailPage({ params }: { params: { id: string } })
               </div>
               <div className="flex justify-between p-3 bg-ecru/20 rounded-xl">
                  <span className="text-body-small text-muted">الإجمالي التقديري</span>
-                 <span className="text-body font-bold text-charcoal">{(quantity * pricePerMeter).toLocaleString()} €</span>
+                 <span className="text-body font-bold text-charcoal">{(quantity * parseFloat(fabricData.price)).toLocaleString()} €</span>
               </div>
             </div>
 
