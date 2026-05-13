@@ -3,12 +3,12 @@ import Link from 'next/link';
 const categories = [
   { icon: '🧵', label: 'أقمشة', href: '/categories/fabrics', color: 'bg-blue-50 text-blue-600' },
   { icon: '👜', label: 'جلود', href: '/categories/leather', color: 'bg-orange-50 text-orange-600' },
-  { icon: '⚙️', label: 'آلات', href: '/categories/machines', color: 'bg-gray-50 text-gray-600' },
-  { icon: '📐', label: 'باترونات', href: '/categories/patterns', color: 'bg-purple-50 text-purple-600' },
+  { icon: '⚙️', label: 'آلات', href: '/categories/machinery', color: 'bg-gray-50 text-gray-600' },
+  { icon: '📐', label: 'باترونات', href: '/categories/fabrics', color: 'bg-purple-50 text-purple-600' },
   { icon: '🎓', label: 'أكاديمية', href: '/academy', color: 'bg-green-50 text-green-600' },
-  { icon: '💼', label: 'وظائف', href: '/jobs', color: 'bg-indigo-50 text-indigo-600' },
-  { icon: '🏭', label: 'مصانع', href: '/factories', color: 'bg-amber-50 text-amber-600' },
-  { icon: '🛍️', label: 'تجزئة', href: '/retail', color: 'bg-rose-50 text-rose-600' },
+  { icon: '💼', label: 'وظائف', href: '/dashboard', color: 'bg-indigo-50 text-indigo-600' },
+  { icon: '🏭', label: 'مصانع', href: '/suppliers', color: 'bg-amber-50 text-amber-600' },
+  { icon: '🛍️', label: 'تجزئة', href: '/fabrics', color: 'bg-rose-50 text-rose-600' },
 ];
 
 export default function QuickCategories() {

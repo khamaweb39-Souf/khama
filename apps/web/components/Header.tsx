@@ -231,8 +231,8 @@ export default function Header() {
                <button onClick={() => setIsMobileMenuOpen(false)}><X /></button>
             </div>
             <ul className="flex flex-col gap-6">
-               <li><Link href="/cat" className="text-subheading">الكتالوج</Link></li>
-               <li><Link href="/market" className="text-subheading">السوق</Link></li>
+               <li><Link href="/fabrics" className="text-subheading">الكتالوج</Link></li>
+               <li><Link href="/suppliers" className="text-subheading">الموردين</Link></li>
                <li><Link href="/academy" className="text-subheading">الأكاديمية</Link></li>
                <li><Link href="/tools" className="text-subheading">الأدوات التقنية</Link></li>
                <li><Link href="/glossary" className="text-subheading">القاموس التقني</Link></li>

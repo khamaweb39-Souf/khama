@@ -72,6 +72,75 @@ const MOCK_FABRICS: FabricCardProps[] = [
       stockStatus: 'ON_ORDER',
       leadTimeWeeks: 4
     }
+  },
+  {
+    id: '3',
+    name: 'Coton Bio Certifié GOTS',
+    reference: 'CB-2026-015',
+    image: 'https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?q=80&w=800&auto=format&fit=crop',
+    collection: 'ECO-FRIENDLY',
+    certifications: ['GOTS', 'OEKO-TEX'],
+    sustainabilityScore: 5,
+    createdAt: new Date().toISOString(),
+    supplier: {
+      id: 's3',
+      name: 'BioTex Algeria',
+      avatar: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?q=80&w=100&auto=format&fit=crop',
+      isVerified: true
+    },
+    origin: { country: 'Algeria', flag: '🇩🇿' },
+    composition: [
+      { fiber: 'Coton Bio', percentage: 100, color: '#FFFFFF' }
+    ],
+    technicalSpecs: {
+      gsm: 160,
+      width: 160,
+      weave: 'Jersey',
+      colorsAvailable: ['#FFFFFF', '#E8E8E8'],
+      totalColors: 8
+    },
+    commercial: {
+      price: 12.50,
+      currency: '€',
+      unit: 'm',
+      moq: 200,
+      stockStatus: 'IN_STOCK'
+    }
+  },
+  {
+    id: '4',
+    name: 'Velours Côtelé Premium',
+    reference: 'VC-2026-088',
+    image: 'https://images.unsplash.com/photo-1596751303335-ca42b3ca50c1?q=80&w=800&auto=format&fit=crop',
+    collection: 'SS26',
+    certifications: ['OEKO-TEX'],
+    sustainabilityScore: 3,
+    createdAt: new Date().toISOString(),
+    supplier: {
+      id: 's4',
+      name: 'Tissage d\'Oran',
+      avatar: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=100&auto=format&fit=crop',
+      isVerified: true
+    },
+    origin: { country: 'Algeria', flag: '🇩🇿' },
+    composition: [
+      { fiber: 'Coton', percentage: 98, color: '#4A3728' },
+      { fiber: 'Élasthanne', percentage: 2, color: '#000000' }
+    ],
+    technicalSpecs: {
+      gsm: 320,
+      width: 145,
+      weave: 'Velours',
+      colorsAvailable: ['#4A3728', '#2D3561', '#5C1D1D'],
+      totalColors: 15
+    },
+    commercial: {
+      price: 15.80,
+      currency: '€',
+      unit: 'm',
+      moq: 30,
+      stockStatus: 'IN_STOCK'
+    }
   }
 ];
 

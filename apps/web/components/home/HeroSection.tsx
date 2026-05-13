@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState, useCallback } from 'react';
+import Link from 'next/link';
 
 /* ─── Types ──────────────────────────────────────────────────────────── */
 interface Fiber {
@@ -596,8 +597,8 @@ export default function HeroSection() {
             }}
           >
             {/* Primary CTA */}
-            <a
-              href="#"
+            <Link
+              href="/fabrics"
               className="btn-gold font-body inline-flex items-center gap-2"
               style={{
                 fontSize: '0.88rem',
@@ -617,11 +618,11 @@ export default function HeroSection() {
               >
                 →
               </span>
-            </a>
+            </Link>
 
             {/* Ghost CTA */}
-            <a
-              href="#"
+            <Link
+              href="/rfq/create"
               className="btn-ghost font-body inline-flex items-center gap-2"
               style={{
                 fontSize: '0.88rem',
@@ -635,11 +636,11 @@ export default function HeroSection() {
               }}
             >
               انشر طلب عرض
-            </a>
+            </Link>
 
             {/* Text link */}
-            <a
-              href="#"
+            <Link
+              href="/academy"
               className="font-body"
               style={{
                 fontSize: '0.85rem',
@@ -688,7 +689,7 @@ export default function HeroSection() {
                   transition: 'transform 0.3s ease',
                 }}
               />
-            </a>
+            </Link>
           </div>
         </div>
 
