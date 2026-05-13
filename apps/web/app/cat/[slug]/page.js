@@ -1,15 +1,19 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import ProductCard from '../../../components/listing/ProductCard';
 import FilterSidebar from '../../../components/listing/FilterSidebar';
 import { Search, LayoutGrid, List, ChevronDown, AlertCircle } from 'lucide-react';
 import { MOCK_PRODUCTS } from '../../../data/mockDatabase';
 
 export default function CategoryListingPage({ params }) {
+  const { t } = useTranslation();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({ category: params.slug });
   const [sortBy, setSortBy] = useState('createdAt');
+
+  const categoryTitle = t(`categories.${params.slug}`, { defaultValue: params.slug });
 
   const fetchProducts = async () => {
     setLoading(true);
@@ -25,16 +29,20 @@ export default function CategoryListingPage({ params }) {
       
       let fetchedProducts = data.products || [];
       
-      // FALLBACK: If backend is empty or fails, use MOCK_PRODUCTS filtered by category
+      // FALLBACK: If backend is empty or fails, use MOCK_PRODUCTS filtered by category or subcategory
       if (fetchedProducts.length === 0) {
-        fetchedProducts = MOCK_PRODUCTS.filter(p => p.category === params.slug);
+        fetchedProducts = MOCK_PRODUCTS.filter(p => 
+          p.category === params.slug || p.subcategory === params.slug
+        );
       }
 
       setProducts(fetchedProducts);
     } catch (e) {
       console.error('Fetch error:', e);
       // FALLBACK on error
-      setProducts(MOCK_PRODUCTS.filter(p => p.category === params.slug));
+      setProducts(MOCK_PRODUCTS.filter(p => 
+        p.category === params.slug || p.subcategory === params.slug
+      ));
     } finally {
       setLoading(false);
     }
@@ -47,11 +55,11 @@ export default function CategoryListingPage({ params }) {
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 pb-32">
       {/* Header & Breadcrumbs */}
-      <header className="mb-8">
+      <header className="mb-8" dir="rtl">
         <div className="text-xs text-gray-400 mb-2 flex items-center gap-2">
-           <span>الرئيسية</span> <span>/</span> <span className="text-burgundy font-bold capitalize">{params.slug}</span>
+           <span>الرئيسية</span> <span>/</span> <span className="text-burgundy font-bold">{categoryTitle}</span>
         </div>
-        <h1 className="text-3xl font-black text-gray-900 capitalize">{params.slug}</h1>
+        <h1 className="text-3xl font-black text-gray-900">{categoryTitle}</h1>
         <p className="text-gray-500 text-sm mt-1">اكتشف أفضل الخامات والمنتجات في هذا القسم</p>
       </header>
 

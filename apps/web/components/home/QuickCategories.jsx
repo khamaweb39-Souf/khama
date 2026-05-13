@@ -3,10 +3,10 @@
 import Link from 'next/link';
 
 const categories = [
-  { icon: '🧵', label: 'أقمشة', href: '/categories/fabrics', color: 'bg-gold/10 text-gold' },
-  { icon: '👜', label: 'جلود', href: '/categories/leather', color: 'bg-gold/10 text-gold' },
-  { icon: '⚙️', label: 'آلات', href: '/categories/machinery', color: 'bg-gold/10 text-gold' },
-  { icon: '📐', label: 'باترونات', href: '/categories/fabrics', color: 'bg-gold/10 text-gold' },
+  { icon: '🧵', label: 'أقمشة', href: '/cat/fabrics', color: 'bg-gold/10 text-gold' },
+  { icon: '👜', label: 'جلود', href: '/cat/leather', color: 'bg-gold/10 text-gold' },
+  { icon: '⚙️', label: 'آلات', href: '/cat/machinery', color: 'bg-gold/10 text-gold' },
+  { icon: '📐', label: 'باترونات', href: '/cat/fabrics', color: 'bg-gold/10 text-gold' },
   { icon: '🎓', label: 'أكاديمية', href: '/academy', color: 'bg-gold/10 text-gold' },
   { icon: '💼', label: 'وظائف', href: '/dashboard', color: 'bg-gold/10 text-gold' },
   { icon: '🏭', label: 'مصانع', href: '/suppliers', color: 'bg-gold/10 text-gold' },
