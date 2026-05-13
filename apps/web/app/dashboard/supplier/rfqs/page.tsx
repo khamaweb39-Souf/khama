@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { 
   Search, Filter, Clock, MapPin, 
   ArrowUpRight, MessageSquare, ChevronRight,
-  ShieldCheck, Zap, Download, Info
+  ShieldCheck, Zap, Download, Info, User
 } from 'lucide-react';
 
 const RFQS = [

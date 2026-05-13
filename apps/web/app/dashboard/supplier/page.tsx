@@ -4,7 +4,8 @@ import React from 'react';
 import { 
   TrendingUp, Users, ShoppingBag, MessageSquare, 
   ArrowUpRight, ArrowDownRight, Package, Calendar,
-  ExternalLink, ChevronRight, Zap, Target
+  ExternalLink, ChevronRight, Zap, Target,
+  PlusCircle, Clock, BarChart2
 } from 'lucide-react';
 
 export default function SupplierDashboardPage() {
