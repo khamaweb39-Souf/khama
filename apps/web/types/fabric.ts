@@ -13,6 +13,58 @@ export interface SupplierInfo {
   name: string;
   avatar: string;
   isVerified: boolean;
+  rating: number;
+  totalProducts: number;
+  location: string;
+  country: string;
+  flag: string;
+  logo: string;
+}
+
+export interface PricingTier {
+  minQuantity: number;
+  price: number;
+}
+
+export interface FabricDetail {
+  id: string;
+  nameAr: string;
+  nameFr: string;
+  reference: string;
+  description: string;
+  longDescription: string;
+  images: string[];
+  collection: CollectionType;
+  certifications: {
+    type: Certification;
+    name: string;
+    description: string;
+    image: string;
+  }[];
+  sustainabilityScore: number;
+  createdAt: string;
+  supplier: SupplierInfo;
+  composition: FiberComposition[];
+  technicalSpecs: {
+    gsm: number;
+    width: number;
+    weave: string;
+    weaveImage: string;
+    density: string;
+    shrinkage: string;
+    martindale: number;
+    colorFastness: string;
+    colorsAvailable: { hex: string; name: string }[];
+  };
+  commercial: {
+    price: number;
+    currency: string;
+    unit: string;
+    moq: number;
+    stockStatus: StockStatus;
+    leadTimeWeeks: number;
+    pricingTiers: PricingTier[];
+  };
 }
 
 export interface FabricCardProps {
@@ -22,9 +74,14 @@ export interface FabricCardProps {
   image: string;
   collection: CollectionType;
   certifications: Certification[];
-  sustainabilityScore: number; // 1-5
-  createdAt: string; // ISO date
-  supplier: SupplierInfo;
+  sustainabilityScore: number;
+  createdAt: string;
+  supplier: {
+    id: string;
+    name: string;
+    avatar: string;
+    isVerified: boolean;
+  };
   origin: {
     country: string;
     flag: string;
@@ -34,7 +91,7 @@ export interface FabricCardProps {
     gsm: number;
     width: number;
     weave: string;
-    colorsAvailable: string[]; // hex codes
+    colorsAvailable: string[];
     totalColors: number;
   };
   commercial: {
