@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 
 const Header = dynamic(() => import('../components/Header'), { ssr: false });
 const BottomNav = dynamic(() => import('../components/BottomNav'), { ssr: false });
+const Footer = dynamic(() => import('../components/Footer'), { ssr: false });
 
 const cairo = Cairo({ subsets: ['arabic', 'latin'] });
 
@@ -54,6 +55,7 @@ export default function RootLayout({ children }) {
           <main className="min-h-screen bg-gray-50 pt-32 pb-20">
             {children}
           </main>
+          <Footer />
           <BottomNav />
         </I18nProvider>
       </body>

@@ -6,6 +6,10 @@ import TrustedFactories from '../components/home/TrustedFactories';
 import LatestCourses from '../components/home/LatestCourses';
 import FilterSidebar from '../components/FilterSidebar';
 import dynamic from 'next/dynamic';
+import WhyKhama from '../components/home/WhyKhama';
+import HowItWorks from '../components/home/HowItWorks';
+import PartnersMarquee from '../components/home/PartnersMarquee';
+import NewsletterSection from '../components/home/NewsletterSection';
 import SEOHead, { getHomeSchema } from '../components/SEOHead';
 
 const HomeSections = dynamic(() => import('../components/home/HomeSections'), { ssr: false });
@@ -33,14 +37,26 @@ export default function HomePage() {
         </main>
       </div>
       
+      {/* Why Khama? */}
+      <WhyKhama />
+
+      {/* How it Works? */}
+      <HowItWorks />
+
       {/* Trusted Factories Carousel */}
       <TrustedFactories />
+
+      {/* Partners & Certifications */}
+      <PartnersMarquee />
       
       {/* Academy & Courses Section */}
       <LatestCourses />
 
       {/* Advanced Editorial & Market Sections */}
       <HomeSections />
+
+      {/* Newsletter */}
+      <NewsletterSection />
     </div>
   );
 }
