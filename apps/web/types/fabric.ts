@@ -1,4 +1,4 @@
-export type CollectionType = 'SS26' | 'FW26' | 'PERMANENT';
+export type CollectionType = 'SS26' | 'FW26' | 'PERMANENT' | 'ECO-FRIENDLY';
 export type StockStatus = 'IN_STOCK' | 'ON_ORDER' | 'PRE_ORDER';
 export type Certification = 'GOTS' | 'OEKO-TEX' | 'ISO' | 'REACH' | 'BCI' | 'BLUESIGN';
 
