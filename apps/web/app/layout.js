@@ -1,13 +1,23 @@
-import { Cairo } from 'next/font/google';
+import { Cairo, Tajawal } from 'next/font/google';
 import './globals.css';
 import dynamic from 'next/dynamic';
 
 const Header = dynamic(() => import('../components/Header'), { ssr: false });
 const BottomNav = dynamic(() => import('../components/BottomNav'), { ssr: false });
 
-const cairo = Cairo({ subsets: ['arabic', 'latin'] });
+const cairo = Cairo({ 
+  subsets: ['arabic', 'latin'],
+  variable: '--font-display'
+});
+
+const tajawal = Tajawal({ 
+  subsets: ['arabic'],
+  weight: ['300', '400', '500', '700'],
+  variable: '--font-body'
+});
 
 export const metadata = {
+  // ... existing metadata (keep as is for SEO)
   title: {
     default: 'خامة - منصة الصناعات النسيجية والجلود',
     template: '%s | خامة'
@@ -47,11 +57,11 @@ import { I18nProvider } from '../components/I18nProvider';
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="ar" dir="rtl">
-      <body className={cairo.className}>
+    <html lang="ar" dir="rtl" className={`${cairo.variable} ${tajawal.variable}`}>
+      <body className="font-body bg-cream">
         <I18nProvider>
           <Header />
-          <main className="min-h-screen bg-gray-50 pt-32 pb-20">
+          <main className="min-h-screen pt-32 pb-20 px-0">
             {children}
           </main>
           <BottomNav />

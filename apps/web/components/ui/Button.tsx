@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'ghost' | 'danger';
+  variant?: 'primary' | 'premium' | 'secondary' | 'outline' | 'ghost' | 'danger';
   size?: 'sm' | 'md' | 'lg' | 'xl';
   isLoading?: boolean;
   leftIcon?: React.ReactNode;
@@ -21,20 +21,22 @@ const Button: React.FC<ButtonProps> = ({
   disabled,
   ...props
 }) => {
-  const baseStyles = 'inline-flex items-center justify-center font-body font-semibold transition-all duration-300 active:scale-95 disabled:opacity-50 disabled:pointer-events-none';
+  const baseStyles = 'inline-flex items-center justify-center font-body font-bold transition-all duration-500 active:scale-95 disabled:opacity-50 disabled:pointer-events-none tracking-tight';
   
   const variants = {
-    primary: 'bg-gold text-white hover:bg-gold-dark shadow-gold/20 hover:shadow-lg hover:shadow-gold/30',
-    secondary: 'border-2 border-burgundy text-burgundy bg-transparent hover:bg-burgundy hover:text-white',
-    ghost: 'text-charcoal bg-transparent hover:bg-ecru',
-    danger: 'bg-garance text-white hover:opacity-90',
+    primary: 'bg-gold text-white hover:bg-gold-dark shadow-silk hover:shadow-gold-glow',
+    premium: 'bg-gradient-to-br from-gold to-gold-dark text-white shadow-silk hover:shadow-gold-glow hover:-translate-y-0.5',
+    secondary: 'bg-navy text-white hover:bg-navy-light shadow-silk',
+    outline: 'border-2 border-gold text-gold bg-transparent hover:bg-gold hover:text-white',
+    ghost: 'text-navy bg-transparent hover:bg-gold/10',
+    danger: 'bg-burgundy text-white hover:opacity-90',
   };
 
   const sizes = {
-    sm: 'px-3 py-1.5 text-xs rounded-sm',
-    md: 'px-6 py-2.5 text-sm rounded-md',
-    lg: 'px-8 py-3.5 text-base rounded-lg',
-    xl: 'px-10 py-4 text-lg rounded-xl',
+    sm: 'px-4 py-2 text-xs rounded-xl',
+    md: 'px-7 py-3 text-sm rounded-2xl',
+    lg: 'px-9 py-4 text-base rounded-2xl',
+    xl: 'px-12 py-5 text-lg rounded-3xl',
   };
 
   const width = fullWidth ? 'w-full' : '';

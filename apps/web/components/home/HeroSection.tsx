@@ -328,8 +328,8 @@ export default function HeroSection() {
   return (
     <section
       ref={heroRef}
-      className="hero-section grain-overlay"
-      style={{ minHeight: '100vh', background: 'var(--obsidian)' }}
+      className="hero-section grain-overlay pattern-jacquard"
+      style={{ minHeight: '100vh', background: 'var(--navy)' }}
       aria-label="Section principale Khama"
     >
       {/* ── Background Layer ───────────────────────────────────────── */}
@@ -346,7 +346,7 @@ export default function HeroSection() {
         >
           {/* Fallback image always shown behind video */}
           <img
-            src="/images/loom-fallback.jpg"
+            src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?q=80&w=1920&auto=format&fit=crop"
             alt=""
             aria-hidden="true"
             style={{
@@ -358,41 +358,9 @@ export default function HeroSection() {
               objectPosition: 'center 30%',
             }}
           />
-
-          {/* Video (if available) */}
-          {!videoError && (
-            <video
-              ref={videoRef}
-              autoPlay
-              muted
-              loop
-              playsInline
-              aria-hidden="true"
-              onError={() => setVideoError(true)}
-              style={{
-                position: 'absolute',
-                inset: 0,
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                objectPosition: 'center 30%',
-                opacity: 0,
-                transition: 'opacity 1.2s ease',
-              }}
-              onCanPlay={(e) => {
-                (e.target as HTMLVideoElement).style.opacity = '1';
-              }}
-            >
-              {/* 
-                Add your video source here when available:
-                <source src="/video/loom-weaving.mp4" type="video/mp4" />
-              */}
-            </video>
-          )}
         </div>
 
-        {/* Gradient overlays */}
-        {/* Diagonal ecru overlay */}
+        {/* Gradient overlays - Refined for Navy */}
         <div
           aria-hidden="true"
           style={{
@@ -401,48 +369,26 @@ export default function HeroSection() {
             background: `
               linear-gradient(
                 125deg,
-                rgba(13,12,10,0.92)  0%,
-                rgba(26,25,23,0.82)  25%,
-                rgba(245,240,232,0.08) 58%,
-                rgba(13,12,10,0.65)  100%
+                rgba(10,22,40,0.95) 0%,
+                rgba(10,22,40,0.85) 35%,
+                rgba(201,168,76,0.05) 60%,
+                rgba(10,22,40,0.7) 100%
               )
             `,
-            animation: 'overlay-breathe 8s ease-in-out infinite',
             zIndex: 1,
           }}
         />
-        {/* Bottom gradient for stat section */}
+        {/* Bottom silk gradient */}
         <div
           aria-hidden="true"
+          className="animate-silk"
           style={{
             position: 'absolute',
             bottom: 0,
             left: 0,
             right: 0,
-            height: '45%',
-            background: 'linear-gradient(to top, rgba(13,12,10,0.97), transparent)',
-            zIndex: 1,
-          }}
-        />
-        {/* Left vignette */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: 'absolute',
-            top: 0, left: 0, bottom: 0,
-            width: '55%',
-            background: 'linear-gradient(to right, rgba(13,12,10,0.88), transparent)',
-            zIndex: 1,
-          }}
-        />
-        {/* Subtle top edge */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: 'absolute',
-            top: 0, left: 0, right: 0,
-            height: '20%',
-            background: 'linear-gradient(to bottom, rgba(13,12,10,0.7), transparent)',
+            height: '50%',
+            background: 'linear-gradient(to top, var(--navy), transparent)',
             zIndex: 1,
           }}
         />
@@ -450,9 +396,6 @@ export default function HeroSection() {
 
       {/* ── Fibers Layer ───────────────────────────────────────────── */}
       <FibersLayer reducedMotion={reducedMotion} />
-
-      {/* ── Decorative Gold Corner Lines ───────────────────────────── */}
-      <GoldDecorLines />
 
       {/* ── Main Hero Content ──────────────────────────────────────── */}
       <div
@@ -469,30 +412,27 @@ export default function HeroSection() {
           width: '100%',
         }}
       >
-        <div style={{ maxWidth: '680px' }}>
+        <div style={{ maxWidth: '750px' }}>
 
           {/* ── Badge ────────────────────────────────────────────── */}
           <div
-            className="badge-anim"
+            className="badge-anim glass-card"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '0.55rem',
-              marginBottom: '2rem',
-              padding: '0.45rem 1rem',
-              border: '1px solid rgba(201,168,76,0.45)',
-              background: 'rgba(201,168,76,0.08)',
-              backdropFilter: 'blur(8px)',
+              gap: '0.75rem',
+              marginBottom: '2.5rem',
+              padding: '0.6rem 1.2rem',
+              borderRadius: '999px',
               opacity: 0,
               animation: contentVisible
-                ? 'badge-enter 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s forwards'
+                ? 'badge-enter 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s forwards'
                 : 'none',
             }}
-            aria-label="Badge : Plateforme Textile Professionnelle N°1 au Maghreb et Afrique"
           >
             <span
               style={{
-                fontSize: '0.7rem',
+                fontSize: '0.8rem',
                 animation: reducedMotion ? 'none' : 'star-spin 4s linear infinite',
                 display: 'inline-block',
                 color: 'var(--gold)',
@@ -504,46 +444,34 @@ export default function HeroSection() {
             <span
               className="font-body"
               style={{
-                fontSize: '0.72rem',
-                letterSpacing: '0.12em',
+                fontSize: '0.75rem',
+                letterSpacing: '0.15em',
                 textTransform: 'uppercase',
-                color: 'var(--gold-light)',
-                fontWeight: 500,
-              }}
-            >
-              المنصة الاحترافية الأولى للمنسوجات في المغرب العربي وأفريقيا
-            </span>
-            <span
-              style={{
-                fontSize: '0.7rem',
-                animation: reducedMotion ? 'none' : 'star-spin 4s linear infinite reverse',
-                display: 'inline-block',
                 color: 'var(--gold)',
+                fontWeight: 900,
               }}
-              aria-hidden="true"
             >
-              ✦
+              المنصة الاحترافية الأولى للمنسوجات في المغرب العربي
             </span>
           </div>
 
-          {/* ── H1 : Sequential letter animation ─────────────────── */}
+          {/* ── H1 : Premium Gold Gradient ─────────────────── */}
           <h1
             className="font-display"
             style={{
-              fontSize: 'clamp(2.8rem, 6vw, 5.2rem)',
-              fontWeight: 300,
-              lineHeight: 1.08,
-              letterSpacing: '-0.01em',
-              color: 'var(--ecru)',
-              marginBottom: '1.6rem',
-              perspective: '800px',
+              fontSize: 'clamp(3rem, 7vw, 5.5rem)',
+              fontWeight: 900,
+              lineHeight: 1.05,
+              color: 'var(--cream)',
+              marginBottom: '2rem',
+              perspective: '1000px',
             }}
           >
             {contentVisible && (
               <>
                 <AnimatedH1 line={H1_LINE_1} baseDelay={350} />
                 <span
-                  className="block"
+                  className="block mt-2"
                   style={{
                     background: `linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 40%, var(--gold-dark) 70%, var(--gold-light) 100%)`,
                     backgroundSize: '200% auto',
@@ -551,8 +479,6 @@ export default function HeroSection() {
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
                     animation: reducedMotion ? 'none' : 'shimmer-gold 4s linear infinite',
-                    fontStyle: 'italic',
-                    fontWeight: 400,
                   }}
                 >
                   <AnimatedH1 line={H1_LINE_2} baseDelay={350 + H1_LINE_1.length * 42 + 100} />
@@ -565,11 +491,11 @@ export default function HeroSection() {
           <p
             className="font-body"
             style={{
-              fontSize: 'clamp(1rem, 1.8vw, 1.2rem)',
-              lineHeight: 1.7,
-              color: 'rgba(245,240,232,0.68)',
-              marginBottom: '2.5rem',
-              maxWidth: '520px',
+              fontSize: 'clamp(1.1rem, 2vw, 1.3rem)',
+              lineHeight: 1.8,
+              color: 'rgba(253,248,240,0.7)',
+              marginBottom: '3rem',
+              maxWidth: '580px',
               opacity: 0,
               animation: contentVisible
                 ? 'word-slide-up 0.8s cubic-bezier(0.22,1,0.36,1) 1.6s forwards'
@@ -577,66 +503,31 @@ export default function HeroSection() {
             }}
           >
             خامة تربط محترفي صناعة النسيج بذكاء&nbsp;:
-            <br />
-            <span style={{ color: 'rgba(245,240,232,0.45)' }}>
-              المشترون، الموردون، المصممون، ومكاتب الدراسات.
-            </span>
+            المشترون، الموردون، المصممون، ومكاتب الدراسات في سوق واحد متكامل.
           </p>
 
           {/* ── CTA Group ────────────────────────────────────────── */}
           <div
+            className="flex flex-wrap items-center gap-5"
             style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              alignItems: 'center',
-              gap: '1rem',
               opacity: 0,
               animation: contentVisible
-                ? 'cta-enter 0.75s cubic-bezier(0.22,1,0.36,1) 1.9s forwards'
+                ? 'cta-enter 0.8s cubic-bezier(0.22,1,0.36,1) 1.9s forwards'
                 : 'none',
             }}
           >
-            {/* Primary CTA */}
-            <Link
-              href="/fabrics"
-              className="btn-gold font-body inline-flex items-center gap-2"
-              style={{
-                fontSize: '0.88rem',
-                fontWeight: 600,
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                color: 'var(--obsidian)',
-                textDecoration: 'none',
-                padding: '0.9rem 2rem',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              استكشف الكتالوج
-              <span
-                style={{ animation: reducedMotion ? 'none' : 'arrow-nudge 1.5s ease-in-out infinite' }}
-                aria-hidden="true"
-              >
-                →
-              </span>
+            <Link href="/fabrics">
+              <Button variant="premium" size="xl" rightIcon={<span>→</span>}>
+                استكشف الكتالوج
+              </Button>
             </Link>
 
-            {/* Ghost CTA */}
-            <Link
-              href="/rfq/create"
-              className="btn-ghost font-body inline-flex items-center gap-2"
-              style={{
-                fontSize: '0.88rem',
-                fontWeight: 500,
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                color: 'var(--ecru)',
-                textDecoration: 'none',
-                padding: '0.9rem 2rem',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              انشر طلب عرض
+            <Link href="/rfq/create">
+              <Button variant="outline" size="xl">
+                انشر طلب عرض
+              </Button>
             </Link>
+          </div>
 
             {/* Text link */}
             <Link
