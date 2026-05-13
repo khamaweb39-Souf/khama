@@ -592,5 +592,204 @@ export const GLOSSARY_DATA: GlossaryEntry[] = [
       fr: 'Outil transportant le fil de trame à travers la foule sur les anciens métiers à tisser.',
       ar: 'الأداة التي تحمل خيط اللحمة عبر خيوط السداء في أنوال النسيج القديمة.'
     }
+  },
+  {
+    id: 'katifa',
+    termFr: 'Katifa',
+    termEn: 'Traditional Velvet',
+    termAr: 'القطيفة / الكاتيفة',
+    category: 'Armures',
+    definition: {
+      fr: 'Velours traditionnel lourd et noble, souvent utilisé en Algérie pour les vêtements de cérémonie comme le Karakou.',
+      ar: 'مخمل تقليدي ثقيل ونبيل، يستخدم غالباً في الجزائر للملابس الاحتفالية مثل الكراكو.'
+    },
+    example: 'La Katifa de Constantine est renommée pour sa densité.'
+  },
+  {
+    id: 'mensoudj',
+    termFr: 'Mensoudj',
+    termEn: 'Traditional Tlemcen Weave',
+    termAr: 'المنسوج التلمساني',
+    category: 'Armures',
+    definition: {
+      fr: 'Tissu traditionnel de Tlemcen, tissé à la main avec des fils de soie et d\'or (skalli).',
+      ar: 'قماش تقليدي تلمساني، ينسج يدوياً بخيوط الحرير والذهب (الصقلي).'
+    }
+  },
+  {
+    id: 'lisiere',
+    termFr: 'Lisière',
+    termEn: 'Selvage / Selvedge',
+    termAr: 'حاشية القماش',
+    category: 'Armures',
+    definition: {
+      fr: 'Bordure latérale d\'un tissu, finie de manière à ne pas s\'effilocher.',
+      ar: 'الحافة الجانبية للقماش، تكون منسوجة بطريقة تمنع تنسل الخيوط.'
+    }
+  },
+  {
+    id: 'droit-fil',
+    termFr: 'Droit-fil',
+    termEn: 'Grain line',
+    termAr: 'اتجاه النسيج / دروا فيل',
+    category: 'Armures',
+    definition: {
+      fr: 'Sens des fils de chaîne, parallèle aux lisières. Crucial pour le tombé d\'un vêtement.',
+      ar: 'اتجاه خيوط السداء، موازٍ للحواف. ضروري جداً لضمان انسيابية الملابس.'
+    }
+  },
+  {
+    id: 'biais',
+    termFr: 'Biais',
+    termEn: 'Bias',
+    termAr: 'الوارب / قص مائل',
+    category: 'Armures',
+    definition: {
+      fr: 'Diagonale à 45° par rapport aux fils de chaîne et de trame, offrant le maximum d\'extensibilité.',
+      ar: 'خط قطري بزاوية 45 درجة بالنسبة لخيوط السداء واللحمة، يوفر أقصى درجات المرونة.'
+    }
+  },
+  {
+    id: 'bluesign',
+    termFr: 'Bluesign',
+    termEn: 'Bluesign Approved',
+    termAr: 'اعتماد بلوساين',
+    category: 'Certifications',
+    definition: {
+      fr: 'Standard environnemental strict pour la fabrication textile, excluant les substances nocives dès le début du processus.',
+      ar: 'معيار بيئي صارم لتصنيع المنسوجات، يستبعد المواد الضارة منذ بداية عملية الإنتاج.'
+    }
+  },
+  {
+    id: 'fair-trade',
+    termFr: 'Commerce Équitable',
+    termEn: 'Fair Trade',
+    termAr: 'التجارة العادلة',
+    category: 'Certifications',
+    definition: {
+      fr: 'Système d\'échange garantissant aux producteurs des pays en développement de meilleures conditions commerciales.',
+      ar: 'نظام تبادل يضمن للمنتجين في الدول النامية ظروفاً تجارية أفضل.'
+    }
+  },
+  {
+    id: 'ratiere',
+    termFr: 'Ratière',
+    termEn: 'Dobby',
+    termAr: 'ماكينة راتير / دوبي',
+    category: 'Machines',
+    definition: {
+      fr: 'Mécanisme sur un métier à tisser permettant de créer de petits motifs géométriques simples.',
+      ar: 'آلية في نول النسيج تسمح بإنشاء زخارف هندسية صغيرة وبسيطة.'
+    }
+  },
+  {
+    id: 'landed-cost',
+    termFr: 'Coût de Revient Rendu',
+    termEn: 'Landed Cost',
+    termAr: 'التكلفة الإجمالية الواصلة',
+    category: 'Commerce',
+    definition: {
+      fr: 'Prix total d\'un produit incluant le prix d\'achat, le transport, l\'assurance et les taxes douanières.',
+      ar: 'السعر الإجمالي للمنتج بما في ذلك سعر الشراء، النقل، التأمين، والرسوم الجمركية.'
+    }
+  },
+  {
+    id: 'lead-time',
+    termFr: 'Délai de Livraison',
+    termEn: 'Lead Time',
+    termAr: 'مدة التوريد / مهلة التسليم',
+    category: 'Commerce',
+    definition: {
+      fr: 'Temps écoulé entre la passation d\'une commande et sa réception finale.',
+      ar: 'الوقت المستغرق بين تقديم الطلبية واستلامها النهائي.'
+    }
+  },
+  {
+    id: 'pilling',
+    termFr: 'Boulochage',
+    termEn: 'Pilling',
+    termAr: 'توبير / تكوين كرات صغيرة',
+    category: 'Finitions',
+    definition: {
+      fr: 'Formation de petites boules de fibres à la surface du tissu sous l\'effet du frottement.',
+      ar: 'تكون كرات صغيرة من الألياف على سطح القماش نتيجة الاحتكاك.'
+    }
+  },
+  {
+    id: 'merinos',
+    termFr: 'Mérinos',
+    termEn: 'Merino Wool',
+    termAr: 'صوف الميرينو',
+    category: 'Fibres',
+    definition: {
+      fr: 'Laine de mouton mérinos, célèbre pour sa finesse, sa douceur et ses propriétés thermorégulatrices.',
+      ar: 'صوف من أغنام الميرينو، مشهور بنعومته الفائقة وخصائصه المنظمة للحرارة.'
+    }
+  },
+  {
+    id: 'lycra',
+    termFr: 'Lycra',
+    termEn: 'Lycra',
+    termAr: 'ليكرا',
+    category: 'Fibres',
+    definition: {
+      fr: 'Marque déposée de fibre élasthanne, devenue un terme générique pour désigner les tissus extensibles.',
+      ar: 'علامة تجارية مسجلة لألياف الإيلاستين، أصبحت مصطلحاً عاماً للدلالة على الأقمشة المرنة.'
+    }
+  },
+  {
+    id: 'tricot',
+    termFr: 'Tricot / Maille',
+    termEn: 'Knitted Fabric',
+    termAr: 'تريكو / قماش مصنع بالحبك',
+    category: 'Armures',
+    definition: {
+      fr: 'Tissu formé par l\'entrelacement de boucles de fil, offrant une grande élasticité.',
+      ar: 'قماش يتكون من تشابك حلقات الخيط، مما يوفر مرونة عالية.'
+    }
+  },
+  {
+    id: 'enduction',
+    termFr: 'Enduction',
+    termEn: 'Coating',
+    termAr: 'طلاء القماش / تلبيس',
+    category: 'Finitions',
+    definition: {
+      fr: 'Application d\'une couche de polymère sur un tissu pour lui donner des propriétés spécifiques (étanchéité).',
+      ar: 'تطبيق طبقة من البوليمر على القماش لمنحه خصائص معينة (مثل عزل الماء).'
+    }
+  },
+  {
+    id: 'broderie',
+    termFr: 'Broderie',
+    termEn: 'Embroidery',
+    termAr: 'تطريز',
+    category: 'Finitions',
+    definition: {
+      fr: 'Art de décorer un tissu en y ajoutant des motifs en fils de couleur, perles ou paillettes.',
+      ar: 'فن تزيين القماش عن طريق إضافة زخارف بخيوط ملونة أو خرز أو ترتر.'
+    }
+  },
+  {
+    id: 'teinture-indanthren',
+    termFr: 'Teinture Indanthrène',
+    termEn: 'Vat Dyeing (Indanthrene)',
+    termAr: 'صباغة إندانثرين / صباغة ثابتة جداً',
+    category: 'Finitions',
+    definition: {
+      fr: 'Type de teinture offrant une excellente solidité à la lumière et aux lavages fréquents.',
+      ar: 'نوع من الصباغة يوفر ثباتاً ممتازاً للألوان ضد الضوء والغسيل المتكرر.'
+    }
+  },
+  {
+    id: 'foulard',
+    termFr: 'Foulardage',
+    termEn: 'Padding',
+    termAr: 'فولار / صباغة بالضغط',
+    category: 'Machines',
+    definition: {
+      fr: 'Machine permettant d\'imprégner le tissu de liquides (colorants, apprêts) par passage entre deux rouleaux presseurs.',
+      ar: 'آلة تسمح بتشريب القماش بالسوائل (أصباغ، مواد تجهيز) عبر تمريره بين أسطوانتي ضغط.'
+    }
   }
 ];
