@@ -30,7 +30,7 @@ const TopBar = () => (
       </div>
       <span className="cursor-pointer hover:text-white">دج (DZD)</span>
       <div className="h-3 w-px bg-white/10 mx-1" />
-      <Link href="/dashboard" className="hover:text-gold transition-colors flex items-center gap-1">
+      <Link href="/dashboard/buyer" className="hover:text-gold transition-colors flex items-center gap-1">
         <Icons.User className="w-3 h-3" />
         لوحة التحكم
       </Link>
@@ -116,10 +116,10 @@ export default function Header() {
     marketplace: {
       sections: [
         { title: 'إدارة المشتريات', items: [
-          { label: 'إنشاء طلب عرض سعر (RFQ)', link: '/rfq/create', badge: 'جديد' },
+          { label: 'لوحة تحكم المشتري', link: '/dashboard/buyer', badge: 'جديد' },
+          { label: 'إنشاء طلب عرض سعر (RFQ)', link: '/rfq/create' },
           { label: 'طلبات عروض الأسعار النشطة', link: '/rfq' },
-          { label: 'مزادات الأقمشة', link: '/auctions' },
-          { label: 'صفقات سريعة (Flash Deals)', link: '/deals' }
+          { label: 'مقارن الأقمشة الذكي', link: '/dashboard/buyer/compare' }
         ]},
         { title: 'خدمات الموردين', items: [
           { label: 'إضافة منتج جديد', link: '/dashboard/supplier/products/new', badge: 'إدراج' },
