@@ -22,17 +22,17 @@ export default function YardageConverter() {
   }, [meters, width, gsm, pricePerMeter]);
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
+    <div className="space-y-8 animate-in fade-in duration-500" dir="rtl">
       <div className="grid md:grid-cols-2 gap-8">
         <div className="space-y-6">
           <h3 className="text-lg font-bold text-charcoal flex items-center gap-2">
             <Ruler className="w-5 h-5 text-accent" />
-            Saisie des Dimensions
+            إدخال المقاسات
           </h3>
           
-          <div className="space-y-4">
+          <div className="space-y-4 text-right">
             <div>
-              <label className="text-xs font-bold text-muted uppercase mb-1 block">Quantité (Mètres)</label>
+              <label className="text-xs font-bold text-muted uppercase mb-1 block">الكمية (أمتار)</label>
               <input 
                 type="number" 
                 value={meters} 
@@ -42,7 +42,7 @@ export default function YardageConverter() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="text-xs font-bold text-muted uppercase mb-1 block">Laize (cm)</label>
+                <label className="text-xs font-bold text-muted uppercase mb-1 block">العرض / لايز (سم)</label>
                 <input 
                   type="number" 
                   value={width} 
@@ -51,7 +51,7 @@ export default function YardageConverter() {
                 />
               </div>
               <div>
-                <label className="text-xs font-bold text-muted uppercase mb-1 block">Grammage (GSM)</label>
+                <label className="text-xs font-bold text-muted uppercase mb-1 block">الجراماج (GSM)</label>
                 <input 
                   type="number" 
                   value={gsm} 
@@ -61,7 +61,7 @@ export default function YardageConverter() {
               </div>
             </div>
             <div>
-              <label className="text-xs font-bold text-muted uppercase mb-1 block">Prix par Mètre (€)</label>
+              <label className="text-xs font-bold text-muted uppercase mb-1 block">السعر لكل متر (€)</label>
               <input 
                 type="number" 
                 value={pricePerMeter} 
@@ -74,31 +74,31 @@ export default function YardageConverter() {
 
         <div className="grid grid-cols-1 gap-4">
           <div className="p-6 bg-white border border-border rounded-2xl flex items-center justify-between">
-            <div className="space-y-1">
-              <p className="text-[10px] text-muted uppercase font-bold">Conversion Yards</p>
-              <p className="text-2xl font-black text-charcoal">{yards} <span className="text-sm font-normal">yds</span></p>
-            </div>
             <div className="p-3 bg-gray-50 rounded-xl text-muted">
               <Repeat className="w-5 h-5" />
+            </div>
+            <div className="space-y-1 text-left">
+              <p className="text-[10px] text-muted uppercase font-bold text-right">تحويل الياردات</p>
+              <p className="text-2xl font-black text-charcoal">{yards} <span className="text-sm font-normal">ياردة</span></p>
             </div>
           </div>
 
           <div className="p-6 bg-white border border-border rounded-2xl flex items-center justify-between">
-            <div className="space-y-1">
-              <p className="text-[10px] text-muted uppercase font-bold">Poids Total de la Commande</p>
-              <p className="text-2xl font-black text-charcoal">{totalWeight} <span className="text-sm font-normal">kg</span></p>
-            </div>
             <div className="p-3 bg-gray-50 rounded-xl text-muted">
               <ShoppingCart className="w-5 h-5" />
             </div>
+            <div className="space-y-1 text-left">
+              <p className="text-[10px] text-muted uppercase font-bold text-right">الوزن الإجمالي للطلب</p>
+              <p className="text-2xl font-black text-charcoal">{totalWeight} <span className="text-sm font-normal">كجم</span></p>
+            </div>
           </div>
 
-          <div className="p-8 bg-charcoal rounded-3xl text-white flex flex-col justify-center">
-            <p className="text-[10px] text-gold uppercase font-bold tracking-widest mb-1">Montant Total Estimé</p>
+          <div className="p-8 bg-charcoal rounded-3xl text-white flex flex-col justify-center text-right">
+            <p className="text-[10px] text-gold uppercase font-bold tracking-widest mb-1">المبلغ الإجمالي المقدر</p>
             <p className="text-4xl font-black">{totalPrice.toLocaleString()} €</p>
             <div className="mt-4 pt-4 border-t border-white/10 flex justify-between text-xs text-white/60">
-               <span>Poids volumétrique:</span>
-               <span className="font-bold text-white">~{Math.ceil(totalWeight * 1.2)} kg</span>
+               <span className="font-bold text-white">~{Math.ceil(totalWeight * 1.2)} كجم</span>
+               <span>الوزن الحجمي:</span>
             </div>
           </div>
         </div>

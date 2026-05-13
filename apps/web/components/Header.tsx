@@ -172,6 +172,7 @@ export default function Header() {
             </div>
 
             <Link href="/academy" className="text-label text-charcoal hover:text-gold transition-colors">أكاديمية خامة</Link>
+            <Link href="/tools" className="text-label text-charcoal hover:text-gold transition-colors">الأدوات التقنية</Link>
           </nav>
 
           {/* Search Bar Container */}
@@ -216,6 +217,7 @@ export default function Header() {
                <li><Link href="/cat" className="text-subheading">الكتالوج</Link></li>
                <li><Link href="/market" className="text-subheading">السوق</Link></li>
                <li><Link href="/academy" className="text-subheading">الأكاديمية</Link></li>
+               <li><Link href="/tools" className="text-subheading">الأدوات التقنية</Link></li>
                <li className="pt-6 border-t"><Button variant="primary" fullWidth>انشر عرضاً</Button></li>
             </ul>
          </div>

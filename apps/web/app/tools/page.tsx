@@ -19,12 +19,12 @@ export default function ToolsPage() {
   const [activeTool, setActiveTool] = useState<ToolId>('gsm');
 
   const tools = [
-    { id: 'gsm', label: 'Calculateur GSM', icon: Calculator, description: 'Estimer le grammage théorique selon le tissage.' },
-    { id: 'yardage', label: 'Convertisseur Métrage', icon: Ruler, description: 'Mètres, yards et poids de commande.' },
-    { id: 'cost', label: 'Coût de Revient', icon: DollarSign, description: 'Calculer le prix réel au mètre livré.' },
-    { id: 'color', label: 'Pantone / Couleur', icon: Palette, description: 'Convertir les codes Pantone en HEX/RGB.' },
-    { id: 'shrinkage', label: 'Lavage & Retrait', icon: Droplets, description: 'Estimer le rétrécissement après lavage.' },
-    { id: 'waste', label: 'Économie Matière', icon: Maximize2, description: 'Optimiser le placement et réduire les chutes.' },
+    { id: 'gsm', label: 'حاسبة الـ GSM', icon: Calculator, description: 'تقدير وزن القماش بناءً على كثافة الخيوط.' },
+    { id: 'yardage', label: 'محول الأمتار والأوزان', icon: Ruler, description: 'التحويل بين الأمتار، الياردات، وأوزان الطلبيات.' },
+    { id: 'cost', label: 'حاسبة التكلفة النهائية', icon: DollarSign, description: 'حساب السعر الحقيقي للمتر الواصل للمخزن.' },
+    { id: 'color', label: 'محول ألوان Pantone', icon: Palette, description: 'تحويل أكواد Pantone إلى HEX/RGB للنسيج.' },
+    { id: 'shrinkage', label: 'الانكماش والغسيل', icon: Droplets, description: 'تقدير نسبة انكماش القماش بعد الغسيل.' },
+    { id: 'waste', label: 'مقدر الهالك والقص', icon: Maximize2, description: 'تحسين وضع الباترون لتقليل فواضل القماش.' },
   ];
 
   const ActiveToolComponent = {
@@ -37,14 +37,14 @@ export default function ToolsPage() {
   }[activeTool];
 
   return (
-    <div className="min-h-screen bg-[#F9F9F9] pb-20 pt-10" dir="ltr">
+    <div className="min-h-screen bg-[#F9F9F9] pb-20 pt-10" dir="rtl">
       
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         
         {/* Header */}
-        <div className="mb-12 space-y-2">
-           <h1 className="text-4xl font-black text-charcoal tracking-tight">Outils Textiles Professionnels</h1>
-           <p className="text-muted font-medium">Calculatrices techniques et convertisseurs pour les experts de la mode.</p>
+        <div className="mb-12 space-y-2 text-right">
+           <h1 className="text-4xl font-black text-charcoal tracking-tight">الأدوات التقنية للمحترفين</h1>
+           <p className="text-muted font-medium">حاسبات مهنية ومحولات دقيقة لخبراء صناعة النسيج.</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -77,16 +77,16 @@ export default function ToolsPage() {
             <div className="p-6 bg-ecru/30 rounded-3xl border border-ecru flex items-start gap-3">
                <Info className="w-5 h-5 text-gold shrink-0 mt-0.5" />
                <p className="text-[10px] text-muted leading-relaxed">
-                 Ces outils sont fournis à titre indicatif. Les résultats peuvent varier selon les tolérances industrielles (±5%).
+                 هذه الأدوات مقدمة كدليل استرشادي فقط. قد تختلف النتائج الفعلية بناءً على التفاوتات الصناعية المعمول بها (±5%).
                </p>
             </div>
 
-            <div className="p-6 bg-white border border-border rounded-3xl space-y-4 shadow-sm">
-               <h4 className="text-xs font-bold text-charcoal flex items-center gap-2">
-                  <History className="w-4 h-4 text-accent" /> Historique Récent
+            <div className="p-6 bg-white border border-border rounded-3xl space-y-4 shadow-sm text-right">
+               <h4 className="text-xs font-bold text-charcoal flex items-center justify-end gap-2">
+                   السجلات الأخيرة <History className="w-4 h-4 text-accent" />
                </h4>
                <div className="space-y-2">
-                  <p className="text-[10px] text-muted italic">Aucun calcul récent trouvé.</p>
+                  <p className="text-[10px] text-muted italic">لا توجد عمليات حسابية سابقة.</p>
                </div>
             </div>
           </div>
@@ -95,9 +95,9 @@ export default function ToolsPage() {
           <div className="lg:col-span-8">
             <div className="bg-white rounded-[40px] p-8 md:p-12 shadow-sm border border-border min-h-[600px] flex flex-col">
                <div className="flex justify-between items-center mb-12">
-                  <div>
+                  <div className="text-right">
                     <h2 className="text-2xl font-black text-charcoal">{tools.find(t => t.id === activeTool)?.label}</h2>
-                    <p className="text-xs text-muted font-bold tracking-widest uppercase mt-1">Version 1.0 • Expert Suite</p>
+                    <p className="text-xs text-muted font-bold tracking-widest uppercase mt-1">الإصدار 1.0 • حزمة الخبراء</p>
                   </div>
                   <div className="flex gap-2">
                      <button className="p-3 bg-gray-50 rounded-xl text-muted hover:text-accent transition-colors"><Share2 className="w-5 h-5" /></button>

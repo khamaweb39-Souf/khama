@@ -43,28 +43,28 @@ export default function ColorConverter() {
   };
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
+    <div className="space-y-8 animate-in fade-in duration-500" dir="rtl">
       <div className="grid md:grid-cols-2 gap-12">
         <div className="space-y-6">
           <h3 className="text-lg font-bold text-charcoal flex items-center gap-2">
             <Palette className="w-5 h-5 text-accent" />
-            Recherche Pantone Textile (TCX/TPX)
+            البحث في ألوان Pantone النسيجية (TCX/TPX)
           </h3>
           
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted" />
+            <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted" />
             <input 
               type="text" 
-              placeholder="Ex: 19-4052..." 
+              placeholder="مثال: 19-4052..." 
               value={query}
               onChange={(e) => handleSearch(e.target.value)}
-              className="w-full pl-12 pr-4 py-4 rounded-2xl border-2 border-border focus:border-accent outline-none font-bold text-lg"
+              className="w-full pr-12 pl-4 py-4 rounded-2xl border-2 border-border focus:border-accent outline-none font-bold text-lg text-right"
             />
           </div>
 
-          <div className="space-y-3">
-             <p className="text-xs font-bold text-muted uppercase tracking-widest">Couleurs Populaires</p>
-             <div className="flex flex-wrap gap-2">
+          <div className="space-y-3 text-right">
+             <p className="text-xs font-bold text-muted uppercase tracking-widest">الألوان الشائعة</p>
+             <div className="flex flex-wrap gap-2 justify-start">
                 {Object.keys(PANTONE_DB).map(code => (
                   <button 
                     key={code}
@@ -78,29 +78,29 @@ export default function ColorConverter() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 text-right">
            {/* Color Preview */}
            <div className="h-48 rounded-3xl shadow-2xl border-4 border-white overflow-hidden relative group">
               <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-110" style={{ backgroundColor: hex }} />
-              <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-4 py-2 rounded-xl">
-                 <p className="text-[10px] font-bold text-muted uppercase">Aperçu Réel</p>
+              <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur px-4 py-2 rounded-xl">
+                 <p className="text-[10px] font-bold text-muted uppercase">معاينة واقعية</p>
                  <p className="text-sm font-black text-charcoal">PANTONE {query}</p>
               </div>
            </div>
 
            <div className="grid grid-cols-2 gap-4">
               <div className="p-4 bg-white border border-border rounded-2xl space-y-1">
-                 <p className="text-[10px] text-muted font-bold uppercase">HEX Code</p>
+                 <p className="text-[10px] text-muted font-bold uppercase">كود HEX</p>
                  <div className="flex justify-between items-center">
-                    <span className="text-lg font-black text-charcoal">{hex}</span>
                     <button onClick={() => navigator.clipboard.writeText(hex)} className="text-muted hover:text-accent"><Copy className="w-4 h-4" /></button>
+                    <span className="text-lg font-black text-charcoal">{hex}</span>
                  </div>
               </div>
               <div className="p-4 bg-white border border-border rounded-2xl space-y-1">
-                 <p className="text-[10px] text-muted font-bold uppercase">RGB Values</p>
+                 <p className="text-[10px] text-muted font-bold uppercase">قيم RGB</p>
                  <div className="flex justify-between items-center">
-                    <span className="text-lg font-black text-charcoal">{rgb}</span>
                     <button onClick={() => navigator.clipboard.writeText(rgb)} className="text-muted hover:text-accent"><Copy className="w-4 h-4" /></button>
+                    <span className="text-lg font-black text-charcoal">{rgb}</span>
                  </div>
               </div>
            </div>
