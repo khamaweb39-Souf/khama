@@ -2,10 +2,13 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as Icons from 'lucide-react';
+import Link from 'next/link';
+import Button from '../ui/Button';
 
 const { 
   TrendingUp, Users, Grid, BarChart, MessageSquare, 
-  ArrowRight, Globe, Shield, Mail, Clock, ArrowUpRight, ArrowDownRight
+  ArrowRight, Globe, Shield, Mail, Clock, ArrowUpRight, ArrowDownRight,
+  ChevronLeft, ChevronRight, ExternalLink
 } = Icons;
 
 // ─── Utility: Intersection Observer Hook ──────────────────────────────
@@ -36,33 +39,40 @@ const TrendsSection = () => {
   return (
     <section 
       ref={ref}
-      className={`py-24 bg-[#0D0C0A] text-[#F5F0E8] overflow-hidden transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}
+      className={`py-32 bg-navy text-cream overflow-hidden transition-all duration-1000 pattern-silk ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}
     >
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-        <div className="relative group overflow-hidden rounded-2xl">
+        <div className="relative group overflow-hidden rounded-3xl shadow-silk border border-gold/10">
           <img 
             src="https://images.unsplash.com/photo-1594932224011-042041c6ff9a?q=80&w=800&auto=format&fit=crop" 
             alt="Trends" 
-            className="w-full h-[600px] object-cover transition-transform duration-700 group-hover:scale-110"
+            className="w-full h-[600px] object-cover transition-transform duration-1000 group-hover:scale-110"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0D0C0A] via-transparent to-transparent opacity-60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/20 to-transparent opacity-80" />
+          <div className="absolute bottom-8 right-8 p-6 glass-card rounded-2xl border-gold/20">
+             <span className="text-gold font-black text-xs uppercase tracking-[0.3em]">تحفة الموسم</span>
+             <h4 className="text-2xl font-black mt-2">نسيج الأطلس الملكي</h4>
+          </div>
         </div>
         
-        <div className="space-y-8 text-right">
-          <span className="text-[#C9A84C] font-body text-sm tracking-[0.2em] uppercase">اتجاهات 2026</span>
-          <h2 className="text-display text-5xl md:text-6xl font-light leading-tight">مجموعة خريف وشتاء <br/><span className="italic font-normal">الفخامة المستدامة</span></h2>
-          <p className="text-[#F5F0E8]/70 text-lg leading-relaxed max-w-xl mr-auto">
-            نستعرض هذا الموسم تمازج الخامات الطبيعية مع التقنيات الصديقة للبيئة. من الصوف الجزائري الفاخر إلى الجلود النباتية المبتكرة، نقدم لكم رؤية جديدة للأناقة التي تحترم الطبيعة وتلبي معايير الجودة العالمية.
+        <div className="space-y-10 text-right">
+          <div className="inline-block px-4 py-1.5 glass-card border-gold/30 rounded-full">
+            <span className="text-gold font-black text-[10px] uppercase tracking-[0.2em]">اتجاهات 2026</span>
+          </div>
+          <h2 className="text-5xl md:text-7xl font-black leading-tight text-white">مجموعة خريف وشتاء <br/><span className="text-gold italic font-medium">الفخامة المستدامة</span></h2>
+          <p className="text-cream/70 text-xl leading-relaxed max-w-xl mr-auto font-medium">
+            نستعرض هذا الموسم تمازج الخامات الطبيعية مع التقنيات الصديقة للبيئة. من الصوف الجزائري الفاخر إلى الجلود النباتية المبتكرة، نقدم لكم رؤية جديدة للأناقة.
           </p>
           <div className="flex flex-wrap justify-end gap-3">
             {['تويد', 'مخمل', 'صوف عضوي', 'جلد نباتي'].map(tag => (
-              <span key={tag} className="px-4 py-1.5 border border-[#C9A84C]/30 rounded-full text-xs text-[#C9A84C]">{tag}</span>
+              <span key={tag} className="px-5 py-2 glass-card border-white/10 rounded-full text-[10px] font-black text-cream uppercase tracking-widest">{tag}</span>
             ))}
           </div>
-          <button className="flex items-center gap-3 mr-auto group text-[#C9A84C] border-b border-[#C9A84C]/40 pb-2 hover:border-[#C9A84C] transition-all">
-            <span className="font-body text-sm uppercase tracking-widest">عرض المجموعة كاملة</span>
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
-          </button>
+          <div className="pt-6">
+            <Button variant="premium" size="lg" rightIcon={<ArrowRight className="w-5 h-5" />}>
+              عرض المجموعة كاملة
+            </Button>
+          </div>
         </div>
       </div>
     </section>
@@ -82,35 +92,38 @@ const NewSuppliers = () => {
   ];
 
   return (
-    <section ref={ref} className="py-24 bg-[#FEFCF8]">
+    <section ref={ref} className="py-32 bg-white pattern-jacquard">
       <div className="max-w-7xl mx-auto px-6">
-        <div className={`flex justify-between items-end mb-16 transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          <div className="flex gap-2">
-             <button className="p-3 border border-[#E8E2D9] rounded-full hover:bg-[#F5F0E8] transition-colors"><Icons.ChevronLeft className="w-5 h-5"/></button>
-             <button className="p-3 border border-[#E8E2D9] rounded-full hover:bg-[#F5F0E8] transition-colors"><Icons.ChevronRight className="w-5 h-5"/></button>
+        <div className={`flex flex-col md:flex-row justify-between items-end mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+          <div className="flex gap-4 order-2 md:order-1 mt-8 md:mt-0">
+             <button className="p-4 glass-card border-gold/20 rounded-2xl hover:bg-gold/10 transition-all shadow-silk"><ChevronLeft className="w-6 h-6 text-navy"/></button>
+             <button className="p-4 glass-card border-gold/20 rounded-2xl hover:bg-gold/10 transition-all shadow-silk"><ChevronRight className="w-6 h-6 text-navy"/></button>
           </div>
-          <div className="text-right">
-            <h2 className="text-display text-4xl font-semibold text-[#1A1A2E]">شركاء جدد تم التحقق منهم</h2>
-            <p className="text-[#9E8E7E] mt-2">انضموا إلينا لتقديم أفضل خامات النسيج في المنطقة</p>
+          <div className="text-right order-1 md:order-2">
+            <span className="text-gold font-black text-xs uppercase tracking-[0.3em]">التميز الإقليمي</span>
+            <h2 className="text-5xl font-black text-navy mt-4">شركاء جدد تم التحقق منهم</h2>
+            <p className="text-navy/50 mt-4 text-lg font-medium">نخبة المصنعين والموردين في شمال أفريقيا والشرق الأوسط</p>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
           {suppliers.map((s, i) => (
             <div 
               key={i}
-              className={`group bg-white border border-[#E8E2D9] p-6 rounded-2xl hover:border-[#C9A84C] transition-all duration-500 hover:shadow-xl text-center flex flex-col items-center space-y-4 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+              className={`group glass-card border-gold/10 p-8 rounded-[2rem] hover:border-gold/30 transition-all duration-700 hover:shadow-gold-glow text-center flex flex-col items-center space-y-6 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
               style={{ transitionDelay: `${i * 100}ms` }}
             >
               <div className="relative">
-                <img src={s.logo} className="w-16 h-16 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all" alt={s.name} />
-                <span className="absolute -top-1 -right-1 text-[10px] bg-[#C9A84C] text-white px-1.5 py-0.5 rounded-full">✦</span>
+                <div className="w-20 h-20 rounded-full border-2 border-gold/20 p-1 group-hover:border-gold transition-colors duration-500">
+                  <img src={s.logo} className="w-full h-full rounded-full object-cover transition-all duration-700 group-hover:scale-110" alt={s.name} />
+                </div>
+                <span className="absolute -top-1 -right-1 text-xs bg-gold text-navy w-6 h-6 flex items-center justify-center rounded-full shadow-lg border-2 border-white animate-pulse">✦</span>
               </div>
               <div>
-                <h4 className="font-bold text-[#1A1A2E] text-sm">{s.name}</h4>
-                <p className="text-[10px] text-[#9E8E7E] uppercase tracking-wider">{s.country}</p>
+                <h4 className="font-black text-navy text-base leading-tight group-hover:text-gold transition-colors">{s.name}</h4>
+                <p className="text-[10px] text-navy/40 uppercase tracking-widest mt-2 font-black">{s.country}</p>
               </div>
-              <span className="text-[10px] bg-[#F5F0E8] text-[#9E8E7E] px-2 py-1 rounded">{s.specialty}</span>
+              <span className="text-[10px] bg-gold/5 text-gold border border-gold/10 px-3 py-1.5 rounded-full font-black uppercase tracking-tighter">{s.specialty}</span>
             </div>
           ))}
         </div>
@@ -130,29 +143,36 @@ const MarketDashboard = () => {
   ];
 
   return (
-    <section ref={ref} className="py-24 bg-[#F5F0E8]/50">
+    <section ref={ref} className="py-32 bg-cream/30">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-[#E8E2D9]">
-          <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
-            <p className="text-[#9E8E7E] text-xs font-body tracking-widest uppercase">بيانات استرشادية — تحديث يومي</p>
-            <h2 className="text-display text-4xl text-[#1A1A2E] flex items-center gap-3">
-              <BarChart className="w-8 h-8 text-[#C9A84C]" />
-              لوحة بيانات السوق العالمي
-            </h2>
+        <div className="glass-card rounded-[3rem] p-10 md:p-20 shadow-silk border-gold/10 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-gold/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
+          
+          <div className="flex flex-col md:flex-row justify-between items-center mb-16 gap-8 relative z-10">
+            <div className="flex flex-col items-center md:items-start gap-2">
+              <span className="text-gold font-black text-[10px] uppercase tracking-[0.3em] bg-gold/10 px-3 py-1 rounded-full">تحديث مباشر</span>
+              <h2 className="text-4xl md:text-5xl font-black text-navy flex items-center gap-4">
+                <BarChart className="w-10 h-10 text-gold" />
+                بورصة المنسوجات العالمية
+              </h2>
+            </div>
+            <p className="text-navy/40 text-sm font-black text-center md:text-right max-w-xs leading-relaxed uppercase tracking-widest">مؤشرات الأسعار العالمية للخامات الأساسية يومياً</p>
           </div>
           
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 relative z-10">
             {data.map((item, i) => (
-              <div key={i} className="p-6 border-r border-[#E8E2D9] last:border-0 text-right">
-                <p className="text-[#9E8E7E] text-xs font-bold mb-2 uppercase">{item.label}</p>
-                <div className="flex items-baseline justify-end gap-2">
-                  <span className="text-2xl font-bold text-[#1A1A2E]">{item.price}</span>
-                  <span className={`text-xs flex items-center gap-1 ${item.trend === 'up' ? 'text-green-600' : item.trend === 'down' ? 'text-red-600' : 'text-gray-500'}`}>
+              <div key={i} className="p-8 border-r border-gold/10 last:border-0 text-right group hover:bg-gold/5 transition-all duration-500 rounded-3xl">
+                <p className="text-navy/40 text-[10px] font-black mb-4 uppercase tracking-[0.2em]">{item.label}</p>
+                <div className="flex items-baseline justify-end gap-3">
+                  <span className="text-3xl font-black text-navy group-hover:text-gold transition-colors">{item.price}</span>
+                  <span className={`text-xs font-black flex items-center gap-1 ${item.trend === 'up' ? 'text-emerald' : item.trend === 'down' ? 'text-burgundy' : 'text-navy/40'}`}>
                     {item.change}
-                    {item.trend === 'up' ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
+                    {item.trend === 'up' ? <ArrowUpRight className="w-4 h-4" /> : <ArrowDownRight className="w-4 h-4" />}
                   </span>
                 </div>
-                <div className="mt-4 h-8 w-full bg-[#F5F0E8] rounded opacity-40 animate-pulse" />
+                <div className="mt-6 h-1 w-full bg-navy/5 rounded-full overflow-hidden">
+                   <div className={`h-full transition-all duration-1000 ${item.trend === 'up' ? 'bg-emerald w-2/3' : item.trend === 'down' ? 'bg-burgundy w-1/3' : 'bg-gold w-1/2'}`} />
+                </div>
               </div>
             ))}
           </div>
@@ -172,33 +192,39 @@ const ActiveRFQs = () => {
   ];
 
   return (
-    <section ref={ref} className="py-24 bg-[#1A1A2E] text-white overflow-hidden">
-      <div className="max-w-5xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-display text-4xl mb-4 italic">طلبات العروض النشطة</h2>
-          <div className="w-24 h-1 bg-[#C9A84C] mx-auto rounded-full" />
+    <section ref={ref} className="py-32 bg-navy text-white overflow-hidden relative">
+      <div className="absolute inset-0 pattern-silk opacity-10" />
+      <div className="max-w-5xl mx-auto px-6 relative z-10">
+        <div className="text-center mb-20">
+          <span className="text-gold font-black text-xs uppercase tracking-[0.4em] mb-4 block">سوق الفرص</span>
+          <h2 className="text-5xl md:text-6xl font-black mb-8 italic">عروض حصرية نشطة</h2>
+          <div className="w-32 h-1 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto rounded-full" />
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-8">
           {rfqs.map((rfq, i) => (
             <div 
               key={i}
-              className={`group bg-white/5 border border-white/10 p-6 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-6 hover:bg-white/10 transition-all cursor-pointer ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'}`}
+              className={`group glass-card border-white/5 p-8 rounded-[2.5rem] flex flex-col md:flex-row justify-between items-center gap-10 hover:bg-white/10 transition-all duration-700 cursor-pointer ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'}`}
               style={{ transitionDelay: `${i * 150}ms` }}
             >
               <div className="text-right flex-1">
-                <div className="flex items-center justify-end gap-3 mb-2">
-                  {rfq.urgent && <span className="bg-red-500/20 text-red-500 text-[10px] px-2 py-0.5 rounded-full flex items-center gap-1 animate-pulse"><Clock className="w-3 h-3"/> تنتهي قريباً</span>}
-                  <span className="text-[#C9A84C] text-[10px] font-bold tracking-widest uppercase">{rfq.timer} متبقي</span>
+                <div className="flex items-center justify-end gap-4 mb-4">
+                  {rfq.urgent && <span className="bg-burgundy/20 text-burgundy text-[10px] px-3 py-1 rounded-full flex items-center gap-1.5 animate-pulse font-black uppercase tracking-widest"><Clock className="w-3.5 h-3.5"/> تنتهي قريباً</span>}
+                  <span className="text-gold text-[10px] font-black tracking-[0.2em] uppercase bg-gold/10 px-3 py-1 rounded-full">{rfq.timer} متبقي</span>
                 </div>
-                <h3 className="text-xl font-semibold mb-1">{rfq.title}</h3>
-                <p className="text-white/50 text-sm">المشتري: {rfq.buyer} | الكمية: {rfq.qty}</p>
+                <h3 className="text-2xl font-black mb-3 group-hover:text-gold transition-colors">{rfq.title}</h3>
+                <div className="flex items-center justify-end gap-6 text-white/40 text-xs font-bold">
+                   <span className="flex items-center gap-2"><Users className="w-4 h-4" /> {rfq.buyer}</span>
+                   <span className="flex items-center gap-2"><Grid className="w-4 h-4" /> {rfq.qty}</span>
+                </div>
               </div>
-              <button className="bg-[#C9A84C] text-[#0D0C0A] px-8 py-3 rounded-full font-bold text-sm hover:scale-105 transition-transform shrink-0">
-                الرد على العرض
-              </button>
+              <Button variant="premium" size="lg">الرد على العرض</Button>
             </div>
           ))}
+        </div>
+        <div className="mt-16 text-center">
+           <Link href="/rfq" className="text-gold hover:text-gold-light transition-all font-black text-sm uppercase tracking-widest border-b-2 border-gold/20 pb-2 hover:border-gold">عرض كافة الطلبات ↗</Link>
         </div>
       </div>
     </section>
@@ -209,9 +235,9 @@ const ActiveRFQs = () => {
 const Testimonials = () => {
   const { ref, isVisible } = useScrollReveal();
   return (
-    <section ref={ref} className="py-24 bg-[#FEFCF8]">
+    <section ref={ref} className="py-32 bg-cream">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid md:grid-cols-3 gap-16">
+        <div className="grid md:grid-cols-3 gap-20">
           {[
             { text: "خامة غيرت مفهوم التوريد لدينا. الجودة والسرعة في الوصول للموردين المعتمدين كانت مفاجئة.", name: "ياسين بركاني", role: "مدير المشتريات، زارا (شمال أفريقيا)" },
             { text: "كمصممة، أبحث دائماً عن الخامات الفريدة. خامة هي بوصلتي لاستكشاف كنوز النسيج في منطقتنا.", name: "ليلى المنصوري", role: "مصممة أزياء، هيرميس (مستشارة)" },
@@ -219,14 +245,17 @@ const Testimonials = () => {
           ].map((t, i) => (
             <div 
               key={i} 
-              className={`text-right space-y-6 transition-all duration-1000 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
+              className={`text-right space-y-10 transition-all duration-1000 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
               style={{ transitionDelay: `${i * 200}ms` }}
             >
-              <MessageSquare className="w-10 h-10 text-[#C9A84C]/20 ml-auto" />
-              <p className="text-2xl font-display italic text-[#1A1A2E] leading-relaxed">"{t.text}"</p>
-              <div>
-                <h4 className="font-bold text-[#C9A84C]">{t.name}</h4>
-                <p className="text-xs text-[#9E8E7E] uppercase tracking-wider">{t.role}</p>
+              <div className="relative">
+                <MessageSquare className="w-16 h-16 text-gold/10 ml-auto" />
+                <div className="absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2 text-4xl text-gold font-serif opacity-30">“</div>
+              </div>
+              <p className="text-3xl font-black italic text-navy leading-tight">"{t.text}"</p>
+              <div className="pt-4 border-r-4 border-gold pr-6">
+                <h4 className="font-black text-gold text-lg">{t.name}</h4>
+                <p className="text-[10px] text-navy/40 uppercase tracking-[0.2em] mt-2 font-black">{t.role}</p>
               </div>
             </div>
           ))}
@@ -239,21 +268,22 @@ const Testimonials = () => {
 // ─── Footer Premium ──────────────────────────────────────────────────
 const Footer = () => {
   return (
-    <footer className="bg-[#0D0C0A] text-[#F5F0E8] pt-24 pb-12 border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid md:grid-cols-4 gap-16 mb-24 text-right">
-          <div className="space-y-6">
-             <div className="flex justify-end gap-2 items-center">
-                <span className="text-3xl font-display font-bold tracking-tighter text-[#C9A84C]">خامة</span>
-                <div className="w-8 h-8 border-2 border-[#C9A84C] flex items-center justify-center font-bold text-xs text-[#C9A84C]">KH</div>
+    <footer className="bg-navy text-cream pt-32 pb-16 border-t border-white/5 relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gold to-transparent opacity-30" />
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="grid md:grid-cols-4 gap-20 mb-32 text-right">
+          <div className="space-y-8">
+             <div className="flex justify-end gap-4 items-center">
+                <span className="text-4xl font-black tracking-tighter text-gold">خامة</span>
+                <div className="w-10 h-10 border-2 border-gold flex items-center justify-center font-black text-sm text-gold rounded-xl">KH</div>
              </div>
-             <p className="text-[#F5F0E8]/40 text-sm leading-relaxed">
-               المنصة المتكاملة لإدارة سلاسل التوريد والابتكار في عالم المنسوجات والأزياء الراقية.
+             <p className="text-cream/40 text-base leading-relaxed font-medium">
+               المنصة المتكاملة لإدارة سلاسل التوريد والابتكار في عالم المنسوجات والأزياء الراقية في أفريقيا.
              </p>
-             <div className="flex justify-end gap-4 text-[#F5F0E8]/40">
-                <svg className="w-5 h-5 hover:text-[#C9A84C] cursor-pointer fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                <svg className="w-5 h-5 hover:text-[#C9A84C] cursor-pointer fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                <svg className="w-5 h-5 hover:text-[#C9A84C] cursor-pointer fill-current" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+             <div className="flex justify-end gap-6 text-gold/60">
+                {['Linkedin', 'Instagram', 'Twitter'].map(social => (
+                   <span key={social} className="hover:text-gold cursor-pointer transition-colors font-black text-[10px] uppercase tracking-widest">{social}</span>
+                ))}
              </div>
           </div>
 
@@ -262,23 +292,23 @@ const Footer = () => {
             { title: 'المصادر', links: ['أكاديمية خامة', 'تقارير السوق', 'دليل المنسوجات', 'الفعاليات'] },
             { title: 'قانوني', links: ['الشروط والأحكام', 'سياسة الخصوصية', 'حقوق الملكية', 'اتصل بنا'] }
           ].map((col, i) => (
-            <div key={i} className="space-y-6">
-              <h4 className="font-bold text-[#C9A84C] uppercase tracking-[0.2em] text-xs">{col.title}</h4>
-              <ul className="space-y-4">
+            <div key={i} className="space-y-8">
+              <h4 className="font-black text-gold uppercase tracking-[0.3em] text-xs">{col.title}</h4>
+              <ul className="space-y-5">
                 {col.links.map(link => (
-                  <li key={link} className="text-sm text-[#F5F0E8]/50 hover:text-[#C9A84C] transition-colors cursor-pointer">{link}</li>
+                  <li key={link} className="text-sm text-cream/40 hover:text-gold transition-colors cursor-pointer font-black">{link}</li>
                 ))}
               </ul>
             </div>
           ))}
         </div>
 
-        <div className="border-t border-white/10 pt-12 flex flex-col md:flex-row justify-between items-center gap-8 text-[#F5F0E8]/30 text-[10px] tracking-widest uppercase">
-          <div className="flex gap-8">
-             <span>ISO 9001:2015 CERTIFIED</span>
-             <span>GOTS COMPLIANT</span>
+        <div className="border-t border-white/10 pt-16 flex flex-col md:flex-row justify-between items-center gap-10 text-white/30 text-[10px] font-black tracking-[0.3em] uppercase">
+          <div className="flex gap-12">
+             <span className="flex items-center gap-2"><Shield className="w-4 h-4 text-gold"/> ISO 9001:2015 CERTIFIED</span>
+             <span className="flex items-center gap-2"><Globe className="w-4 h-4 text-gold"/> GOTS COMPLIANT</span>
           </div>
-          <p>© 2026 خامة للمنسوجات. جميع الحقوق محفوظة.</p>
+          <p>© 2026 خامة للمنسوجات. صمم للتميز.</p>
         </div>
       </div>
     </footer>
@@ -288,7 +318,7 @@ const Footer = () => {
 // ─── Final HomeSections Assembler ────────────────────────────────────
 export default function HomeSections() {
   return (
-    <div className="bg-[#FEFCF8]">
+    <div className="bg-cream">
       <TrendsSection />
       <NewSuppliers />
       <MarketDashboard />

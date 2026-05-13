@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 import Link from 'next/link';
+import Button from '../ui/Button';
 
 /* ─── Types ──────────────────────────────────────────────────────────── */
 interface Fiber {
@@ -44,234 +45,10 @@ const FIBER_COLORS = [
 const H1_LINE_1 = "فخامة المنسوجات،";
 const H1_LINE_2 = "بلمسة زر واحدة.";
 
-/* ─── Hook: Counter Up ───────────────────────────────────────────────── */
-function useCounterUp(target: number, duration: number = 2200, start: boolean = false) {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    if (!start) return;
-    let raf: number;
-    const startTime = performance.now();
-    const tick = (now: number) => {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      // Ease out cubic
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.floor(eased * target));
-      if (progress < 1) raf = requestAnimationFrame(tick);
-      else setCount(target);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [target, duration, start]);
-  return count;
-}
-
-/* ─── Component: Animated Counter ────────────────────────────────────── */
-function AnimatedCounter({ stat, start, delay }: { stat: StatItem; start: boolean; delay: number }) {
-  const count = useCounterUp(stat.value, 2400, start);
-  return (
-    <div
-      className="stat-item flex flex-col items-center md:items-start"
-      style={{
-        opacity: 0,
-        animation: start ? `counter-enter 0.7s cubic-bezier(0.22,1,0.36,1) ${delay}ms forwards` : 'none',
-      }}
-    >
-      <div
-        className="font-display text-4xl md:text-5xl font-semibold leading-none tracking-tight"
-        style={{ color: 'var(--gold)' }}
-      >
-        {stat.value >= 1000
-          ? count.toLocaleString('fr-FR')
-          : count}
-        <span style={{ color: 'var(--gold-light)' }}>{stat.suffix}</span>
-      </div>
-      <div
-        className="font-body mt-1.5 text-xs md:text-sm font-light tracking-wider uppercase"
-        style={{ color: 'rgba(245,240,232,0.58)', letterSpacing: '0.1em' }}
-      >
-        {stat.label}
-      </div>
-      <div
-        className="mt-3 h-px"
-        style={{
-          background: 'linear-gradient(to right, var(--gold), transparent)',
-          animation: start ? `stat-line-expand 0.9s cubic-bezier(0.22,1,0.36,1) ${delay + 200}ms both` : 'none',
-          opacity: 0,
-          width: '100%',
-        }}
-      />
-    </div>
-  );
-}
-
-/* ─── Component: Animated H1 Word by Word (Fixed for Arabic) ───────── */
-function AnimatedH1({ line, baseDelay }: { line: string; baseDelay: number }) {
-  // Split by spaces to keep Arabic words connected
-  const words = line.split(' ');
-  return (
-    <span className="block">
-      {words.map((word, i) => (
-        <span
-          key={i}
-          className="letter-char"
-          style={{
-            animationDelay: `${baseDelay + i * 150}ms`,
-            display: 'inline-block',
-            marginRight: '0.25em'
-          }}
-        >
-          {word}&nbsp;
-        </span>
-      ))}
-    </span>
-  );
-}
-
-/* ─── Component: Fibers Canvas Layer ─────────────────────────────────── */
-function FibersLayer({ reducedMotion }: { reducedMotion: boolean }) {
-  const fibers = useRef<Fiber[]>([]);
-
-  if (fibers.current.length === 0) {
-    const total = 28;
-    for (let i = 0; i < total; i++) {
-      const type = i % 5 === 0 ? 'horizontal' : i % 7 === 0 ? 'diagonal' : 'vertical';
-      fibers.current.push({
-        id: i,
-        x: Math.random() * 100,
-        width: type === 'vertical' ? 1 + Math.random() * 1.5 : 40 + Math.random() * 80,
-        height: type === 'vertical' ? 60 + Math.random() * 120 : 1 + Math.random() * 1.5,
-        delay: Math.random() * 14000,
-        duration: 10000 + Math.random() * 12000,
-        color: FIBER_COLORS[Math.floor(Math.random() * FIBER_COLORS.length)],
-        type,
-        opacity: 0.2 + Math.random() * 0.5,
-        rotate: type === 'diagonal' ? -35 + Math.random() * 70 : Math.random() * 8 - 4,
-      });
-    }
-  }
-
-  if (reducedMotion) return null;
-
-  return (
-    <div className="fibers-layer" aria-hidden="true">
-      {fibers.current.map((f) => {
-        const isHoriz = f.type === 'horizontal';
-        const animName = isHoriz
-          ? 'fiber-horizontal'
-          : f.id % 2 === 0
-          ? 'fiber-float'
-          : 'fiber-float-alt';
-
-        return (
-          <div
-            key={f.id}
-            style={{
-              position: 'absolute',
-              left: `${f.x}%`,
-              bottom: isHoriz ? `${10 + Math.random() * 80}%` : '-10%',
-              width: `${f.width}px`,
-              height: `${f.height}px`,
-              background: f.color,
-              borderRadius: '999px',
-              transform: `rotate(${f.rotate}deg)`,
-              animation: `${animName} ${f.duration}ms linear ${f.delay}ms infinite`,
-              filter: 'blur(0.4px)',
-              mixBlendMode: 'screen' as const,
-            }}
-          />
-        );
-      })}
-    </div>
-  );
-}
-
-/* ─── Component: Scroll Indicator ────────────────────────────────────── */
-function ScrollIndicator() {
-  return (
-    <div
-      className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20"
-      aria-label="Défiler vers le بافل"
-    >
-      <span
-        className="font-body text-xs tracking-[0.2em] uppercase"
-        style={{ color: 'rgba(245,240,232,0.4)', letterSpacing: '0.18em' }}
-      >
-        اكتشف المزيد
-      </span>
-      <div
-        className="relative flex flex-col items-center"
-        style={{ animation: 'scroll-pulse 1.8s ease-in-out infinite' }}
-      >
-        {/* Scroll track */}
-        <div
-          style={{
-            width: '1px',
-            height: '40px',
-            background: 'linear-gradient(to bottom, rgba(201,168,76,0.8), transparent)',
-            position: 'relative',
-            overflow: 'hidden',
-          }}
-        >
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              background: 'linear-gradient(to bottom, transparent, var(--gold), transparent)',
-              animation: 'scroll-chevron 1.8s ease-in-out infinite',
-            }}
-          />
-        </div>
-        {/* Chevron */}
-        <svg width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true">
-          <path
-            d="M1 1L6 6L11 1"
-            stroke="rgba(201,168,76,0.7)"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </div>
-    </div>
-  );
-}
-
-/* ─── Component: Decorative Gold Lines ──────────────────────────────── */
-function GoldDecorLines() {
-  return (
-    <div className="absolute inset-0 pointer-events-none z-4 overflow-hidden" aria-hidden="true">
-      {/* Top-left corner bracket */}
-      <div style={{
-        position: 'absolute', top: '2rem', left: '2rem',
-        width: '48px', height: '48px',
-        borderTop: '1px solid rgba(201,168,76,0.35)',
-        borderLeft: '1px solid rgba(201,168,76,0.35)',
-      }} />
-      {/* Top-right corner bracket */}
-      <div style={{
-        position: 'absolute', top: '2rem', right: '2rem',
-        width: '48px', height: '48px',
-        borderTop: '1px solid rgba(201,168,76,0.35)',
-        borderRight: '1px solid rgba(201,168,76,0.35)',
-      }} />
-      {/* Bottom-right corner bracket */}
-      <div style={{
-        position: 'absolute', bottom: '2rem', right: '2rem',
-        width: '48px', height: '48px',
-        borderBottom: '1px solid rgba(201,168,76,0.25)',
-        borderRight: '1px solid rgba(201,168,76,0.25)',
-      }} />
-    </div>
-  );
-}
-
 /* ─── Main HeroSection Component ─────────────────────────────────────── */
 export default function HeroSection() {
   const heroRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [videoError, setVideoError] = useState(false);
   const [statsVisible, setStatsVisible] = useState(false);
   const [contentVisible, setContentVisible] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
@@ -344,7 +121,6 @@ export default function HeroSection() {
             willChange: 'transform',
           }}
         >
-          {/* Fallback image always shown behind video */}
           <img
             src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?q=80&w=1920&auto=format&fit=crop"
             alt=""
@@ -502,7 +278,7 @@ export default function HeroSection() {
                 : 'none',
             }}
           >
-            خامة تربط محترفي صناعة النسيج بذكاء&nbsp;:
+            خامة تربط محترفي صناعة النسيج بذكاء :
             المشترون، الموردون، المصممون، ومكاتب الدراسات في سوق واحد متكامل.
           </p>
 
@@ -624,7 +400,6 @@ export default function HeroSection() {
             </div>
           ))}
         </div>
-      </div>
 
       {/* ── Right side decorative panel ──────────────────────────── */}
       <div
@@ -682,5 +457,151 @@ export default function HeroSection() {
       {/* ── Scroll Indicator ──────────────────────────────────────── */}
       <ScrollIndicator />
     </section>
+  );
+}
+
+/* ─── Helper Components ─────────────────────────────────────────────── */
+
+function useCounterUp(target: number, duration: number = 2200, start: boolean = false) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!start) return;
+    let raf: number;
+    const startTime = performance.now();
+    const tick = (now: number) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.floor(eased * target));
+      if (progress < 1) raf = requestAnimationFrame(tick);
+      else setCount(target);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [target, duration, start]);
+  return count;
+}
+
+function AnimatedCounter({ stat, start, delay }: { stat: StatItem; start: boolean; delay: number }) {
+  const count = useCounterUp(stat.value, 2400, start);
+  return (
+    <div
+      className="stat-item flex flex-col items-center md:items-start"
+      style={{
+        opacity: 0,
+        animation: start ? `counter-enter 0.7s cubic-bezier(0.22,1,0.36,1) ${delay}ms forwards` : 'none',
+      }}
+    >
+      <div
+        className="font-display text-4xl md:text-5xl font-semibold leading-none tracking-tight"
+        style={{ color: 'var(--gold)' }}
+      >
+        {stat.value >= 1000 ? count.toLocaleString('fr-FR') : count}
+        <span style={{ color: 'var(--gold-light)' }}>{stat.suffix}</span>
+      </div>
+      <div
+        className="font-body mt-1.5 text-xs md:text-sm font-light tracking-wider uppercase"
+        style={{ color: 'rgba(245,240,232,0.58)', letterSpacing: '0.1em' }}
+      >
+        {stat.label}
+      </div>
+      <div
+        className="mt-3 h-px"
+        style={{
+          background: 'linear-gradient(to right, var(--gold), transparent)',
+          animation: start ? `stat-line-expand 0.9s cubic-bezier(0.22,1,0.36,1) ${delay + 200}ms both` : 'none',
+          opacity: 0,
+          width: '100%',
+        }}
+      />
+    </div>
+  );
+}
+
+function AnimatedH1({ line, baseDelay }: { line: string; baseDelay: number }) {
+  const words = line.split(' ');
+  return (
+    <span className="block">
+      {words.map((word, i) => (
+        <span
+          key={i}
+          className="letter-char"
+          style={{
+            animationDelay: `${baseDelay + i * 150}ms`,
+            display: 'inline-block',
+            marginRight: '0.25em'
+          }}
+        >
+          {word}{" "}
+        </span>
+      ))}
+    </span>
+  );
+}
+
+function FibersLayer({ reducedMotion }: { reducedMotion: boolean }) {
+  const fibers = useRef<Fiber[]>([]);
+  if (fibers.current.length === 0) {
+    const total = 28;
+    for (let i = 0; i < total; i++) {
+      const type = i % 5 === 0 ? 'horizontal' : i % 7 === 0 ? 'diagonal' : 'vertical';
+      fibers.current.push({
+        id: i,
+        x: Math.random() * 100,
+        width: type === 'vertical' ? 1 + Math.random() * 1.5 : 40 + Math.random() * 80,
+        height: type === 'vertical' ? 60 + Math.random() * 120 : 1 + Math.random() * 1.5,
+        delay: Math.random() * 14000,
+        duration: 10000 + Math.random() * 12000,
+        color: FIBER_COLORS[Math.floor(Math.random() * FIBER_COLORS.length)],
+        type,
+        opacity: 0.2 + Math.random() * 0.5,
+        rotate: type === 'diagonal' ? -35 + Math.random() * 70 : Math.random() * 8 - 4,
+      });
+    }
+  }
+  if (reducedMotion) return null;
+  return (
+    <div className="fibers-layer" aria-hidden="true">
+      {fibers.current.map((f) => {
+        const isHoriz = f.type === 'horizontal';
+        const animName = isHoriz ? 'fiber-horizontal' : f.id % 2 === 0 ? 'fiber-float' : 'fiber-float-alt';
+        return (
+          <div
+            key={f.id}
+            style={{
+              position: 'absolute',
+              left: `${f.x}%`,
+              bottom: isHoriz ? `${10 + Math.random() * 80}%` : '-10%',
+              width: `${f.width}px`,
+              height: `${f.height}px`,
+              background: f.color,
+              borderRadius: '999px',
+              transform: `rotate(${f.rotate}deg)`,
+              animation: `${animName} ${f.duration}ms linear ${f.delay}ms infinite`,
+              filter: 'blur(0.4px)',
+              mixBlendMode: 'screen' as const,
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+function ScrollIndicator() {
+  return (
+    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20">
+      <span className="font-body text-xs tracking-[0.2em] uppercase" style={{ color: 'rgba(245,240,232,0.4)', letterSpacing: '0.18em' }}>
+        اكتشف المزيد
+      </span>
+      <div className="relative flex flex-col items-center" style={{ animation: 'scroll-pulse 1.8s ease-in-out infinite' }}>
+        <div style={{ width: '1px', height: '40px', background: 'linear-gradient(to bottom, rgba(201,168,76,0.8), transparent)', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent, var(--gold), transparent)', animation: 'scroll-chevron 1.8s ease-in-out infinite' }} />
+        </div>
+        <svg width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true">
+          <path d="M1 1L6 6L11 1" stroke="rgba(201,168,76,0.7)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </div>
+    </div>
   );
 }
