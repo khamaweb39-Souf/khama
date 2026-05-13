@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 import Link from 'next/link';
-import Button from '../ui/Button';
 
 /* ─── Types ──────────────────────────────────────────────────────────── */
 interface Fiber {
@@ -45,10 +44,234 @@ const FIBER_COLORS = [
 const H1_LINE_1 = "فخامة المنسوجات،";
 const H1_LINE_2 = "بلمسة زر واحدة.";
 
+/* ─── Hook: Counter Up ───────────────────────────────────────────────── */
+function useCounterUp(target: number, duration: number = 2200, start: boolean = false) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!start) return;
+    let raf: number;
+    const startTime = performance.now();
+    const tick = (now: number) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.floor(eased * target));
+      if (progress < 1) raf = requestAnimationFrame(tick);
+      else setCount(target);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [target, duration, start]);
+  return count;
+}
+
+/* ─── Component: Animated Counter ────────────────────────────────────── */
+function AnimatedCounter({ stat, start, delay }: { stat: StatItem; start: boolean; delay: number }) {
+  const count = useCounterUp(stat.value, 2400, start);
+  return (
+    <div
+      className="stat-item flex flex-col items-center md:items-start"
+      style={{
+        opacity: 0,
+        animation: start ? `counter-enter 0.7s cubic-bezier(0.22,1,0.36,1) ${delay}ms forwards` : 'none',
+      }}
+    >
+      <div
+        className="font-display text-4xl md:text-5xl font-semibold leading-none tracking-tight"
+        style={{ color: 'var(--gold)' }}
+      >
+        {stat.value >= 1000
+          ? count.toLocaleString('fr-FR')
+          : count}
+        <span style={{ color: 'var(--gold-light)' }}>{stat.suffix}</span>
+      </div>
+      <div
+        className="font-body mt-1.5 text-xs md:text-sm font-light tracking-wider uppercase"
+        style={{ color: 'rgba(245,240,232,0.58)', letterSpacing: '0.1em' }}
+      >
+        {stat.label}
+      </div>
+      <div
+        className="mt-3 h-px"
+        style={{
+          background: 'linear-gradient(to right, var(--gold), transparent)',
+          animation: start ? `stat-line-expand 0.9s cubic-bezier(0.22,1,0.36,1) ${delay + 200}ms both` : 'none',
+          opacity: 0,
+          width: '100%',
+        }}
+      />
+    </div>
+  );
+}
+
+/* ─── Component: Animated H1 Word by Word (Fixed for Arabic) ───────── */
+function AnimatedH1({ line, baseDelay }: { line: string; baseDelay: number }) {
+  // Split by spaces to keep Arabic words connected
+  const words = line.split(' ');
+  return (
+    <span className="block">
+      {words.map((word, i) => (
+        <span
+          key={i}
+          className="letter-char"
+          style={{
+            animationDelay: `${baseDelay + i * 150}ms`,
+            display: 'inline-block',
+            marginRight: '0.25em'
+          }}
+        >
+          {word}&nbsp;
+        </span>
+      ))}
+    </span>
+  );
+}
+
+/* ─── Component: Fibers Canvas Layer ─────────────────────────────────── */
+function FibersLayer({ reducedMotion }: { reducedMotion: boolean }) {
+  const fibers = useRef<Fiber[]>([]);
+
+  if (fibers.current.length === 0) {
+    const total = 28;
+    for (let i = 0; i < total; i++) {
+      const type = i % 5 === 0 ? 'horizontal' : i % 7 === 0 ? 'diagonal' : 'vertical';
+      fibers.current.push({
+        id: i,
+        x: Math.random() * 100,
+        width: type === 'vertical' ? 1 + Math.random() * 1.5 : 40 + Math.random() * 80,
+        height: type === 'vertical' ? 60 + Math.random() * 120 : 1 + Math.random() * 1.5,
+        delay: Math.random() * 14000,
+        duration: 10000 + Math.random() * 12000,
+        color: FIBER_COLORS[Math.floor(Math.random() * FIBER_COLORS.length)],
+        type,
+        opacity: 0.2 + Math.random() * 0.5,
+        rotate: type === 'diagonal' ? -35 + Math.random() * 70 : Math.random() * 8 - 4,
+      });
+    }
+  }
+
+  if (reducedMotion) return null;
+
+  return (
+    <div className="fibers-layer" aria-hidden="true">
+      {fibers.current.map((f) => {
+        const isHoriz = f.type === 'horizontal';
+        const animName = isHoriz
+          ? 'fiber-horizontal'
+          : f.id % 2 === 0
+          ? 'fiber-float'
+          : 'fiber-float-alt';
+
+        return (
+          <div
+            key={f.id}
+            style={{
+              position: 'absolute',
+              left: `${f.x}%`,
+              bottom: isHoriz ? `${10 + Math.random() * 80}%` : '-10%',
+              width: `${f.width}px`,
+              height: `${f.height}px`,
+              background: f.color,
+              borderRadius: '999px',
+              transform: `rotate(${f.rotate}deg)`,
+              animation: `${animName} ${f.duration}ms linear ${f.delay}ms infinite`,
+              filter: 'blur(0.4px)',
+              mixBlendMode: 'screen' as const,
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+/* ─── Component: Scroll Indicator ────────────────────────────────────── */
+function ScrollIndicator() {
+  return (
+    <div
+      className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20"
+      aria-label="Défiler vers le بافل"
+    >
+      <span
+        className="font-body text-xs tracking-[0.2em] uppercase"
+        style={{ color: 'rgba(245,240,232,0.4)', letterSpacing: '0.18em' }}
+      >
+        اكتشف المزيد
+      </span>
+      <div
+        className="relative flex flex-col items-center"
+        style={{ animation: 'scroll-pulse 1.8s ease-in-out infinite' }}
+      >
+        {/* Scroll track */}
+        <div
+          style={{
+            width: '1px',
+            height: '40px',
+            background: 'linear-gradient(to bottom, rgba(201,168,76,0.8), transparent)',
+            position: 'relative',
+            overflow: 'hidden',
+          }}
+        >
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(to bottom, transparent, var(--gold), transparent)',
+              animation: 'scroll-chevron 1.8s ease-in-out infinite',
+            }}
+          />
+        </div>
+        {/* Chevron */}
+        <svg width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true">
+          <path
+            d="M1 1L6 6L11 1"
+            stroke="rgba(201,168,76,0.7)"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Component: Decorative Gold Lines ──────────────────────────────── */
+function GoldDecorLines() {
+  return (
+    <div className="absolute inset-0 pointer-events-none z-4 overflow-hidden" aria-hidden="true">
+      {/* Top-left corner bracket */}
+      <div style={{
+        position: 'absolute', top: '2rem', left: '2rem',
+        width: '48px', height: '48px',
+        borderTop: '1px solid rgba(201,168,76,0.35)',
+        borderLeft: '1px solid rgba(201,168,76,0.35)',
+      }} />
+      {/* Top-right corner bracket */}
+      <div style={{
+        position: 'absolute', top: '2rem', right: '2rem',
+        width: '48px', height: '48px',
+        borderTop: '1px solid rgba(201,168,76,0.35)',
+        borderRight: '1px solid rgba(201,168,76,0.35)',
+      }} />
+      {/* Bottom-right corner bracket */}
+      <div style={{
+        position: 'absolute', bottom: '2rem', right: '2rem',
+        width: '48px', height: '48px',
+        borderBottom: '1px solid rgba(201,168,76,0.25)',
+        borderRight: '1px solid rgba(201,168,76,0.25)',
+      }} />
+    </div>
+  );
+}
+
 /* ─── Main HeroSection Component ─────────────────────────────────────── */
 export default function HeroSection() {
   const heroRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoError, setVideoError] = useState(false);
   const [statsVisible, setStatsVisible] = useState(false);
   const [contentVisible, setContentVisible] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
@@ -105,8 +328,8 @@ export default function HeroSection() {
   return (
     <section
       ref={heroRef}
-      className="hero-section grain-overlay pattern-jacquard"
-      style={{ minHeight: '100vh', background: 'var(--navy)' }}
+      className="hero-section grain-overlay"
+      style={{ minHeight: '100vh', background: 'var(--obsidian)' }}
       aria-label="Section principale Khama"
     >
       {/* ── Background Layer ───────────────────────────────────────── */}
@@ -121,8 +344,9 @@ export default function HeroSection() {
             willChange: 'transform',
           }}
         >
+          {/* Fallback image always shown behind video */}
           <img
-            src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?q=80&w=1920&auto=format&fit=crop"
+            src="/images/loom-fallback.jpg"
             alt=""
             aria-hidden="true"
             style={{
@@ -134,9 +358,41 @@ export default function HeroSection() {
               objectPosition: 'center 30%',
             }}
           />
+
+          {/* Video (if available) */}
+          {!videoError && (
+            <video
+              ref={videoRef}
+              autoPlay
+              muted
+              loop
+              playsInline
+              aria-hidden="true"
+              onError={() => setVideoError(true)}
+              style={{
+                position: 'absolute',
+                inset: 0,
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: 'center 30%',
+                opacity: 0,
+                transition: 'opacity 1.2s ease',
+              }}
+              onCanPlay={(e) => {
+                (e.target as HTMLVideoElement).style.opacity = '1';
+              }}
+            >
+              {/* 
+                Add your video source here when available:
+                <source src="/video/loom-weaving.mp4" type="video/mp4" />
+              */}
+            </video>
+          )}
         </div>
 
-        {/* Gradient overlays - Refined for Navy */}
+        {/* Gradient overlays */}
+        {/* Diagonal ecru overlay */}
         <div
           aria-hidden="true"
           style={{
@@ -145,26 +401,48 @@ export default function HeroSection() {
             background: `
               linear-gradient(
                 125deg,
-                rgba(10,22,40,0.95) 0%,
-                rgba(10,22,40,0.85) 35%,
-                rgba(201,168,76,0.05) 60%,
-                rgba(10,22,40,0.7) 100%
+                rgba(13,12,10,0.92)  0%,
+                rgba(26,25,23,0.82)  25%,
+                rgba(245,240,232,0.08) 58%,
+                rgba(13,12,10,0.65)  100%
               )
             `,
+            animation: 'overlay-breathe 8s ease-in-out infinite',
             zIndex: 1,
           }}
         />
-        {/* Bottom silk gradient */}
+        {/* Bottom gradient for stat section */}
         <div
           aria-hidden="true"
-          className="animate-silk"
           style={{
             position: 'absolute',
             bottom: 0,
             left: 0,
             right: 0,
-            height: '50%',
-            background: 'linear-gradient(to top, var(--navy), transparent)',
+            height: '45%',
+            background: 'linear-gradient(to top, rgba(13,12,10,0.97), transparent)',
+            zIndex: 1,
+          }}
+        />
+        {/* Left vignette */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            top: 0, left: 0, bottom: 0,
+            width: '55%',
+            background: 'linear-gradient(to right, rgba(13,12,10,0.88), transparent)',
+            zIndex: 1,
+          }}
+        />
+        {/* Subtle top edge */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            top: 0, left: 0, right: 0,
+            height: '20%',
+            background: 'linear-gradient(to bottom, rgba(13,12,10,0.7), transparent)',
             zIndex: 1,
           }}
         />
@@ -172,6 +450,9 @@ export default function HeroSection() {
 
       {/* ── Fibers Layer ───────────────────────────────────────────── */}
       <FibersLayer reducedMotion={reducedMotion} />
+
+      {/* ── Decorative Gold Corner Lines ───────────────────────────── */}
+      <GoldDecorLines />
 
       {/* ── Main Hero Content ──────────────────────────────────────── */}
       <div
@@ -188,27 +469,30 @@ export default function HeroSection() {
           width: '100%',
         }}
       >
-        <div style={{ maxWidth: '750px' }}>
+        <div style={{ maxWidth: '680px' }}>
 
           {/* ── Badge ────────────────────────────────────────────── */}
           <div
-            className="badge-anim glass-card"
+            className="badge-anim"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '0.75rem',
-              marginBottom: '2.5rem',
-              padding: '0.6rem 1.2rem',
-              borderRadius: '999px',
+              gap: '0.55rem',
+              marginBottom: '2rem',
+              padding: '0.45rem 1rem',
+              border: '1px solid rgba(201,168,76,0.45)',
+              background: 'rgba(201,168,76,0.08)',
+              backdropFilter: 'blur(8px)',
               opacity: 0,
               animation: contentVisible
-                ? 'badge-enter 0.8s cubic-bezier(0.22,1,0.36,1) 0.1s forwards'
+                ? 'badge-enter 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s forwards'
                 : 'none',
             }}
+            aria-label="Badge : Plateforme Textile Professionnelle N°1 au Maghreb et Afrique"
           >
             <span
               style={{
-                fontSize: '0.8rem',
+                fontSize: '0.7rem',
                 animation: reducedMotion ? 'none' : 'star-spin 4s linear infinite',
                 display: 'inline-block',
                 color: 'var(--gold)',
@@ -220,34 +504,46 @@ export default function HeroSection() {
             <span
               className="font-body"
               style={{
-                fontSize: '0.75rem',
-                letterSpacing: '0.15em',
+                fontSize: '0.72rem',
+                letterSpacing: '0.12em',
                 textTransform: 'uppercase',
-                color: 'var(--gold)',
-                fontWeight: 900,
+                color: 'var(--gold-light)',
+                fontWeight: 500,
               }}
             >
-              المنصة الاحترافية الأولى للمنسوجات في المغرب العربي
+              المنصة الاحترافية الأولى للمنسوجات في المغرب العربي وأفريقيا
+            </span>
+            <span
+              style={{
+                fontSize: '0.7rem',
+                animation: reducedMotion ? 'none' : 'star-spin 4s linear infinite reverse',
+                display: 'inline-block',
+                color: 'var(--gold)',
+              }}
+              aria-hidden="true"
+            >
+              ✦
             </span>
           </div>
 
-          {/* ── H1 : Premium Gold Gradient ─────────────────── */}
+          {/* ── H1 : Sequential letter animation ─────────────────── */}
           <h1
             className="font-display"
             style={{
-              fontSize: 'clamp(3rem, 7vw, 5.5rem)',
-              fontWeight: 900,
-              lineHeight: 1.05,
-              color: 'var(--cream)',
-              marginBottom: '2rem',
-              perspective: '1000px',
+              fontSize: 'clamp(2.8rem, 6vw, 5.2rem)',
+              fontWeight: 300,
+              lineHeight: 1.08,
+              letterSpacing: '-0.01em',
+              color: 'var(--ecru)',
+              marginBottom: '1.6rem',
+              perspective: '800px',
             }}
           >
             {contentVisible && (
               <>
                 <AnimatedH1 line={H1_LINE_1} baseDelay={350} />
                 <span
-                  className="block mt-2"
+                  className="block"
                   style={{
                     background: `linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 40%, var(--gold-dark) 70%, var(--gold-light) 100%)`,
                     backgroundSize: '200% auto',
@@ -255,6 +551,8 @@ export default function HeroSection() {
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
                     animation: reducedMotion ? 'none' : 'shimmer-gold 4s linear infinite',
+                    fontStyle: 'italic',
+                    fontWeight: 400,
                   }}
                 >
                   <AnimatedH1 line={H1_LINE_2} baseDelay={350 + H1_LINE_1.length * 42 + 100} />
@@ -267,43 +565,78 @@ export default function HeroSection() {
           <p
             className="font-body"
             style={{
-              fontSize: 'clamp(1.1rem, 2vw, 1.3rem)',
-              lineHeight: 1.8,
-              color: 'rgba(253,248,240,0.7)',
-              marginBottom: '3rem',
-              maxWidth: '580px',
+              fontSize: 'clamp(1rem, 1.8vw, 1.2rem)',
+              lineHeight: 1.7,
+              color: 'rgba(245,240,232,0.68)',
+              marginBottom: '2.5rem',
+              maxWidth: '520px',
               opacity: 0,
               animation: contentVisible
                 ? 'word-slide-up 0.8s cubic-bezier(0.22,1,0.36,1) 1.6s forwards'
                 : 'none',
             }}
           >
-            خامة تربط محترفي صناعة النسيج بذكاء :
-            المشترون، الموردون، المصممون، ومكاتب الدراسات في سوق واحد متكامل.
+            خامة تربط محترفي صناعة النسيج بذكاء&nbsp;:
+            <br />
+            <span style={{ color: 'rgba(245,240,232,0.45)' }}>
+              المشترون، الموردون، المصممون، ومكاتب الدراسات.
+            </span>
           </p>
 
           {/* ── CTA Group ────────────────────────────────────────── */}
           <div
-            className="flex flex-wrap items-center gap-5"
             style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              gap: '1rem',
               opacity: 0,
               animation: contentVisible
-                ? 'cta-enter 0.8s cubic-bezier(0.22,1,0.36,1) 1.9s forwards'
+                ? 'cta-enter 0.75s cubic-bezier(0.22,1,0.36,1) 1.9s forwards'
                 : 'none',
             }}
           >
-            <Link href="/fabrics">
-              <Button variant="premium" size="xl" rightIcon={<span>→</span>}>
-                استكشف الكتالوج
-              </Button>
+            {/* Primary CTA */}
+            <Link
+              href="/fabrics"
+              className="btn-gold font-body inline-flex items-center gap-2"
+              style={{
+                fontSize: '0.88rem',
+                fontWeight: 600,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                color: 'var(--obsidian)',
+                textDecoration: 'none',
+                padding: '0.9rem 2rem',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              استكشف الكتالوج
+              <span
+                style={{ animation: reducedMotion ? 'none' : 'arrow-nudge 1.5s ease-in-out infinite' }}
+                aria-hidden="true"
+              >
+                →
+              </span>
             </Link>
 
-            <Link href="/rfq/create">
-              <Button variant="outline" size="xl">
-                انشر طلب عرض
-              </Button>
+            {/* Ghost CTA */}
+            <Link
+              href="/rfq/create"
+              className="btn-ghost font-body inline-flex items-center gap-2"
+              style={{
+                fontSize: '0.88rem',
+                fontWeight: 500,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                color: 'var(--ecru)',
+                textDecoration: 'none',
+                padding: '0.9rem 2rem',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              انشر طلب عرض
             </Link>
-          </div>
 
             {/* Text link */}
             <Link
@@ -400,6 +733,7 @@ export default function HeroSection() {
             </div>
           ))}
         </div>
+      </div>
 
       {/* ── Right side decorative panel ──────────────────────────── */}
       <div
@@ -457,151 +791,5 @@ export default function HeroSection() {
       {/* ── Scroll Indicator ──────────────────────────────────────── */}
       <ScrollIndicator />
     </section>
-  );
-}
-
-/* ─── Helper Components ─────────────────────────────────────────────── */
-
-function useCounterUp(target: number, duration: number = 2200, start: boolean = false) {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    if (!start) return;
-    let raf: number;
-    const startTime = performance.now();
-    const tick = (now: number) => {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.floor(eased * target));
-      if (progress < 1) raf = requestAnimationFrame(tick);
-      else setCount(target);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [target, duration, start]);
-  return count;
-}
-
-function AnimatedCounter({ stat, start, delay }: { stat: StatItem; start: boolean; delay: number }) {
-  const count = useCounterUp(stat.value, 2400, start);
-  return (
-    <div
-      className="stat-item flex flex-col items-center md:items-start"
-      style={{
-        opacity: 0,
-        animation: start ? `counter-enter 0.7s cubic-bezier(0.22,1,0.36,1) ${delay}ms forwards` : 'none',
-      }}
-    >
-      <div
-        className="font-display text-4xl md:text-5xl font-semibold leading-none tracking-tight"
-        style={{ color: 'var(--gold)' }}
-      >
-        {stat.value >= 1000 ? count.toLocaleString('fr-FR') : count}
-        <span style={{ color: 'var(--gold-light)' }}>{stat.suffix}</span>
-      </div>
-      <div
-        className="font-body mt-1.5 text-xs md:text-sm font-light tracking-wider uppercase"
-        style={{ color: 'rgba(245,240,232,0.58)', letterSpacing: '0.1em' }}
-      >
-        {stat.label}
-      </div>
-      <div
-        className="mt-3 h-px"
-        style={{
-          background: 'linear-gradient(to right, var(--gold), transparent)',
-          animation: start ? `stat-line-expand 0.9s cubic-bezier(0.22,1,0.36,1) ${delay + 200}ms both` : 'none',
-          opacity: 0,
-          width: '100%',
-        }}
-      />
-    </div>
-  );
-}
-
-function AnimatedH1({ line, baseDelay }: { line: string; baseDelay: number }) {
-  const words = line.split(' ');
-  return (
-    <span className="block">
-      {words.map((word, i) => (
-        <span
-          key={i}
-          className="letter-char"
-          style={{
-            animationDelay: `${baseDelay + i * 150}ms`,
-            display: 'inline-block',
-            marginRight: '0.25em'
-          }}
-        >
-          {word}{" "}
-        </span>
-      ))}
-    </span>
-  );
-}
-
-function FibersLayer({ reducedMotion }: { reducedMotion: boolean }) {
-  const fibers = useRef<Fiber[]>([]);
-  if (fibers.current.length === 0) {
-    const total = 28;
-    for (let i = 0; i < total; i++) {
-      const type = i % 5 === 0 ? 'horizontal' : i % 7 === 0 ? 'diagonal' : 'vertical';
-      fibers.current.push({
-        id: i,
-        x: Math.random() * 100,
-        width: type === 'vertical' ? 1 + Math.random() * 1.5 : 40 + Math.random() * 80,
-        height: type === 'vertical' ? 60 + Math.random() * 120 : 1 + Math.random() * 1.5,
-        delay: Math.random() * 14000,
-        duration: 10000 + Math.random() * 12000,
-        color: FIBER_COLORS[Math.floor(Math.random() * FIBER_COLORS.length)],
-        type,
-        opacity: 0.2 + Math.random() * 0.5,
-        rotate: type === 'diagonal' ? -35 + Math.random() * 70 : Math.random() * 8 - 4,
-      });
-    }
-  }
-  if (reducedMotion) return null;
-  return (
-    <div className="fibers-layer" aria-hidden="true">
-      {fibers.current.map((f) => {
-        const isHoriz = f.type === 'horizontal';
-        const animName = isHoriz ? 'fiber-horizontal' : f.id % 2 === 0 ? 'fiber-float' : 'fiber-float-alt';
-        return (
-          <div
-            key={f.id}
-            style={{
-              position: 'absolute',
-              left: `${f.x}%`,
-              bottom: isHoriz ? `${10 + Math.random() * 80}%` : '-10%',
-              width: `${f.width}px`,
-              height: `${f.height}px`,
-              background: f.color,
-              borderRadius: '999px',
-              transform: `rotate(${f.rotate}deg)`,
-              animation: `${animName} ${f.duration}ms linear ${f.delay}ms infinite`,
-              filter: 'blur(0.4px)',
-              mixBlendMode: 'screen' as const,
-            }}
-          />
-        );
-      })}
-    </div>
-  );
-}
-
-function ScrollIndicator() {
-  return (
-    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20">
-      <span className="font-body text-xs tracking-[0.2em] uppercase" style={{ color: 'rgba(245,240,232,0.4)', letterSpacing: '0.18em' }}>
-        اكتشف المزيد
-      </span>
-      <div className="relative flex flex-col items-center" style={{ animation: 'scroll-pulse 1.8s ease-in-out infinite' }}>
-        <div style={{ width: '1px', height: '40px', background: 'linear-gradient(to bottom, rgba(201,168,76,0.8), transparent)', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent, var(--gold), transparent)', animation: 'scroll-chevron 1.8s ease-in-out infinite' }} />
-        </div>
-        <svg width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true">
-          <path d="M1 1L6 6L11 1" stroke="rgba(201,168,76,0.7)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </div>
-    </div>
   );
 }

@@ -16,60 +16,55 @@ const {
 // ─── Sub-Components ──────────────────────────────────────────────────────────
 
 const TopBar = ({ t }: { t: any }) => (
-  <div className="h-10 bg-navy text-[10px] sm:text-xs text-cream/80 px-4 flex items-center justify-between border-b border-white/5 relative z-[101]">
+  <div className="h-10 bg-burgundy-dark text-[10px] sm:text-xs text-ecru/80 px-4 flex items-center justify-between border-b border-white/5 relative z-[101]">
     <div className="flex items-center gap-4">
-      <span className="font-bold tracking-widest uppercase">{t('platform_v')} <span className="text-gold ml-1">v2.0</span></span>
+      <span className="font-bold tracking-widest uppercase">{t('platform_v')} <span className="text-gold ml-1">v1.2</span></span>
       <div className="hidden lg:flex items-center gap-2 overflow-hidden border-l border-white/10 pl-4 ml-4">
-        <div className="animate-marquee whitespace-nowrap">
+        <div className="whitespace-nowrap">
           <span>• {t('welcome')} • {t('saved_searches')} • {t('catalogue')}</span>
         </div>
       </div>
     </div>
     <div className="flex items-center gap-4">
       <LanguageSwitcher />
-      <span className="cursor-pointer hover:text-white font-bold">دج (DZD)</span>
+      <span className="cursor-pointer hover:text-white">دج (DZD)</span>
       <div className="h-3 w-px bg-white/10 mx-1" />
-      <Link href="/dashboard/buyer" className="hover:text-gold transition-all flex items-center gap-1 font-bold">
+      <Link href="/dashboard/buyer" className="hover:text-gold transition-colors flex items-center gap-1">
         <Icons.User className="w-3 h-3" />
         {t('dashboard')}
       </Link>
       <div className="h-3 w-px bg-white/10 mx-1" />
-      <Link href="/login" className="hover:text-gold transition-colors font-bold">{t('logout')}</Link>
+      <Link href="/login" className="hover:text-gold transition-colors">{t('logout')}</Link>
     </div>
   </div>
 );
 
 const MegaMenu = ({ isOpen, content }: { isOpen: boolean, content: any }) => (
   <div className={`
-    absolute top-full left-0 w-full bg-white/95 backdrop-blur-xl border-b border-gold/10 shadow-silk transition-all duration-500 z-40
-    ${isOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-4 invisible pointer-events-none'}
+    absolute top-full left-0 w-full bg-white border-b border-border shadow-2xl transition-all duration-300 z-40
+    ${isOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-2 invisible pointer-events-none'}
   `}>
-    <div className="max-w-7xl mx-auto p-10 grid grid-cols-4 gap-12">
+    <div className="max-w-7xl mx-auto p-8 grid grid-cols-4 gap-12">
       {content.sections.map((section: any, idx: number) => (
-        <div key={idx} className="flex flex-col gap-5">
-          <h4 className="text-[11px] font-black text-navy/40 uppercase tracking-[0.2em] border-b border-gold/10 pb-3">{section.title}</h4>
-          <ul className="flex flex-col gap-3">
+        <div key={idx} className="flex flex-col gap-4">
+          <h4 className="text-label text-muted border-b border-ecru pb-2">{section.title}</h4>
+          <ul className="flex flex-col gap-2">
             {section.items.map((item: any, i: number) => (
               <li key={i}>
-                <Link href={item.link} className="text-sm font-bold text-navy hover:text-gold hover:translate-x-2 inline-block transition-all duration-300">
+                <Link href={item.link} className="text-body-small hover:text-gold hover:translate-x-1 inline-block transition-all">
                   {item.label}
-                  {item.badge && <span className="ml-2 bg-gold/10 text-gold-dark text-[9px] px-2 py-0.5 rounded-full font-black uppercase">{item.badge}</span>}
+                  {item.badge && <span className="ml-2 bg-gold/10 text-gold-dark text-[9px] px-1.5 py-0.5 rounded uppercase">{item.badge}</span>}
                 </Link>
               </li>
             ))}
           </ul>
         </div>
       ))}
-      <div className="bg-cream p-8 rounded-3xl border border-gold/10 shadow-silk flex flex-col justify-between">
-        <div>
-          <h4 className="text-xl font-black text-navy mb-4 leading-tight">{content.promo.title}</h4>
-          <p className="text-xs text-navy/60 font-medium mb-6 line-clamp-2">{content.promo.desc}</p>
-        </div>
-        <div className="relative group/promo overflow-hidden rounded-2xl mb-6">
-           <img src={content.promo.image} alt="Featured" className="w-full h-32 object-cover transition-transform duration-700 group-hover/promo:scale-110" />
-           <div className="absolute inset-0 bg-navy/20 group-hover/promo:bg-navy/40 transition-colors" />
-        </div>
-        <Button variant="outline" size="md" fullWidth rightIcon={<ExternalLink className="w-4 h-4" />}>استكشف الآن</Button>
+      <div className="bg-ecru/30 p-6 rounded-xl border border-ecru">
+        <h4 className="text-subheading mb-4 text-burgundy">{content.promo.title}</h4>
+        <p className="text-body-small text-muted mb-4">{content.promo.desc}</p>
+        <img src={content.promo.image} alt="Featured" className="w-full h-32 object-cover rounded-lg mb-4 shadow-sm" />
+        <Button variant="ghost" size="sm" fullWidth rightIcon={<ExternalLink className="w-3 h-3" />}>استكشف الآن</Button>
       </div>
     </div>
   </div>
@@ -89,7 +84,6 @@ export default function Header() {
   }, []);
 
   const menuData: any = {
-    // ... data remains same
     catalogue: {
       sections: [
         { title: 'ألياف طبيعية', items: [
@@ -156,64 +150,64 @@ export default function Header() {
       
       <header 
         className={`
-          bg-white/90 backdrop-blur-lg transition-all duration-700 relative w-full border-b border-gold/10
-          ${isScrolled ? 'h-16 shadow-silk' : 'h-24 shadow-none'}
+          bg-white transition-all duration-500 relative w-full border-b border-border/50
+          ${isScrolled ? 'h-14 shadow-lg' : 'h-20 shadow-sm'}
         `}
         onMouseLeave={() => setActiveMenu(null)}
       >
-        <div className="max-w-7xl mx-auto h-full px-6 flex items-center justify-between w-full gap-8">
+        <div className="max-w-7xl mx-auto h-full px-4 flex items-center justify-between w-full gap-4">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-4 group shrink-0">
-            <div className={`relative overflow-hidden rounded-2xl flex items-center justify-center transition-all duration-700 ${isScrolled ? 'w-12 h-12' : 'w-20 h-20'} shadow-silk border border-gold/10`}>
+          <Link href="/" className="flex items-center gap-3 group shrink-0">
+            <div className={`relative overflow-hidden rounded-lg flex items-center justify-center transition-all duration-300 ${isScrolled ? 'w-12 h-12' : 'w-20 h-20'}`}>
                <img src="/images/logo.png" alt="Khama" className="w-full h-full object-contain" />
             </div>
-            <span className={`text-2xl text-navy transition-all duration-700 font-black tracking-tighter ${isScrolled ? 'opacity-0 -translate-x-4 invisible' : 'opacity-100 translate-x-0'}`}>خامة</span>
+            <span className={`text-display !text-xl text-burgundy transition-all duration-300 font-bold ${isScrolled ? 'scale-90' : 'scale-100'}`}>خامة</span>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-10 h-full">
+          <nav className="hidden lg:flex items-center gap-8 h-full">
             <div 
-              className="h-full flex items-center cursor-pointer group relative"
+              className="h-full flex items-center cursor-pointer group"
               onMouseEnter={() => setActiveMenu('catalogue')}
             >
-              <span className={`text-sm font-bold transition-all duration-300 flex items-center gap-1.5 ${activeMenu === 'catalogue' ? 'text-gold' : 'text-navy/70 group-hover:text-gold'}`}>
-                {t('catalogue')} <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-500 ${activeMenu === 'catalogue' ? 'rotate-180' : ''}`} />
+              <span className={`text-label transition-colors flex items-center gap-1 ${activeMenu === 'catalogue' ? 'text-gold' : 'text-charcoal group-hover:text-gold'}`}>
+                {t('catalogue')} <ChevronDown className={`w-3 h-3 transition-transform ${activeMenu === 'catalogue' ? 'rotate-180' : ''}`} />
               </span>
-              <div className={`absolute bottom-0 left-0 w-full h-1 bg-gold transition-all duration-500 ${activeMenu === 'catalogue' ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'}`} />
+              <div className={`absolute bottom-0 left-0 w-full h-0.5 bg-gold transition-all duration-300 ${activeMenu === 'catalogue' ? 'scale-x-100' : 'scale-x-0'}`} />
             </div>
 
             <div 
-              className="h-full flex items-center cursor-pointer group relative"
+              className="h-full flex items-center cursor-pointer group"
               onMouseEnter={() => setActiveMenu('marketplace')}
             >
-              <span className={`text-sm font-bold transition-all duration-300 flex items-center gap-1.5 ${activeMenu === 'marketplace' ? 'text-gold' : 'text-navy/70 group-hover:text-gold'}`}>
-                {t('marketplace')} <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-500 ${activeMenu === 'marketplace' ? 'rotate-180' : ''}`} />
+              <span className={`text-label transition-colors flex items-center gap-1 ${activeMenu === 'marketplace' ? 'text-gold' : 'text-charcoal group-hover:text-gold'}`}>
+                {t('marketplace')} <ChevronDown className={`w-3 h-3 transition-transform ${activeMenu === 'marketplace' ? 'rotate-180' : ''}`} />
               </span>
-              <div className={`absolute bottom-0 left-0 w-full h-1 bg-gold transition-all duration-500 ${activeMenu === 'marketplace' ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'}`} />
+              <div className={`absolute bottom-0 left-0 w-full h-0.5 bg-gold transition-all duration-300 ${activeMenu === 'marketplace' ? 'scale-x-100' : 'scale-x-0'}`} />
             </div>
 
-            <Link href="/academy" className="text-sm font-bold text-navy/70 hover:text-gold transition-colors">{t('academy')}</Link>
-            <Link href="/tools" className="text-sm font-bold text-navy/70 hover:text-gold transition-colors">{t('tech_tools')}</Link>
-            <Link href="/glossary" className="text-sm font-bold text-navy/70 hover:text-gold transition-colors">{t('glossary')}</Link>
+            <Link href="/academy" className="text-label text-charcoal hover:text-gold transition-colors">{t('academy')}</Link>
+            <Link href="/tools" className="text-label text-charcoal hover:text-gold transition-colors">{t('tech_tools')}</Link>
+            <Link href="/glossary" className="text-label text-charcoal hover:text-gold transition-colors">{t('glossary')}</Link>
           </nav>
 
           {/* Search Bar Container */}
-          <div className="flex-1 max-w-xl hidden xl:block">
+          <div className="flex-1 max-w-xl hidden md:block">
             <SearchBar />
           </div>
 
           {/* User Actions */}
-          <div className="flex items-center gap-6">
-            <button className="relative p-3 text-navy/60 hover:bg-gold/10 hover:text-gold rounded-2xl transition-all duration-300">
+          <div className="flex items-center gap-4">
+            <button className="relative p-2 text-charcoal hover:bg-ecru rounded-full transition-colors">
               <Bell className="w-5 h-5" />
-              <span className="absolute top-2.5 right-2.5 w-2.5 h-2.5 bg-gold rounded-full border-2 border-white shadow-sm" />
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-gold rounded-full border-2 border-white" />
             </button>
             <div className="hidden sm:block">
                <Link href="/rfq/create">
-                 <Button variant="premium" size="md" leftIcon={<PlusCircle className="w-4 h-4" />}>{t('post_rfq')}</Button>
+                 <Button variant="primary" size="md" leftIcon={<PlusCircle className="w-4 h-4" />}>{t('post_rfq')}</Button>
                </Link>
             </div>
             <button 
-              className="lg:hidden p-3 text-navy hover:bg-gold/10 rounded-2xl"
+              className="lg:hidden p-2 text-burgundy"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? <X /> : <Menu />}
@@ -228,21 +222,21 @@ export default function Header() {
 
       {/* Mobile Drawer (Simplistic version) */}
       <div className={`
-        fixed top-0 right-0 w-80 h-full bg-white/95 backdrop-blur-2xl shadow-silk z-[110] transition-all duration-700
-        ${isMobileMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}
+        fixed top-0 right-0 w-80 h-full bg-white shadow-2xl z-[110] transition-transform duration-500
+        ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}
       `}>
-         <div className="p-8">
-            <div className="flex justify-between items-center mb-10">
-               <span className="text-2xl font-black text-navy">خامة</span>
-               <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 hover:bg-gold/10 rounded-xl"><X /></button>
+         <div className="p-6">
+            <div className="flex justify-between items-center mb-8">
+               <span className="text-title">القائمة</span>
+               <button onClick={() => setIsMobileMenuOpen(false)}><X /></button>
             </div>
             <ul className="flex flex-col gap-6">
-               <li><Link href="/fabrics" className="text-xl font-black text-navy/80 hover:text-gold transition-colors">الكتالوج</Link></li>
-               <li><Link href="/suppliers" className="text-xl font-black text-navy/80 hover:text-gold transition-colors">الموردين</Link></li>
-               <li><Link href="/academy" className="text-xl font-black text-navy/80 hover:text-gold transition-colors">الأكاديمية</Link></li>
-               <li><Link href="/tools" className="text-xl font-black text-navy/80 hover:text-gold transition-colors">الأدوات التقنية</Link></li>
-               <li><Link href="/glossary" className="text-xl font-black text-navy/80 hover:text-gold transition-colors">القاموس التقني</Link></li>
-               <li className="pt-8 border-t border-gold/10"><Button variant="premium" fullWidth>انشر عرضاً</Button></li>
+               <li><Link href="/fabrics" className="text-subheading">الكتالوج</Link></li>
+               <li><Link href="/suppliers" className="text-subheading">الموردين</Link></li>
+               <li><Link href="/academy" className="text-subheading">الأكاديمية</Link></li>
+               <li><Link href="/tools" className="text-subheading">الأدوات التقنية</Link></li>
+               <li><Link href="/glossary" className="text-subheading">القاموس التقني</Link></li>
+               <li className="pt-6 border-t"><Button variant="primary" fullWidth>انشر عرضاً</Button></li>
             </ul>
          </div>
       </div>
