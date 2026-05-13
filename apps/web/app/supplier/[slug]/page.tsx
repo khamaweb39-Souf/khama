@@ -6,6 +6,7 @@ import { ChevronRight } from 'lucide-react';
 import SupplierHero from '@/components/supplier/profile/SupplierHero';
 import SupplierContent from '@/components/supplier/profile/SupplierContent';
 import FeaturedSidebar from '@/components/supplier/profile/FeaturedSidebar';
+import SEOHead, { getSupplierSchema } from '@/components/SEOHead';
 
 // ─── Mock Data for Demo ───────────────────────────────────────────────────
 const MOCK_SUPPLIER = {
@@ -21,6 +22,7 @@ const MOCK_SUPPLIER = {
 export default function SupplierProfilePage({ params }: { params: { slug: string } }) {
   return (
     <div className="min-h-screen bg-[#FEFCF8]" dir="rtl">
+      <SEOHead type="LocalBusiness" data={getSupplierSchema(MOCK_SUPPLIER)} />
       
       {/* ─── Breadcrumbs ─── */}
       <nav className="max-w-7xl mx-auto px-4 md:px-8 py-4 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-muted">

@@ -6,12 +6,14 @@ import TrustedFactories from '../components/home/TrustedFactories';
 import LatestCourses from '../components/home/LatestCourses';
 import FilterSidebar from '../components/FilterSidebar';
 import dynamic from 'next/dynamic';
+import SEOHead, { getHomeSchema } from '../components/SEOHead';
 
 const HomeSections = dynamic(() => import('../components/home/HomeSections'), { ssr: false });
 
 export default function HomePage() {
   return (
     <div className="flex flex-col w-full overflow-x-hidden">
+      <SEOHead type="WebSite" data={getHomeSchema()} />
       {/* Cinematic Hero Section */}
       <HeroSection />
       

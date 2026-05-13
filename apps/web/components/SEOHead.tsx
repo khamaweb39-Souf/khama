@@ -54,3 +54,17 @@ export const getHomeSchema = () => ({
     "query-input": "required name=search_term_string"
   }
 });
+
+// Helper for Supplier Schema
+export const getSupplierSchema = (supplier: any) => ({
+  name: supplier.name,
+  alternateName: supplier.tradeName,
+  image: supplier.logo,
+  description: `مورد نسيج معتمد على منصة خامة: ${supplier.name}`,
+  address: {
+    "@type": "PostalAddress",
+    "addressLocality": supplier.location.city,
+    "addressCountry": supplier.location.country
+  },
+  iso6523Id: supplier.stats.founded
+});

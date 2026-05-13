@@ -8,6 +8,7 @@ import {
   Calendar, Package, Info, CheckCircle
 } from 'lucide-react';
 import Link from 'next/link';
+import SEOHead, { getProductSchema } from '@/components/SEOHead';
 
 // ─── Sub-Components & Sections ──────────────────────────────────────────────
 
@@ -39,10 +40,19 @@ export default function FabricDetailPage({ params }: { params: { id: string } })
   const [quantity, setQuantity] = useState(500);
   const [mainImage, setMainImage] = useState('https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?q=80&w=1200&auto=format&fit=crop');
 
-  const pricePerMeter = 24.50;
+  const fabricData = {
+    id: params.id,
+    name: 'Sergé de Soie Lyonnaise',
+    price: '24.50',
+    image: mainImage,
+    supplier: 'نسيج ليون - Lyon Textiles',
+    composition: '100% Soie Naturelle',
+    gsm: '120'
+  };
 
   return (
     <div className="min-h-screen bg-white font-body pt-24 pb-20">
+      <SEOHead type="Product" data={getProductSchema(fabricData)} />
       
       {/* ─── Breadcrumb ─── */}
       <nav className="max-w-7xl mx-auto px-4 py-4 flex items-center gap-2 text-caption text-muted" dir="rtl">
