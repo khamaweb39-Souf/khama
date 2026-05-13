@@ -1,12 +1,12 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { useCompare } from '../../../context/CompareContext';
+import { useCompare } from '../../../../context/CompareContext';
 import { 
   X, Plus, ArrowRight, ShoppingCart, 
   Layers, Check, Ruler, Info, Download, Share2,
   Clock, ShieldCheck, Star, MapPin, Palette,
-  Zap, AlertTriangle, FileText
+  Zap, AlertTriangle, FileText, Wind
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -14,7 +14,7 @@ import Link from 'next/link';
 const RadarChart = ({ data, size = 150 }: { data: any[], size?: number }) => {
   const center = size / 2;
   const radius = size * 0.4;
-  const points = data.map((d, i) => {
+  const points = data.map((d: any, i: number) => {
     const angle = (i * 2 * Math.PI) / data.length - Math.PI / 2;
     const x = center + radius * d.value * Math.cos(angle);
     const y = center + radius * d.value * Math.sin(angle);
@@ -47,10 +47,10 @@ export default function ComparePage() {
     if (compareList.length < 2) return {};
     
     const getBest = (key: string, type: 'min' | 'max') => {
-      const values = compareList.map(p => {
+      const values = compareList.map((p: any) => {
         const val = (p as any)[key] || (p as any).commercial?.[key] || (p as any).technicalSpecs?.[key];
         return typeof val === 'number' ? val : parseFloat(val);
-      }).filter(v => !isNaN(v));
+      }).filter((v: any) => !isNaN(v));
       
       if (values.length === 0) return null;
       return type === 'min' ? Math.min(...values) : Math.max(...values);
@@ -308,13 +308,6 @@ export default function ComparePage() {
 
     </div>
   );
-}
-="text-xs text-gold-dark/70 leading-relaxed">
-              عند اختيار الأقمشة الفاخرة مثل الجاكارد، يفضل دائماً طلب عينة (Sample) قبل إتمام الطلب الكبير للتأكد من الملمس الحقيقي وانعكاس الضوء.
-            </p>
-         </div>
-      </div>
-
     </div>
   );
 }
