@@ -45,18 +45,23 @@ export const metadata = {
 };
 
 import { I18nProvider } from '../components/I18nProvider';
+import { CompareProvider } from '../context/CompareContext';
+import CompareFloatingBar from '../components/CompareFloatingBar';
 
 export default function RootLayout({ children }) {
   return (
     <html lang="ar" dir="rtl">
       <body className={cairo.className}>
         <I18nProvider>
-          <Header />
-          <main className="min-h-screen bg-gray-50 pt-32 pb-20">
-            {children}
-          </main>
-          <Footer />
-          <BottomNav />
+          <CompareProvider>
+            <Header />
+            <main className="min-h-screen bg-gray-50 pt-32 pb-20">
+              {children}
+            </main>
+            <CompareFloatingBar />
+            <Footer />
+            <BottomNav />
+          </CompareProvider>
         </I18nProvider>
       </body>
     </html>
