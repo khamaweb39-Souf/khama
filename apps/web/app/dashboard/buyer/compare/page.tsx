@@ -177,7 +177,7 @@ export default function ComparePage() {
                 <tr key={idx} className="group hover:bg-gold/5 transition-colors">
                   <td className="p-8 border-l border-gray-100 bg-white sticky right-0 z-10 font-bold text-sm text-charcoal flex items-center gap-4">
                      <div className="p-3 bg-gray-50 rounded-2xl group-hover:bg-gold/20 group-hover:text-gold transition-all">
-                        {React.cloneElement(row.icon as React.ReactElement, { className: 'w-5 h-5' })}
+                        {React.cloneElement(row.icon as React.ReactElement<any>, { className: 'w-5 h-5' })}
                      </div>
                      {row.label}
                   </td>
@@ -218,7 +218,7 @@ export default function ComparePage() {
                 <tr key={idx} className="group hover:bg-gold/5 transition-colors">
                    <td className="p-8 border-l border-gray-100 bg-white sticky right-0 z-10 font-bold text-sm text-charcoal flex items-center gap-4">
                      <div className="p-3 bg-gray-50 rounded-2xl group-hover:bg-gold/20 group-hover:text-gold transition-all">
-                        {React.cloneElement(row.icon as React.ReactElement, { className: 'w-5 h-5' })}
+                        {React.cloneElement(row.icon as React.ReactElement<any>, { className: 'w-5 h-5' })}
                      </div>
                      {row.label}
                   </td>
