@@ -16,5 +16,21 @@
   "analytics": "Analytics",
   "compare": "Compare",
   "view_all": "View all",
-  "actions": "Actions"
+  "actions": "Actions",
+  "academy": "Khama Academy",
+  "tech_tools": "Technical Tools",
+  "glossary": "Technical Glossary",
+  "catalogue": "Fabric Catalogue",
+  "marketplace": "B2B Marketplace",
+  "post_rfq": "Post an RFQ",
+  "menu": "Menu",
+  "platform_v": "Khama Pro Platform",
+  "new_arrivals": "New Arrivals",
+  "in_stock": "In Stock",
+  "gots_certified": "GOTS Certified",
+  "premium": "Premium",
+  "europe": "Europe",
+  "search_placeholder_1": "Search by fabric type... e.g. Silk",
+  "recent_searches": "Recent Searches",
+  "start_typing": "Start typing to see suggestions..."
 }

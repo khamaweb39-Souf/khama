@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 import * as Icons from 'lucide-react';
 import Button from './ui/Button';
 import SearchBar from './SearchBar';
@@ -14,13 +15,13 @@ const {
 
 // ─── Sub-Components ──────────────────────────────────────────────────────────
 
-const TopBar = () => (
-  <div className="h-9 bg-burgundy-dark text-[10px] sm:text-xs text-ecru/80 px-4 flex items-center justify-between border-b border-white/5">
+const TopBar = ({ t }: { t: any }) => (
+  <div className="h-10 bg-burgundy-dark text-[10px] sm:text-xs text-ecru/80 px-4 flex items-center justify-between border-b border-white/5 relative z-[101]">
     <div className="flex items-center gap-4">
-      <span className="font-bold tracking-widest uppercase">Khama Pro Platform <span className="text-gold ml-1">v1.2</span></span>
+      <span className="font-bold tracking-widest uppercase">{t('platform_v')} <span className="text-gold ml-1">v1.2</span></span>
       <div className="hidden lg:flex items-center gap-2 overflow-hidden border-l border-white/10 pl-4 ml-4">
         <div className="whitespace-nowrap">
-          <span>• طلب متزايد على الكتان العضوي (+24%) • أسعار البوليستر مستقرة • مجموعة ربيع 2026 متوفرة الآن</span>
+          <span>• {t('welcome')} • {t('saved_searches')} • {t('catalogue')}</span>
         </div>
       </div>
     </div>
@@ -30,10 +31,10 @@ const TopBar = () => (
       <div className="h-3 w-px bg-white/10 mx-1" />
       <Link href="/dashboard/buyer" className="hover:text-gold transition-colors flex items-center gap-1">
         <Icons.User className="w-3 h-3" />
-        لوحة التحكم
+        {t('dashboard')}
       </Link>
       <div className="h-3 w-px bg-white/10 mx-1" />
-      <Link href="/login" className="hover:text-gold transition-colors">دخول المهنيين</Link>
+      <Link href="/login" className="hover:text-gold transition-colors">{t('logout')}</Link>
     </div>
   </div>
 );
@@ -141,9 +142,11 @@ export default function Header() {
     }
   };
 
+  const { t } = useTranslation();
+
   return (
     <div className="fixed top-0 left-0 right-0 w-full z-[100] font-body">
-      <TopBar />
+      <TopBar t={t} />
       
       <header 
         className={`
@@ -161,14 +164,13 @@ export default function Header() {
             <span className={`text-display !text-xl text-burgundy transition-all duration-300 font-bold ${isScrolled ? 'scale-90' : 'scale-100'}`}>خامة</span>
           </Link>
 
-          {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8 h-full">
             <div 
               className="h-full flex items-center cursor-pointer group"
               onMouseEnter={() => setActiveMenu('catalogue')}
             >
               <span className={`text-label transition-colors flex items-center gap-1 ${activeMenu === 'catalogue' ? 'text-gold' : 'text-charcoal group-hover:text-gold'}`}>
-                كتالوج الأقمشة <ChevronDown className={`w-3 h-3 transition-transform ${activeMenu === 'catalogue' ? 'rotate-180' : ''}`} />
+                {t('catalogue')} <ChevronDown className={`w-3 h-3 transition-transform ${activeMenu === 'catalogue' ? 'rotate-180' : ''}`} />
               </span>
               <div className={`absolute bottom-0 left-0 w-full h-0.5 bg-gold transition-all duration-300 ${activeMenu === 'catalogue' ? 'scale-x-100' : 'scale-x-0'}`} />
             </div>
@@ -178,14 +180,14 @@ export default function Header() {
               onMouseEnter={() => setActiveMenu('marketplace')}
             >
               <span className={`text-label transition-colors flex items-center gap-1 ${activeMenu === 'marketplace' ? 'text-gold' : 'text-charcoal group-hover:text-gold'}`}>
-                سوق المحترفين <ChevronDown className={`w-3 h-3 transition-transform ${activeMenu === 'marketplace' ? 'rotate-180' : ''}`} />
+                {t('marketplace')} <ChevronDown className={`w-3 h-3 transition-transform ${activeMenu === 'marketplace' ? 'rotate-180' : ''}`} />
               </span>
               <div className={`absolute bottom-0 left-0 w-full h-0.5 bg-gold transition-all duration-300 ${activeMenu === 'marketplace' ? 'scale-x-100' : 'scale-x-0'}`} />
             </div>
 
-            <Link href="/academy" className="text-label text-charcoal hover:text-gold transition-colors">أكاديمية خامة</Link>
-            <Link href="/tools" className="text-label text-charcoal hover:text-gold transition-colors">الأدوات التقنية</Link>
-            <Link href="/glossary" className="text-label text-charcoal hover:text-gold transition-colors">القاموس التقني</Link>
+            <Link href="/academy" className="text-label text-charcoal hover:text-gold transition-colors">{t('academy')}</Link>
+            <Link href="/tools" className="text-label text-charcoal hover:text-gold transition-colors">{t('tech_tools')}</Link>
+            <Link href="/glossary" className="text-label text-charcoal hover:text-gold transition-colors">{t('glossary')}</Link>
           </nav>
 
           {/* Search Bar Container */}
@@ -201,7 +203,7 @@ export default function Header() {
             </button>
             <div className="hidden sm:block">
                <Link href="/rfq/create">
-                 <Button variant="primary" size="md" leftIcon={<PlusCircle className="w-4 h-4" />}>انشر طلب شراء</Button>
+                 <Button variant="primary" size="md" leftIcon={<PlusCircle className="w-4 h-4" />}>{t('post_rfq')}</Button>
                </Link>
             </div>
             <button 

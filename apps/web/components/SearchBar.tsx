@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Search, Camera, X, History, TrendingUp, Factory, FileText, Book, ArrowRight } from 'lucide-react';
 
 // ─── Mock Data ──────────────────────────────────────────────────────────────
@@ -33,6 +34,7 @@ const PLACEHOLDERS = [
 
 // ─── Component ──────────────────────────────────────────────────────────────
 export default function SearchBar() {
+  const { t } = useTranslation();
   const [query, setQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
@@ -40,6 +42,11 @@ export default function SearchBar() {
   const [history, setHistory] = useState<string[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const PLACEHOLDERS = [
+    t('search_placeholder_1'),
+    t('search'),
+  ];
 
   // Dynamic Placeholder Rotation
   useEffect(() => {
@@ -128,12 +135,18 @@ export default function SearchBar() {
 
       {/* Quick Filter Chips */}
       <div className="flex gap-2 mt-3 px-2 overflow-x-auto no-scrollbar">
-        {['Nouveautés', 'En stock', 'Certifié GOTS', 'Premium', 'Europe'].map((chip) => (
+        {[
+          { key: 'new_arrivals' },
+          { key: 'in_stock' },
+          { key: 'gots_certified' },
+          { key: 'premium' },
+          { key: 'europe' }
+        ].map((chip) => (
           <button 
-            key={chip}
+            key={chip.key}
             className="whitespace-nowrap px-4 py-1.5 rounded-full bg-white border border-ecru text-caption text-charcoal hover:border-gold hover:text-gold transition-all"
           >
-            {chip}
+            {t(chip.key)}
           </button>
         ))}
       </div>
@@ -147,7 +160,7 @@ export default function SearchBar() {
             {!query && history.length > 0 && (
               <div className="mb-4">
                 <h3 className="px-3 py-2 text-label text-muted flex items-center gap-2">
-                  <History className="w-3 h-3" /> Vos dernières recherches
+                  <History className="w-3 h-3" /> {t('recent_searches')}
                 </h3>
                 {history.map((term, i) => (
                   <button 
@@ -220,7 +233,7 @@ export default function SearchBar() {
             ) : (
               <div className="p-8 text-center">
                 <TrendingUp className="w-10 h-10 text-ecru mx-auto mb-3" />
-                <p className="text-body-small text-muted italic">Commencez à taper pour voir les suggestions intelligentes...</p>
+                <p className="text-body-small text-muted italic">{t('start_typing')}</p>
               </div>
             )}
 
