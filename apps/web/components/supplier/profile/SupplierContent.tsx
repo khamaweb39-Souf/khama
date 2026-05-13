@@ -128,11 +128,67 @@ function AboutTab({ lang, setLang }: { lang: string, setLang: any }) {
 
 /* ─── Catalogue Tab Component ─── */
 function CatalogueTab() {
-  const mockProducts = [
-    { id: '1', title: 'حرير ساتان لامع', price: 24.50, category: 'حرير', image: 'https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?q=80&w=600&auto=format&fit=crop' },
-    { id: '2', title: 'صوف كشمير ناعم', price: 45.00, category: 'صوف', image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=600&auto=format&fit=crop' },
-    { id: '3', title: 'كتان عضوي منقوش', price: 18.00, category: 'كتان', image: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=600&auto=format&fit=crop' },
-    { id: '4', title: 'بوليستر تقني مقاوم للماء', price: 12.50, category: 'صناعي', image: 'https://images.unsplash.com/photo-1574634534894-89d7576c8259?q=80&w=600&auto=format&fit=crop' },
+  const mockProducts: any[] = [
+    { 
+      id: '1', 
+      name: 'حرير ساتان لامع', 
+      reference: 'SL-2024-01',
+      image: 'https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?q=80&w=600&auto=format&fit=crop',
+      collection: 'SS26',
+      certifications: ['GOTS'],
+      sustainabilityScore: 5,
+      createdAt: new Date().toISOString(),
+      supplier: { id: 's1', name: 'Tissage de Lyon', avatar: 'https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?q=80&w=100', isVerified: true },
+      origin: { country: 'فرنسا', flag: '🇫🇷' },
+      composition: [{ fiber: 'Silk', percentage: 100, color: '#D4AF37' }],
+      technicalSpecs: { gsm: 85, width: 140, weave: 'ساتان', colorsAvailable: ['#D4AF37'], totalColors: 12 },
+      commercial: { price: 24.50, currency: 'EUR', unit: 'm', moq: 50, stockStatus: 'IN_STOCK' }
+    },
+    { 
+      id: '2', 
+      name: 'صوف كشمير ناعم', 
+      reference: 'CW-2024-02',
+      image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=600&auto=format&fit=crop',
+      collection: 'FW26',
+      certifications: ['ISO'],
+      sustainabilityScore: 4,
+      createdAt: new Date().toISOString(),
+      supplier: { id: 's1', name: 'Tissage de Lyon', avatar: 'https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?q=80&w=100', isVerified: true },
+      origin: { country: 'إيطاليا', flag: '🇮🇹' },
+      composition: [{ fiber: 'Cashmere', percentage: 100, color: '#2B2D42' }],
+      technicalSpecs: { gsm: 320, width: 150, weave: 'تويل', colorsAvailable: ['#2B2D42'], totalColors: 6 },
+      commercial: { price: 45.00, currency: 'EUR', unit: 'm', moq: 20, stockStatus: 'IN_STOCK' }
+    },
+    { 
+      id: '3', 
+      name: 'كتان عضوي منقوش', 
+      reference: 'OL-2024-03',
+      image: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=600&auto=format&fit=crop',
+      collection: 'PERMANENT',
+      certifications: ['OEKO-TEX'],
+      sustainabilityScore: 5,
+      createdAt: new Date().toISOString(),
+      supplier: { id: 's1', name: 'Tissage de Lyon', avatar: 'https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?q=80&w=100', isVerified: true },
+      origin: { country: 'بلجيكا', flag: '🇧🇪' },
+      composition: [{ fiber: 'Linen', percentage: 100, color: '#E3D5CA' }],
+      technicalSpecs: { gsm: 180, width: 145, weave: 'سادة', colorsAvailable: ['#E3D5CA'], totalColors: 8 },
+      commercial: { price: 18.00, currency: 'EUR', unit: 'm', moq: 100, stockStatus: 'ON_ORDER' }
+    },
+    { 
+      id: '4', 
+      name: 'بوليستر تقني مقاوم للماء', 
+      reference: 'TP-2024-04',
+      image: 'https://images.unsplash.com/photo-1574634534894-89d7576c8259?q=80&w=600&auto=format&fit=crop',
+      collection: 'FW26',
+      certifications: ['REACH'],
+      sustainabilityScore: 3,
+      createdAt: new Date().toISOString(),
+      supplier: { id: 's1', name: 'Tissage de Lyon', avatar: 'https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?q=80&w=100', isVerified: true },
+      origin: { country: 'الصين', flag: '🇨🇳' },
+      composition: [{ fiber: 'Polyester', percentage: 100, color: '#8D99AE' }],
+      technicalSpecs: { gsm: 150, width: 150, weave: 'ريبستوب', colorsAvailable: ['#8D99AE'], totalColors: 15 },
+      commercial: { price: 12.50, currency: 'EUR', unit: 'm', moq: 500, stockStatus: 'IN_STOCK' }
+    },
   ];
 
   return (

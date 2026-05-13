@@ -5,10 +5,52 @@ import { ShoppingBag, ChevronLeft, ArrowLeft } from 'lucide-react';
 import FabricCard from '@/components/FabricCard';
 
 export default function FeaturedSidebar() {
-  const bestSellers = [
-    { id: 'b1', title: 'حرير ليون الفاخر', price: 32.00, category: 'حرير', image: 'https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?q=80&w=400&auto=format&fit=crop' },
-    { id: 'b2', title: 'كتان هولندي خام', price: 21.50, category: 'كتان', image: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=400&auto=format&fit=crop' },
-    { id: 'b3', title: 'صوف ميرينو ملكي', price: 55.00, category: 'صوف', image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=400&auto=format&fit=crop' },
+  const bestSellers: any[] = [
+    { 
+      id: 'b1', 
+      name: 'حرير ليون الفاخر', 
+      reference: 'SL-2024-01',
+      image: 'https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?q=80&w=400&auto=format&fit=crop',
+      collection: 'SS26',
+      certifications: ['GOTS', 'ISO'],
+      sustainabilityScore: 5,
+      createdAt: new Date().toISOString(),
+      supplier: { id: 's1', name: 'Tissage de Lyon', avatar: 'https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?q=80&w=100', isVerified: true },
+      origin: { country: 'فرنسا', flag: '🇫🇷' },
+      composition: [{ fiber: 'Silk', percentage: 100, color: '#D4AF37' }],
+      technicalSpecs: { gsm: 85, width: 140, weave: 'ساتان', colorsAvailable: ['#D4AF37', '#FFF'], totalColors: 12 },
+      commercial: { price: 32.00, currency: 'EUR', unit: 'm', moq: 50, stockStatus: 'IN_STOCK' }
+    },
+    { 
+      id: 'b2', 
+      name: 'كتان هولندي خام', 
+      reference: 'LH-2024-05',
+      image: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=400&auto=format&fit=crop',
+      collection: 'PERMANENT',
+      certifications: ['OEKO-TEX'],
+      sustainabilityScore: 4,
+      createdAt: new Date().toISOString(),
+      supplier: { id: 's1', name: 'Tissage de Lyon', avatar: 'https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?q=80&w=100', isVerified: true },
+      origin: { country: 'هولندا', flag: '🇳🇱' },
+      composition: [{ fiber: 'Linen', percentage: 100, color: '#E3D5CA' }],
+      technicalSpecs: { gsm: 220, width: 150, weave: 'سادة', colorsAvailable: ['#E3D5CA'], totalColors: 4 },
+      commercial: { price: 21.50, currency: 'EUR', unit: 'm', moq: 100, stockStatus: 'ON_ORDER' }
+    },
+    { 
+      id: 'b3', 
+      name: 'صوف ميرينو ملكي', 
+      reference: 'WM-2024-09',
+      image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=400&auto=format&fit=crop',
+      collection: 'FW26',
+      certifications: ['ISO'],
+      sustainabilityScore: 4,
+      createdAt: new Date().toISOString(),
+      supplier: { id: 's1', name: 'Tissage de Lyon', avatar: 'https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?q=80&w=100', isVerified: true },
+      origin: { country: 'إيطاليا', flag: '🇮🇹' },
+      composition: [{ fiber: 'Wool', percentage: 100, color: '#2B2D42' }],
+      technicalSpecs: { gsm: 340, width: 155, weave: 'تويل', colorsAvailable: ['#2B2D42'], totalColors: 8 },
+      commercial: { price: 55.00, currency: 'EUR', unit: 'm', moq: 20, stockStatus: 'IN_STOCK' }
+    },
   ];
 
   return (
