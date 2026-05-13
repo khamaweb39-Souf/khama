@@ -327,3 +327,13 @@ body {
 .lang-transition {
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}

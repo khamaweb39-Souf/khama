@@ -1,11 +1,12 @@
 'use client';
 
 import React, { useState } from 'react';
-import Image from 'next/image';
 import { 
   Eye, Heart, FileText, Share2, 
   CheckCircle, Globe, Star, Info,
-  ChevronRight, ArrowUpRight
+  ChevronDown, ChevronUp, Clock, Package,
+  TrendingUp, Award, Layers, Ruler, Palette,
+  Plus, Minus, ArrowLeftRight
 } from 'lucide-react';
 import { FabricCardProps } from '../types/fabric';
 
@@ -17,200 +18,229 @@ export default function FabricCard(props: FabricCardProps) {
   } = props;
 
   const [isHovered, setIsHovered] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   // Helper for "New" badge logic (within 30 days)
   const isNew = (new Date().getTime() - new Date(createdAt).getTime()) < (30 * 24 * 60 * 60 * 1000);
 
-  if (viewVariant === 'compact') {
-    return (
-      <div className="flex items-center gap-3 p-2 bg-white border border-border rounded-lg hover:shadow-md transition-all cursor-pointer group">
-        <div className="relative w-12 h-12 rounded overflow-hidden">
-          <img src={image} alt={name} className="object-cover w-full h-full" />
-        </div>
-        <div className="flex-1 min-w-0">
-          <h4 className="text-body-small font-bold text-charcoal truncate">{name}</h4>
-          <p className="text-[10px] text-muted">{technicalSpecs.gsm}g/m² • {origin.country}</p>
-        </div>
-        <ArrowUpRight className="w-4 h-4 text-muted group-hover:text-gold transition-colors" />
-      </div>
-    );
-  }
-
   return (
     <div 
       className={`
-        group relative bg-white border border-border transition-all duration-500 overflow-hidden
-        ${viewVariant === 'grid' ? 'rounded-2xl flex flex-col' : 'rounded-xl flex flex-row h-72'}
-        hover:shadow-2xl hover:border-gold/30
+        group relative bg-white border border-ecru/50 transition-all duration-500 overflow-hidden
+        ${viewVariant === 'grid' ? 'rounded-[2rem] flex flex-col' : 'rounded-2xl flex flex-row h-[450px]'}
+        hover:shadow-[0_20px_50px_rgba(201,168,76,0.15)] hover:border-gold/30 hover:-translate-y-2
       `}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* ─── VISUAL HEADER (IMAGE) ─── */}
-      <div className={`relative overflow-hidden bg-ecru ${viewVariant === 'grid' ? 'aspect-[4/3] w-full' : 'w-80 h-full'}`}>
+      {/* ─── 1. IMAGE SECTION (60%) ─── */}
+      <div className={`relative overflow-hidden bg-ecru ${viewVariant === 'grid' ? 'h-[280px] w-full' : 'w-2/5 h-full'}`}>
         <img 
           src={image} 
           alt={name} 
-          className={`w-full h-full object-cover transition-transform duration-700 ${isHovered ? 'scale-110' : 'scale-100'}`}
+          className={`w-full h-full object-cover transition-transform duration-[1.5s] ease-out ${isHovered ? 'scale-110' : 'scale-100'}`}
         />
         
-        {/* Badges & Ribbons */}
-        <div className="absolute top-4 left-4 flex flex-col gap-2">
-          <span className="bg-charcoal text-white text-[10px] font-bold px-3 py-1 rounded-full backdrop-blur-md bg-opacity-70">
+        {/* Glassmorphism Badges (Top Left) */}
+        <div className="absolute top-4 left-4 flex flex-col gap-2 z-10">
+          <div className="bg-white/20 backdrop-blur-md border border-white/30 text-white text-[10px] font-black px-3 py-1.5 rounded-full shadow-xl uppercase tracking-widest">
             {collection}
-          </span>
+          </div>
           {isNew && (
-            <div className="bg-gold text-white text-[10px] font-bold px-3 py-1 rounded-r-lg shadow-lg -ml-4 flex items-center">
-              NEW <Star className="w-3 h-3 ml-1 fill-white" />
+            <div className="bg-gold/90 backdrop-blur-md text-white text-[10px] font-black px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1.5 animate-pulse">
+              <Star className="w-3 h-3 fill-white" /> NEW
             </div>
           )}
         </div>
 
-        <div className="absolute top-4 right-4 flex flex-wrap justify-end gap-1 max-w-[50%]">
-          {certifications.slice(0, 2).map(cert => (
-            <span key={cert} className="bg-white/90 border border-success/30 text-success text-[9px] px-2 py-0.5 rounded font-bold">
-              {cert}
-            </span>
-          ))}
-        </div>
+        {/* Favorite Button (Top Right) */}
+        <button 
+          onClick={(e) => { e.stopPropagation(); setIsFavorite(!isFavorite); }}
+          className={`
+            absolute top-4 right-4 p-2.5 rounded-full backdrop-blur-md border transition-all z-10
+            ${isFavorite ? 'bg-gold border-gold text-white scale-110 shadow-lg shadow-gold/30' : 'bg-white/20 border-white/30 text-white hover:bg-white hover:text-burgundy'}
+          `}
+        >
+          <Heart className={`w-4 h-4 ${isFavorite ? 'fill-white' : ''} transition-transform active:scale-125`} />
+        </button>
 
-        {/* Sustainability Stars */}
-        <div className="absolute bottom-4 left-4 flex gap-0.5">
-          {[...Array(5)].map((_, i) => (
-            <div 
-              key={i} 
-              className={`w-2.5 h-2.5 rounded-full ${i < sustainabilityScore ? 'bg-success shadow-[0_0_8px_rgba(74,124,89,0.5)]' : 'bg-gray-300'}`} 
-            />
-          ))}
-        </div>
-
-        {/* Hover Overlay */}
-        <div className={`
-          absolute inset-0 bg-burgundy/20 backdrop-blur-[2px] transition-opacity duration-300 flex items-center justify-center gap-3
-          ${isHovered ? 'opacity-100' : 'opacity-0 pointer-events-none'}
-        `}>
-          <button className="p-3 bg-white text-burgundy rounded-full hover:bg-gold hover:text-white transition-all transform hover:scale-110 shadow-xl">
-            <Eye className="w-5 h-5" />
-          </button>
-          <button className="p-3 bg-white text-burgundy rounded-full hover:bg-gold hover:text-white transition-all transform hover:scale-110 shadow-xl">
-            <FileText className="w-5 h-5" />
-          </button>
-          <button className="p-3 bg-white text-burgundy rounded-full hover:bg-gold hover:text-white transition-all transform hover:scale-110 shadow-xl">
-            <Heart className="w-5 h-5" />
-          </button>
-        </div>
-      </div>
-
-      {/* ─── BODY & CONTENT ─── */}
-      <div className={`p-5 flex flex-col flex-1 ${viewVariant === 'list' ? 'justify-between' : ''}`}>
-        
-        {/* Top Info */}
-        <div className="mb-4">
-          <div className="flex justify-between items-start mb-2">
-            <h3 className="text-subheading !text-lg text-charcoal hover:text-gold cursor-pointer transition-colors line-clamp-1">
-              {name}
-            </h3>
-            <span className="font-mono text-[10px] bg-ecru px-2 py-0.5 rounded border border-border/50 text-muted">
-              {technicalSpecs.weave}
-            </span>
+        {/* Certifications (Bottom on Image) */}
+        <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end z-10">
+          <div className="flex gap-1.5">
+            {certifications.map(cert => (
+              <div key={cert} className="bg-white/10 backdrop-blur-md border border-white/20 p-1.5 rounded-lg shadow-lg group/cert hover:bg-white/30 transition-all">
+                <div className="flex items-center gap-1">
+                   <Award className="w-3 h-3 text-white" />
+                   <span className="text-[8px] font-black text-white uppercase hidden group-hover/cert:block">{cert}</span>
+                </div>
+              </div>
+            ))}
           </div>
           
-          <div className="flex items-center gap-2 mb-3">
-            <div className="relative w-5 h-5 rounded-full overflow-hidden border border-border">
-              <img src={supplier.avatar} alt={supplier.name} className="object-cover" />
+          {/* Sustainability Dot Indicator */}
+          <div className="flex gap-1 mb-1">
+            {[...Array(5)].map((_, i) => (
+              <div 
+                key={i} 
+                className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${i < sustainabilityScore ? 'bg-gold shadow-[0_0_8px_var(--gold)] scale-110' : 'bg-white/30'}`} 
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Image Vignette Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 opacity-60 pointer-events-none" />
+      </div>
+
+      {/* ─── 2. CONTENT SECTION ─── */}
+      <div className={`p-6 flex flex-col flex-1 bg-white relative`}>
+        
+        {/* Fabric Title & Origin */}
+        <div className="mb-4">
+          <div className="flex items-start justify-between gap-4 mb-2">
+            <h3 className="text-xl font-black text-charcoal leading-tight group-hover:text-gold transition-colors line-clamp-2">
+              {name}
+              <span className="block text-[10px] text-muted font-normal mt-1 italic">Sergé de Soie Lyonnaise</span>
+            </h3>
+            <div className="flex flex-col items-end shrink-0">
+               <span className="text-lg" title={origin.country}>{origin.flag}</span>
+               <div className="flex items-center gap-1 mt-1">
+                  <Layers className="w-3 h-3 text-gold" />
+                  <span className="text-[10px] font-black text-muted uppercase tracking-tighter">{technicalSpecs.weave}</span>
+               </div>
             </div>
-            <span className="text-[11px] text-muted flex items-center gap-1">
-              {supplier.name} {supplier.isVerified && <CheckCircle className="w-3 h-3 text-success" />}
-            </span>
-            <span className="text-[11px] text-muted ml-auto flex items-center gap-1">
-              {origin.flag} {origin.country}
-            </span>
           </div>
 
-          {/* Composition Bar */}
-          <div className="relative h-1.5 w-full bg-gray-100 rounded-full overflow-hidden flex mb-1">
+          {/* Supplier Info */}
+          <div className="flex items-center gap-2 py-3 border-y border-ecru/30">
+            <div className="relative w-7 h-7 rounded-full overflow-hidden border border-gold/20 shadow-sm">
+              <img src={supplier.avatar} alt={supplier.name} className="object-cover w-full h-full" />
+            </div>
+            <span className="text-[11px] font-bold text-charcoal flex items-center gap-1">
+              {supplier.name} {supplier.isVerified && <CheckCircle className="w-3 h-3 text-success fill-success/10" />}
+            </span>
+          </div>
+        </div>
+
+        {/* Composition Proportional Bars */}
+        <div className="mb-6">
+          <p className="text-[9px] font-black text-muted uppercase tracking-widest mb-2 flex justify-between">
+            <span>التركيبة الأساسية</span>
+            <span>{composition[0].percentage}% {composition[0].fiber}</span>
+          </p>
+          <div className="h-1.5 w-full bg-ecru/30 rounded-full flex overflow-hidden">
             {composition.map((comp, idx) => (
               <div 
                 key={idx} 
                 style={{ width: `${comp.percentage}%`, backgroundColor: comp.color }}
-                className="h-full first:rounded-l-full last:rounded-r-full"
-                title={`${comp.fiber}: ${comp.percentage}%`}
+                className="h-full transition-all duration-1000 group-hover:brightness-110"
               />
             ))}
           </div>
-          <div className="flex justify-between text-[9px] text-muted uppercase font-bold tracking-tighter">
-            {composition.slice(0, 3).map((comp, i) => (
-              <span key={i}>{comp.percentage}% {comp.fiber}</span>
-            ))}
-          </div>
         </div>
 
-        {/* Technical Grid */}
-        <div className="grid grid-cols-2 gap-y-3 gap-x-4 mb-6 py-4 border-y border-ecru/50">
-          <div className="flex flex-col">
-            <span className="text-[9px] text-muted uppercase tracking-widest font-bold">Poids (GSM)</span>
-            <span className="text-body-small font-bold text-charcoal">{technicalSpecs.gsm} g/m²</span>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-[9px] text-muted uppercase tracking-widest font-bold">Largeur</span>
-            <span className="text-body-small font-bold text-charcoal">{technicalSpecs.width} cm</span>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-[9px] text-muted uppercase tracking-widest font-bold">Armure</span>
-            <span className="text-body-small font-bold text-charcoal">{technicalSpecs.weave}</span>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-[9px] text-muted uppercase tracking-widest font-bold">Couleurs</span>
-            <div className="flex items-center gap-1 mt-1">
-              {technicalSpecs.colorsAvailable.slice(0, 4).map((c, i) => (
-                <div key={i} className="w-3 h-3 rounded-full border border-border/50" style={{ backgroundColor: c }} />
-              ))}
-              {technicalSpecs.totalColors > 4 && (
-                <span className="text-[9px] text-muted font-bold ml-1">+{technicalSpecs.totalColors - 4}</span>
-              )}
-            </div>
+        {/* ─── 3. TECHNICAL SPECS (Expandable) ─── */}
+        <div className={`mb-6 transition-all duration-500 overflow-hidden ${isExpanded ? 'max-h-60' : 'max-h-0'}`}>
+          <div className="grid grid-cols-2 gap-4 p-4 bg-gray-50 rounded-2xl border border-ecru/50">
+             <div className="space-y-1">
+                <p className="text-[9px] text-muted font-black uppercase">الوزن (GSM)</p>
+                <div className="flex items-center gap-2">
+                   <div className="flex-1 h-1 bg-gray-200 rounded-full overflow-hidden">
+                      <div className="h-full bg-burgundy rounded-full" style={{ width: `${(technicalSpecs.gsm / 400) * 100}%` }} />
+                   </div>
+                   <span className="text-xs font-bold text-charcoal">{technicalSpecs.gsm}</span>
+                </div>
+             </div>
+             <div className="space-y-1">
+                <p className="text-[9px] text-muted font-black uppercase">العرض (Laize)</p>
+                <div className="flex items-center gap-1 text-xs font-bold text-charcoal">
+                   <Ruler className="w-3 h-3 text-gold" /> {technicalSpecs.width} cm
+                </div>
+             </div>
+             <div className="col-span-2 space-y-1 pt-2 border-t border-gray-200/50">
+                <p className="text-[9px] text-muted font-black uppercase">الألوان المتاحة</p>
+                <div className="flex items-center gap-1.5">
+                   {technicalSpecs.colorsAvailable.slice(0, 6).map((c, i) => (
+                     <div key={i} className="w-4 h-4 rounded-full border border-white shadow-sm ring-1 ring-ecru" style={{ backgroundColor: c }} />
+                   ))}
+                   {technicalSpecs.totalColors > 6 && (
+                     <span className="text-[10px] font-black text-muted ml-1">+{technicalSpecs.totalColors - 6} ألوان</span>
+                   )}
+                </div>
+             </div>
           </div>
         </div>
+        
+        <button 
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="flex items-center justify-center gap-1 w-full text-[9px] font-black text-gold uppercase tracking-[0.2em] mb-4 hover:opacity-70 transition-opacity"
+        >
+          {isExpanded ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+          {isExpanded ? 'إغلاق التفاصيل' : 'المواصفات التقنية'}
+        </button>
 
-        {/* ─── FOOTER & COMMERCIAL ─── */}
-        <div className="mt-auto">
-          <div className="flex items-end justify-between mb-4">
+        {/* ─── 4. COMMERCIAL SECTION ─── */}
+        <div className="mt-auto pt-4 border-t border-ecru/30">
+          <div className="flex items-end justify-between mb-5">
             <div className="flex flex-col">
-              <span className="text-[10px] text-muted font-bold mb-1">PRIX INDICATIF</span>
-              <div className="flex items-baseline gap-1">
-                {typeof commercial.price === 'number' ? (
-                  <>
-                    <span className="text-title !text-xl text-gold font-bold">{commercial.price.toFixed(2)}</span>
-                    <span className="text-[12px] text-muted uppercase">{commercial.currency}/{commercial.unit}</span>
-                  </>
-                ) : (
-                  <span className="text-body-large text-gold font-bold">Sur devis</span>
-                )}
+              <div className="flex items-baseline gap-1.5">
+                <span className="text-3xl font-black text-burgundy">{typeof commercial.price === 'number' ? commercial.price.toFixed(2) : '---'}</span>
+                <span className="text-xs font-bold text-muted uppercase">{commercial.currency} / {commercial.unit}</span>
+              </div>
+              <p className="text-[10px] text-muted font-bold mt-1 flex items-center gap-1">
+                <TrendingUp className="w-3 h-3 text-success" /> متوسط سعر السوق المحلي
+              </p>
+            </div>
+            <div className="flex flex-col items-end gap-1">
+              <div className="flex items-center gap-1 text-[11px] font-bold text-charcoal bg-ecru/30 px-3 py-1 rounded-full border border-ecru/50">
+                <Package className="w-3 h-3 text-gold" /> {commercial.moq} {commercial.unit}
+              </div>
+              <div className="flex items-center gap-1 text-[9px] text-muted mt-1">
+                <Clock className="w-3 h-3" /> 2-4 أسابيع
               </div>
             </div>
-            <div className="flex flex-col items-end">
-              <span className="text-[10px] text-muted font-bold mb-1">MOQ</span>
-              <span className="text-body-small font-bold text-charcoal">Min. {commercial.moq}{commercial.unit}</span>
-            </div>
           </div>
 
-          <div className="flex gap-2">
-            <button className="flex-1 bg-burgundy text-white py-3 rounded-xl text-label hover:bg-gold transition-colors flex items-center justify-center gap-2 group/btn shadow-lg shadow-burgundy/10">
-              Demander un devis
-              <ChevronRight className="w-3 h-3 transition-transform group-hover/btn:translate-x-1" />
+          <div className="flex gap-2.5">
+            <button className="flex-1 bg-burgundy text-white py-4 rounded-2xl text-[11px] font-black uppercase tracking-widest hover:bg-gold transition-all shadow-xl shadow-burgundy/10 active:scale-95">
+              طلب عينة فنية
             </button>
-            <button className="w-12 h-12 border border-border rounded-xl flex items-center justify-center text-muted hover:text-gold hover:border-gold transition-all">
-              <Share2 className="w-4 h-4" />
+            <button className="w-14 h-14 border-2 border-ecru rounded-2xl flex items-center justify-center text-charcoal hover:bg-ecru transition-all active:scale-90" title="إضافة للمقارنة">
+              <ArrowLeftRight className="w-5 h-5" />
             </button>
           </div>
         </div>
 
-        {/* Stock Status Badge */}
+        {/* Vertical Stock Status Strip */}
         <div className={`
-          absolute top-0 right-0 w-1.5 h-full
-          ${commercial.stockStatus === 'IN_STOCK' ? 'bg-success' : commercial.stockStatus === 'ON_ORDER' ? 'bg-warning' : 'bg-gold'}
+          absolute top-0 right-0 w-1 h-full
+          ${commercial.stockStatus === 'IN_STOCK' ? 'bg-success' : 'bg-warning'}
         `} />
       </div>
+    </div>
+  );
+}
+
+export function FabricCardSkeleton() {
+  return (
+    <div className="bg-white rounded-[2rem] border border-ecru/50 overflow-hidden flex flex-col h-[600px] animate-pulse">
+       <div className="h-[280px] bg-gray-200" />
+       <div className="p-6 flex-1 space-y-6">
+          <div className="space-y-2">
+             <div className="h-6 bg-gray-200 rounded-full w-3/4" />
+             <div className="h-4 bg-gray-100 rounded-full w-1/2" />
+          </div>
+          <div className="h-10 bg-gray-100 rounded-2xl" />
+          <div className="space-y-2">
+             <div className="h-1.5 bg-gray-200 rounded-full" />
+             <div className="h-3 bg-gray-100 rounded-full w-1/4" />
+          </div>
+          <div className="mt-auto pt-4 border-t border-ecru/30 flex justify-between items-end">
+             <div className="h-10 bg-gray-200 rounded-xl w-32" />
+             <div className="h-10 bg-gray-100 rounded-xl w-24" />
+          </div>
+       </div>
     </div>
   );
 }
