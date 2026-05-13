@@ -3,7 +3,8 @@
 import React, { useState } from 'react';
 import { 
   Maximize2, X, Plus, ArrowRight, ShoppingCart, 
-  Layers, Check, Ruler, Info, Download, Share2
+  Layers, Check, Ruler, Info, Download, Share2,
+  Clock
 } from 'lucide-react';
 
 const MOCK_FABRICS = [

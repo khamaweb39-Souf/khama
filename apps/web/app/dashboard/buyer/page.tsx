@@ -4,7 +4,7 @@ import React from 'react';
 import { 
   TrendingUp, TrendingDown, Clock, AlertTriangle, 
   ChevronRight, ArrowUpRight, Search, Zap, 
-  Filter, Calendar, ExternalLink
+  Filter, Calendar, ExternalLink, Bell
 } from 'lucide-react';
 
 export default function BuyerDashboardPage() {
