@@ -20,6 +20,7 @@ module.exports = {
         ecru: '#F5F0E8',
         'off-white': '#FEFCF8',
         charcoal: '#1A1A2E',
+        obsidian: '#0D0C0A',
         grege: '#9E8E7E',
         sage: '#4A7C59',
         sienna: '#C4713A',
