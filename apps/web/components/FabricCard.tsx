@@ -102,8 +102,12 @@ export default function FabricCard(props: FabricCardProps) {
 
           {/* Supplier Info */}
           <div className="flex items-center gap-3 py-2 border-b border-gray-50">
-             <div className="relative w-8 h-8 rounded-full border-2 border-ecru overflow-hidden shadow-sm">
-                <img src={supplier.avatar} alt={supplier.name} className="object-cover w-full h-full" />
+             <div className="relative w-8 h-8 rounded-full border-2 border-ecru overflow-hidden shadow-sm bg-gray-100 flex items-center justify-center">
+                {supplier.avatar?.startsWith('http') || supplier.avatar?.startsWith('/') ? (
+                  <img src={supplier.avatar} alt={supplier.name} className="object-cover w-full h-full" />
+                ) : (
+                  <span className="text-lg">{supplier.avatar || '🏢'}</span>
+                )}
              </div>
              <div className="flex flex-col">
                 <span className="text-[11px] font-black text-charcoal flex items-center gap-1">
