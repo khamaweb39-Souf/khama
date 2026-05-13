@@ -30,6 +30,11 @@ const TopBar = () => (
       </div>
       <span className="cursor-pointer hover:text-white">دج (DZD)</span>
       <div className="h-3 w-px bg-white/10 mx-1" />
+      <Link href="/dashboard" className="hover:text-gold transition-colors flex items-center gap-1">
+        <Icons.User className="w-3 h-3" />
+        لوحة التحكم
+      </Link>
+      <div className="h-3 w-px bg-white/10 mx-1" />
       <Link href="/login" className="hover:text-gold transition-colors">دخول المهنيين</Link>
     </div>
   </div>
@@ -110,20 +115,28 @@ export default function Header() {
     },
     marketplace: {
       sections: [
-        { title: 'عروض الجملة', items: [
-          { label: 'أحدث طلبات عروض الأسعار', link: '/rfq/active', badge: '12 جديد' },
+        { title: 'إدارة المشتريات', items: [
+          { label: 'إنشاء طلب عرض سعر (RFQ)', link: '/rfq/create', badge: 'جديد' },
+          { label: 'طلبات عروض الأسعار النشطة', link: '/rfq' },
           { label: 'مزادات الأقمشة', link: '/auctions' },
           { label: 'صفقات سريعة (Flash Deals)', link: '/deals' }
+        ]},
+        { title: 'خدمات الموردين', items: [
+          { label: 'إضافة منتج جديد', link: '/dashboard/supplier/products/new', badge: 'إدراج' },
+          { label: 'إدارة المتجر الرقمي', link: '/dashboard/supplier' },
+          { label: 'معرض الموردين (Showroom)', link: '/supplier/tissage-de-lyon' },
+          { label: 'الأدوات التقنية للمحترفين', link: '/tools' }
         ]},
         { title: 'الموردون', items: [
           { label: 'موردون جزائريون معتمدون', link: '/suppliers/dz' },
           { label: 'مراكز التوزيع الكبرى', link: '/distributors' },
-          { label: 'المتاجر الرسمية', link: '/brands' }
+          { label: 'المتاجر الرسمية', link: '/brands' },
+          { label: 'نظام توثيق الموردين', link: '/verification' }
         ]}
       ],
       promo: {
         title: 'شركاء النجاح',
-        desc: 'تواصل مباشرة مع كبار المصنعين في الجزائر.',
+        desc: 'تواصل مباشرة مع كبار المصنعين في الجزائر وقم بإدارة صفقاتك.',
         image: 'https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?q=80&w=400&auto=format&fit=crop'
       }
     }
@@ -187,7 +200,9 @@ export default function Header() {
               <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-gold rounded-full border-2 border-white" />
             </button>
             <div className="hidden sm:block">
-               <Button variant="primary" size="md" leftIcon={<PlusCircle className="w-4 h-4" />}>انشر عرضاً</Button>
+               <Link href="/rfq/create">
+                 <Button variant="primary" size="md" leftIcon={<PlusCircle className="w-4 h-4" />}>انشر طلب شراء</Button>
+               </Link>
             </div>
             <button 
               className="lg:hidden p-2 text-burgundy"
