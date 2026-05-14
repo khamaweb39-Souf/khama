@@ -51,6 +51,7 @@ enum UserType {
   IMPORTER
   DESIGNER
   TRAINER
+  AGENT
   ADMIN
 }
 
