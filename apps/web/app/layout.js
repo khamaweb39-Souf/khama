@@ -9,6 +9,7 @@ const Footer = dynamic(() => import('../components/Footer'), { ssr: false });
 const cairo = Cairo({ subsets: ['arabic', 'latin'] });
 
 export const metadata = {
+  metadataBase: new URL('https://khama.dz'),
   title: {
     default: 'خامة - منصة الصناعات النسيجية والجلود',
     template: '%s | خامة'
