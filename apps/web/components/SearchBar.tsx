@@ -8,6 +8,7 @@ import {
   ShieldCheck, Wind, Layers
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import VisualSearchModal from './VisualSearchModal';
 
 // ─── Mock Data for Autocomplete ──────────────────────────────────────────────
 const SMART_SUGGESTIONS = {
@@ -61,6 +62,7 @@ export default function SearchBar() {
   const [history, setHistory] = useState<string[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [isVisualSearchOpen, setIsVisualSearchOpen] = useState(false);
 
   // Load History
   useEffect(() => {
@@ -140,6 +142,7 @@ export default function SearchBar() {
           </button>
           
           <button 
+            onClick={() => setIsVisualSearchOpen(true)}
             className="p-2.5 text-muted hover:text-burgundy hover:bg-burgundy/5 rounded-xl transition-all group"
             title={t('visual_search')}
           >
@@ -147,6 +150,12 @@ export default function SearchBar() {
           </button>
         </div>
       </div>
+
+      {/* Visual Search Modal */}
+      <VisualSearchModal 
+        isOpen={isVisualSearchOpen} 
+        onClose={() => setIsVisualSearchOpen(false)} 
+      />
 
       {/* Dropdown Results */}
       {isOpen && (
