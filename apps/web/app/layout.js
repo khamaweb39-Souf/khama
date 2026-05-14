@@ -42,7 +42,22 @@ export const metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
+  manifest: '/manifest.json',
+  alternates: {
+    canonical: 'https://khama.dz',
+  },
+};
+
+export const viewport = {
+  themeColor: '#C9A84C',
 };
 
 import { I18nProvider } from '../components/I18nProvider';

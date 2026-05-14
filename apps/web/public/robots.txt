@@ -1,10 +1,11 @@
 User-agent: *
 Allow: /
-Allow: /catalogue
-Allow: /fournisseurs
-Allow: /actualites
-Disallow: /dashboard
-Disallow: /admin
-Disallow: /api
 
+# Sitemaps
 Sitemap: https://khama.dz/sitemap.xml
+
+# Disallow admin and account paths
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /account
+Disallow: /api

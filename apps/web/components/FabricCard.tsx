@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { FabricCardProps } from '../types/fabric';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 
 const Fabric3DViewer = dynamic(() => import('./product/Fabric3DViewer'), { ssr: false });
 
@@ -44,12 +45,39 @@ export default function FabricCard(props: FabricCardProps) {
       onMouseLeave={() => setIsHovered(false)}
       dir="rtl"
     >
+      {/* Schema.org Product Markup */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org/",
+            "@type": "Product",
+            "name": name,
+            "image": image,
+            "description": `${name} - ${technicalSpecs.weave} fabric from ${supplier.name}`,
+            "brand": {
+              "@type": "Brand",
+              "name": supplier.name
+            },
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "DZD",
+              "price": commercial.price,
+              "availability": commercial.stockStatus === 'IN_STOCK' ? "https://schema.org/InStock" : "https://schema.org/OutOfStock"
+            }
+          })
+        }}
+      />
+
       {/* ─── Visual Section (60%) ─── */}
       <div className="relative aspect-[4/5] w-full overflow-hidden bg-ecru">
-        <img 
+        <Image 
           src={image} 
           alt={name} 
-          className={`w-full h-full object-cover transition-transform duration-1000 ${isHovered ? 'scale-110' : 'scale-100'}`}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className={`object-cover transition-transform duration-1000 ${isHovered ? 'scale-110' : 'scale-100'}`}
+          loading="lazy"
         />
         
         {/* Top Badges */}

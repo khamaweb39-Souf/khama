@@ -1,0 +1,21 @@
+{
+  "name": "Khama - Textile Marketplace",
+  "short_name": "Khama",
+  "description": "The First Specialized Marketplace for Fabrics and Textile Machinery in Algeria.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0D0C0A",
+  "theme_color": "#C9A84C",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
