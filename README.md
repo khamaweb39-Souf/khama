@@ -9,6 +9,7 @@ Khama is a high-performance Monorepo architecture designed to bridge the gap bet
 
 ### 🛠️ Tech Stack (التقنيات المستخدمة)
 - **Framework**: [Next.js 14](https://nextjs.org/) (App Router, Server Actions, ISR).
+- **3D Rendering**: [Three.js](https://threejs.org/) & [React Three Fiber](https://r3f.docs.pmnd.rs/) for fabric visualization.
 - **Backend**: Node.js & Express (High performance, Scalable).
 - **Monorepo Tooling**: [Turborepo](https://turbo.build/).
 - **Database**: PostgreSQL with [Prisma ORM](https://www.prisma.io/).
@@ -21,24 +22,29 @@ Khama is a high-performance Monorepo architecture designed to bridge the gap bet
 
 ## ✨ Recent Major Updates (آخر التحديثات الجوهرية)
 
-### 🎬 Cinematic UI & Global Localization
-- **Arabic First Approach**: Full localization of the homepage, hero sections, and dashboards with high-end Arabic typography.
-- **Word-Level Animations**: Optimized text reveal animations to ensure perfect Arabic script connectivity (no broken ligatures).
-- **Build Stability**: Resolved critical PostCSS encoding issues (UTF-8) and React Error #130 by implementing stable local SVG icons.
+### 💳 Finance Center & Khama Escrow (المركز المالي ونظام الضمان)
+- **Local Payment Gateways**: Integrated support for **BaridiMob**, **CIB**, and **EDAHABIA** cards tailored for the Algerian market.
+- **Secure Escrow System**: Funds are held securely and only released to suppliers after buyer confirmation of receipt.
+- **Accounting Dashboards**: Real-time revenue tracking, invoice generation, and withdrawal management for both buyers and suppliers.
 
-### 📦 Supplier Add-Product Wizard (معالج إضافة المنتجات)
-- **4-Step Professional Flow**: A high-end onboarding system for suppliers to list technical fabrics.
-- **Technical Precision**: Capture granular data: Composition (%), Weight (GSM), Width (Laize), and Weave types.
-- **Commercial Terms**: Integrated MOQ, Lead Time, and Certification management (GOTS, ISO, OEKO-TEX).
+### 📦 Logistics & Intelligent Shipping (اللوجستيك والشحن الذكي)
+- **Shipping Calculator**: Dynamic cost calculation based on weight (GSM/m), volume, and Algerian wilayas (58 regions).
+- **Real-time Tracking**: Interactive visual timeline showing order status from "Preparation" to "Out for Delivery".
+- **Carrier Integration**: Support for local carriers (Yalidine, EMS) with automated tracking number assignment.
 
-### 🤝 B2B RFQ Procurement Engine (نظام طلبات العروض)
-- **Buyer-Side Wizard**: Multi-step flow for buyers to launch international tenders.
-- **Smart Targeting**: Ability to target verified suppliers by geographic region or certification status.
-- **Real-time Marketplace**: Public RFQ directory with live stats, countdown timers, and urgency indicators.
+### 👁️ Visual AI Search (البحث البصري بالذكاء الاصطناعي)
+- **Image-to-Fabric Matching**: Users can upload or capture a photo of a fabric to find matches in the catalog.
+- **AI Analysis**: Automatically detects weave type (Satin, Twill, etc.), color palette, and estimated weight from a single image.
 
-### 🔗 Full-Stack Database Integration
-- **Server Actions Architecture**: All wizards (Product & RFQ) are now connected to the **PostgreSQL** database via **Prisma**.
-- **Data Persistence**: Real-world data submission with automatic cache revalidation for a seamless UX.
+### 🧵 3D Fabric Viewer & AR (معاينة الأقمشة ثلاثية الأبعاد)
+- **Draped Simulation**: Interactive 3D visualization of fabric drapes with PBR (Physically Based Rendering).
+- **Real-time Customization**: Switch colors and weave patterns in a live 3D environment.
+- **Augmented Reality (AR)**: "View in Space" feature for mobile users to visualize fabrics in their real-world environment.
+
+### 🎓 Khama Academy (أكاديمية خامة التعليمية)
+- **Professional Courses**: Specialized textile education platform covering QC, International Trade, and Sustainability.
+- **Textile Blog**: Industry news, market trends, and expert interviews integrated directly into the knowledge hub.
+- **Certification System**: Automated certificate generation for course completion.
 
 ---
 
@@ -47,8 +53,8 @@ Khama is a high-performance Monorepo architecture designed to bridge the gap bet
 khama/
 ├── apps/
 │   ├── api/          # Express Backend (Prisma, Socket.io)
-│   ├── web/          # Next.js 14 (Marketplace, Dashboards, Server Actions)
-│   └── mobile/       # Expo/React Native App (Coming Soon)
+│   ├── web/          # Next.js 14 (Marketplace, Dashboards, 3D, AI Search)
+│   └── mobile/       # Expo/React Native App (In Development)
 ├── packages/
 │   ├── ui/           # Shared Component Library
 │   └── shared/       # Shared Utilities & Types
@@ -64,7 +70,8 @@ khama/
 
 ### 2. Run Development
 ```bash
-npm install
+# Install with legacy peer deps due to React 18/19 conflicts in 3D libraries
+npm install --legacy-peer-deps
 npx prisma generate --schema=apps/api/prisma/schema.prisma
 npm run dev
 ```
@@ -72,10 +79,13 @@ npm run dev
 ---
 
 ## 🗺️ Roadmap (خارطة الطريق)
-- [ ] **Chat System Integration**: Linking the RFQ engine with a real-time negotiation chat.
-- [ ] **Payment Gateway**: BaridiMob & CIB integration for Algerian market.
-- [ ] **Shipping Logistics**: Automated weight calculation and carrier assignment.
-- [ ] **AI Search**: Image-to-Fabric visual matching system.
+- [x] **Finance & Escrow System**: Fully implemented with local payment support.
+- [x] **Shipping & Logistics**: Integrated with tracking and cost calculation.
+- [x] **Visual AI Search**: Image-based fabric discovery.
+- [x] **3D & AR Preview**: High-fidelity fabric visualization.
+- [x] **Educational Academy**: Specialized textile training hub.
+- [ ] **Advanced Analytics**: AI-powered price trend forecasting for suppliers.
+- [ ] **Mobile App Launch**: Native Android/iOS experience for field sourcing.
 
 ---
 
