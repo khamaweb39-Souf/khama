@@ -5,7 +5,7 @@ import {
   X, Camera, Upload, Image as ImageIcon, 
   RefreshCw, Layers, Palette, Wind, 
   CheckCircle2, AlertCircle, ArrowRight,
-  ShieldCheck, Search, FileText
+  ShieldCheck, Search, FileText, Info
 } from 'lucide-react';
 
 interface VisualSearchModalProps {
