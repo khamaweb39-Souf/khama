@@ -3,7 +3,6 @@
 import React, { Suspense, useState, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { 
-  OrbitControls, 
   PerspectiveCamera, 
   Environment, 
   ContactShadows, 
@@ -15,7 +14,7 @@ import {
 import * as THREE from 'three';
 import { 
   X, Maximize2, Minimize2, 
-  Rotate3D, Info, Palette, 
+  Rotate3D, Palette, 
   Layers, Smartphone, RefreshCw 
 } from 'lucide-react';
 
@@ -24,7 +23,6 @@ import {
 const FabricMesh = ({ color, weaveType }: { color: string, weaveType: string }) => {
   const meshRef = useRef<THREE.Mesh>(null!);
   
-  // Subtle animation to simulate gentle air movement
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
     if (meshRef.current) {
@@ -34,18 +32,17 @@ const FabricMesh = ({ color, weaveType }: { color: string, weaveType: string }) 
   });
 
   return (
-    <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
+    <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
       <mesh ref={meshRef} castShadow receiveShadow>
-        {/* Using a TorusKnot to simulate complex fabric folds/drapes */}
-        <torusKnotGeometry args={[1, 0.4, 128, 32]} />
+        <torusKnotGeometry args={[1, 0.4, 160, 40]} />
         <MeshDistortMaterial 
           color={color} 
-          speed={2} 
-          distort={0.4} 
+          speed={3} 
+          distort={0.3} 
           radius={1}
-          roughness={weaveType === 'Satin' ? 0.1 : weaveType === 'Twill' ? 0.4 : 0.6}
-          metalness={weaveType === 'Satin' ? 0.2 : 0.05}
-          bumpScale={weaveType === 'Jacquard' ? 0.05 : 0.01}
+          roughness={weaveType === 'Satin' ? 0.05 : weaveType === 'Twill' ? 0.3 : 0.7}
+          metalness={weaveType === 'Satin' ? 0.4 : 0.05}
+          bumpScale={weaveType === 'Jacquard' ? 0.08 : 0.01}
         />
       </mesh>
     </Float>
@@ -72,145 +69,131 @@ export default function Fabric3DViewer({
   if (!isOpen) return null;
 
   return (
-    <div className={`fixed inset-0 z-[250] flex items-center justify-center p-4 sm:p-10 transition-all duration-700 ${isFull ? 'p-0' : ''}`} dir="rtl">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden" dir="rtl">
       {/* Backdrop */}
       <div 
-        className="absolute inset-0 bg-charcoal/98 backdrop-blur-2xl animate-in fade-in duration-1000" 
+        className="absolute inset-0 bg-black/95 backdrop-blur-3xl animate-in fade-in duration-500" 
         onClick={onClose}
       />
 
       {/* Modal Container */}
-      <div className={`relative w-full max-w-6xl bg-[#0D0C0A] overflow-hidden shadow-2xl transition-all duration-1000 ease-in-out border border-white/5 ${isFull ? 'h-full max-w-none rounded-0' : 'h-[85vh] rounded-[3.5rem]'}`}>
+      <div className={`relative w-full transition-all duration-700 ease-out flex flex-col ${isFull ? 'h-full' : 'h-[90vh] max-w-7xl mx-4 rounded-[3rem] border border-white/10 shadow-[0_0_100px_rgba(0,0,0,0.5)] overflow-hidden bg-[#0A0A0A]'}`}>
         
+        {/* ─── Header ─── */}
+        <div className="absolute top-0 left-0 right-0 p-8 flex justify-between items-start z-50 pointer-events-none">
+           <div className="pointer-events-auto">
+              <h2 className="text-3xl font-black text-white tracking-tighter leading-none mb-2">{fabricName}</h2>
+              <div className="flex items-center gap-2">
+                 <span className="w-2 h-2 bg-gold rounded-full animate-pulse" />
+                 <span className="text-[10px] font-bold text-white/40 uppercase tracking-[0.2em]">Simulation Interactive 3.0</span>
+              </div>
+           </div>
+           <div className="flex gap-3 pointer-events-auto">
+              <button 
+                onClick={() => setIsFull(!isFull)}
+                className="w-12 h-12 flex items-center justify-center bg-white/5 hover:bg-white/10 rounded-2xl border border-white/10 text-white/40 hover:text-white transition-all"
+              >
+                {isFull ? <Minimize2 size={20} /> : <Maximize2 size={20} />}
+              </button>
+              <button 
+                onClick={onClose}
+                className="w-12 h-12 flex items-center justify-center bg-white/5 hover:bg-burgundy/20 rounded-2xl border border-white/10 text-white/40 hover:text-white transition-all"
+              >
+                <X size={20} />
+              </button>
+           </div>
+        </div>
+
         {/* ─── 3D Viewport ─── */}
-        <div className="absolute inset-0 z-0">
+        <div className="flex-1 relative">
           <Canvas shadows dpr={[1, 2]}>
-            <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={45} />
+            <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={35} />
             
-            <Suspense fallback={<Html center><div className="flex flex-col items-center gap-4"><RefreshCw className="w-10 h-10 text-gold animate-spin" /><p className="text-gold font-black uppercase tracking-widest text-[10px]">Loading 3D Engine</p></div></Html>}>
+            <Suspense fallback={<Html center><div className="flex flex-col items-center gap-4"><RefreshCw className="w-10 h-10 text-gold animate-spin" /><p className="text-gold font-black uppercase tracking-widest text-[10px]">Rendering Material...</p></div></Html>}>
               
               <PresentationControls 
                 global 
                 config={{ mass: 2, tension: 500 }} 
                 snap={{ mass: 4, tension: 1500 }} 
-                rotation={[0, 0.3, 0]} 
-                polar={[-Math.PI / 3, Math.PI / 3]} 
-                azimuth={[-Math.PI / 1.4, Math.PI / 1.4]}
+                rotation={[0, 0, 0]} 
+                polar={[-Math.PI / 4, Math.PI / 4]} 
+                azimuth={[-Math.PI / 2, Math.PI / 2]}
               >
                 <FabricMesh color={color} weaveType={weave} />
               </PresentationControls>
 
-              <ContactShadows position={[0, -2, 0]} opacity={0.4} scale={10} blur={2.5} far={4} />
+              <ContactShadows position={[0, -1.8, 0]} opacity={0.5} scale={10} blur={2.5} far={4} color="#000000" />
               <Environment preset="studio" />
               <ambientLight intensity={0.5} />
-              <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
+              <pointLight position={[10, 10, 10]} intensity={1.5} color={color} />
+              <spotLight position={[-10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
             </Suspense>
           </Canvas>
         </div>
 
-        {/* ─── UI Overlays ─── */}
-        
-        {/* Top Controls */}
-        <div className="absolute top-8 left-8 right-8 flex justify-between items-start z-10 pointer-events-none">
-           <div className="pointer-events-auto space-y-2">
-              <h2 className="text-2xl font-black text-white tracking-tight">{fabricName}</h2>
-              <div className="flex items-center gap-3">
-                 <span className="px-3 py-1 bg-gold/10 border border-gold/20 rounded-full text-[9px] font-black text-gold uppercase tracking-widest">Interactive 3D</span>
-                 <span className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[9px] font-black text-white/40 uppercase tracking-widest">Real-time PBR</span>
-              </div>
-           </div>
-           <div className="flex gap-4 pointer-events-auto">
-              <button 
-                onClick={() => setIsFull(!isFull)}
-                className="p-4 bg-white/5 hover:bg-white/10 rounded-[1.5rem] border border-white/10 transition-all text-white/40 hover:text-white"
-              >
-                {isFull ? <Minimize2 className="w-5 h-5" /> : <Maximize2 className="w-5 h-5" />}
-              </button>
-              <button 
-                onClick={onClose}
-                className="p-4 bg-white/5 hover:bg-white/10 rounded-[1.5rem] border border-white/10 transition-all text-white/40 hover:text-white"
-              >
-                <X className="w-5 h-5" />
-              </button>
-           </div>
-        </div>
-
-        {/* Floating Tool Panel */}
-        <div className="absolute bottom-10 right-10 z-10 space-y-6 max-w-sm w-full animate-in slide-in-from-right-10 duration-1000">
+        {/* ─── Sidebar Controls (Glassmorphism) ─── */}
+        <div className="absolute bottom-10 left-10 right-10 flex flex-col md:flex-row items-center justify-between gap-6 z-50">
            
-           {/* Color Picker */}
-           <div className="bg-[#1A1917]/80 backdrop-blur-xl border border-white/10 p-6 rounded-[2.5rem] space-y-4">
-              <div className="flex items-center justify-between">
-                 <h3 className="text-xs font-black text-white uppercase tracking-widest flex items-center gap-2">
-                    <Palette className="w-4 h-4 text-gold" /> اختر اللون
-                 </h3>
-                 <span className="text-[10px] font-bold text-white/20 uppercase">Real-time update</span>
+           {/* Color Selector */}
+           <div className="bg-white/5 backdrop-blur-2xl border border-white/10 p-4 rounded-[2rem] flex items-center gap-6">
+              <div className="flex items-center gap-3 px-4 border-l border-white/10">
+                 <Palette className="w-4 h-4 text-gold" />
+                 <span className="text-[10px] font-black text-white/40 uppercase tracking-widest">Colors</span>
               </div>
-              <div className="flex flex-wrap gap-3">
-                 {['#C9A84C', '#002366', '#4B0082', '#2F4F4F', '#8B0000', '#FFFFFF'].map((c) => (
+              <div className="flex gap-2 p-1">
+                 {['#C9A84C', '#0A0A0A', '#4A0E0E', '#0E2A47', '#1D4D3A', '#FFFFFF'].map((c) => (
                    <button 
                      key={c}
                      onClick={() => setColor(c)}
-                     className={`w-10 h-10 rounded-xl border-2 transition-all hover:scale-110 ${color === c ? 'border-gold shadow-lg shadow-gold/20 scale-110' : 'border-transparent'}`}
+                     className={`w-8 h-8 rounded-full border-2 transition-all hover:scale-125 ${color === c ? 'border-gold shadow-[0_0_15px_rgba(201,168,76,0.5)]' : 'border-transparent opacity-60 hover:opacity-100'}`}
                      style={{ backgroundColor: c }}
                    />
                  ))}
               </div>
            </div>
 
-           {/* Weave Switcher */}
-           <div className="bg-[#1A1917]/80 backdrop-blur-xl border border-white/10 p-6 rounded-[2.5rem] space-y-4">
-              <div className="flex items-center justify-between">
-                 <h3 className="text-xs font-black text-white uppercase tracking-widest flex items-center gap-2">
-                    <Layers className="w-4 h-4 text-blue-400" /> نوع النسج
-                 </h3>
-              </div>
-              <div className="grid grid-cols-2 gap-2">
-                 {[
-                   { id: 'Plain', label: 'سادة (Plain)' },
-                   { id: 'Twill', label: 'سرجيل (Twill)' },
-                   { id: 'Satin', label: 'ساتان (Satin)' },
-                   { id: 'Jacquard', label: 'جاكارد (Jacq)' },
-                 ].map((w) => (
-                   <button 
-                     key={w.id}
-                     onClick={() => setWeave(w.id)}
-                     className={`px-4 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${weave === w.id ? 'bg-gold text-charcoal shadow-lg' : 'bg-white/5 text-white/30 hover:bg-white/10'}`}
-                   >
-                      {w.label}
-                   </button>
-                 ))}
-              </div>
+           {/* Weave Selector */}
+           <div className="bg-white/5 backdrop-blur-2xl border border-white/10 p-2 rounded-[2rem] flex items-center">
+              {[
+                { id: 'Plain', label: 'Plain' },
+                { id: 'Twill', label: 'Twill' },
+                { id: 'Satin', label: 'Satin' },
+                { id: 'Jacquard', label: 'Jacq' },
+              ].map((w) => (
+                <button 
+                  key={w.id}
+                  onClick={() => setWeave(w.id)}
+                  className={`px-6 py-3 rounded-[1.5rem] text-[10px] font-black uppercase tracking-widest transition-all ${weave === w.id ? 'bg-gold text-charcoal shadow-lg' : 'text-white/40 hover:text-white'}`}
+                >
+                   {w.label}
+                </button>
+              ))}
            </div>
 
            {/* AR Action */}
-           <button className="w-full py-5 bg-gold text-charcoal font-black text-xs uppercase tracking-[0.2em] rounded-[2rem] shadow-2xl shadow-gold/20 flex items-center justify-center gap-4 hover:scale-[1.02] transition-all group overflow-hidden relative">
-              <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-              شاهد في مكانك (AR) <Smartphone className="w-5 h-5" />
+           <button className="px-8 py-5 bg-gold text-charcoal font-black text-[11px] uppercase tracking-[0.2em] rounded-full shadow-[0_15px_30px_rgba(201,168,76,0.2)] flex items-center gap-4 hover:bg-white transition-all transform hover:-translate-y-1">
+              Live in AR <Smartphone className="w-5 h-5" />
            </button>
-
         </div>
 
         {/* Interaction Hint */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 pointer-events-none flex flex-col items-center gap-3 animate-bounce">
-           <div className="w-8 h-12 border-2 border-white/20 rounded-full flex justify-center p-2">
-              <div className="w-1 h-2 bg-gold rounded-full" />
+        <div className="absolute top-1/2 right-10 -translate-y-1/2 hidden lg:flex flex-col items-center gap-6 text-white/20">
+           <div className="flex flex-col items-center gap-2">
+              <Rotate3D className="w-6 h-6 animate-pulse" />
+              <div className="w-[1px] h-20 bg-gradient-to-b from-white/20 to-transparent" />
            </div>
-           <p className="text-[9px] font-black text-white/20 uppercase tracking-[0.4em]">Drag to rotate • Scroll to zoom</p>
-        </div>
-
-        {/* Security / Info Badge */}
-        <div className="absolute bottom-10 left-10 z-10">
-           <div className="bg-white/5 border border-white/10 p-4 rounded-2xl flex items-center gap-4 text-white/40">
-              <Rotate3D className="w-6 h-6" />
-              <div className="space-y-0.5">
-                 <p className="text-[10px] font-black uppercase tracking-widest text-white/60">3D Simulation Mode</p>
-                 <p className="text-[9px] font-bold">المعاينة تقريبية للملمس والانسدال.</p>
-              </div>
-           </div>
+           <p className="vertical-text text-[8px] font-black uppercase tracking-[0.6em] whitespace-nowrap">Explore Material Physics</p>
         </div>
 
       </div>
+      
+      <style jsx>{`
+        .vertical-text {
+          writing-mode: vertical-rl;
+          text-orientation: mixed;
+          transform: rotate(180deg);
+        }
+      `}</style>
     </div>
   );
 }
