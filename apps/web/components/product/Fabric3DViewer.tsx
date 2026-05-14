@@ -36,17 +36,16 @@ const FabricMesh = ({ color, weaveType }: { color: string, weaveType: string }) 
   return (
     <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
       <mesh ref={meshRef} castShadow receiveShadow>
-        {/* Using a rounded box with distortion to simulate folded fabric */}
-        <sphereGeometry args={[1.5, 64, 64]} />
+        {/* Using a TorusKnot to simulate complex fabric folds/drapes */}
+        <torusKnotGeometry args={[1, 0.4, 128, 32]} />
         <MeshDistortMaterial 
           color={color} 
           speed={2} 
-          distort={0.3} 
+          distort={0.4} 
           radius={1}
-          roughness={0.4}
-          metalness={0.05}
-          bumpScale={0.02}
-          // Weave texture simulation could go here
+          roughness={weaveType === 'Satin' ? 0.1 : weaveType === 'Twill' ? 0.4 : 0.6}
+          metalness={weaveType === 'Satin' ? 0.2 : 0.05}
+          bumpScale={weaveType === 'Jacquard' ? 0.05 : 0.01}
         />
       </mesh>
     </Float>
