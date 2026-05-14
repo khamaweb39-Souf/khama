@@ -43,7 +43,7 @@ services:
       - key: NEXT_TELEMETRY_DISABLED
         value: 1
       - key: NODE_OPTIONS
-        value: --max-old-space-size=450
+        value: --max-old-space-size=2048
       - key: GENERATE_SOURCEMAP
         value: "false"
       - key: CI

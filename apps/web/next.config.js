@@ -13,7 +13,7 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   productionBrowserSourceMaps: false,
-  transpilePackages: ['lucide-react'],
+  transpilePackages: ['lucide-react', '@react-three/fiber', '@react-three/drei', 'three'],
 }
 
 module.exports = nextConfig
