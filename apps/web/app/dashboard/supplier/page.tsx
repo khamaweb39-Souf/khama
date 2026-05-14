@@ -66,7 +66,7 @@ export default function SupplierDashboardPage() {
             
             <div className="flex justify-between items-start mb-6">
                <div className={`p-4 bg-white/5 rounded-2xl group-hover:scale-110 transition-transform duration-500 ${kpi.color}`}>
-                  {React.cloneElement(kpi.icon as React.ReactElement, { className: 'w-6 h-6' })}
+                  {React.cloneElement(kpi.icon as React.ReactElement<any>, { className: 'w-6 h-6' })}
                </div>
                <div className={`flex items-center gap-1 text-[10px] font-black px-3 py-1 rounded-full ${
                  kpi.trend === 'up' ? 'bg-green-500/10 text-green-400' : 'bg-red-500/10 text-red-400'
@@ -294,19 +294,5 @@ function Sparkles({ className }: { className?: string }) {
       <path d="M3 5h4"></path>
       <path d="M17 19h4"></path>
     </svg>
-  );
-}
-className="text-2xl font-black">تحليلات الأداء المتقدمة</h3>
-               <p className="text-sm text-white/60 max-w-md">
-                 اكتشف المنتجات الأكثر طلباً في السوق الجزائري وقم بتحسين استراتيجية التسعير الخاصة بك.
-               </p>
-            </div>
-            <button className="px-8 py-4 bg-gold text-charcoal font-black rounded-2xl hover:scale-105 transition-all flex items-center gap-2">
-               فتح مركز التحليلات <BarChart2 className="w-5 h-5" />
-            </button>
-         </div>
-      </div>
-
-    </div>
   );
 }

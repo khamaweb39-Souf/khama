@@ -141,7 +141,7 @@ export default function SupplierProductsPage() {
                             type="checkbox" 
                             className="w-4 h-4 rounded border-white/10 bg-white/5 accent-gold"
                             checked={selectedProducts.includes(product.id)}
-                            onChange={() => toggleSelect(id)} // Fix: product.id
+                            onChange={() => toggleSelect(product.id)}
                           />
                        </td>
                        <td className="p-6">
