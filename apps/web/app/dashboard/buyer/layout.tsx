@@ -7,7 +7,7 @@ import {
   Home, Search, Heart, FileText, MessageSquare, 
   Package, BarChart2, Settings, Bell, Menu, X,
   LogOut, ChevronLeft, ChevronRight, Globe, User,
-  Truck, ShieldCheck, Bookmark
+  Truck, ShieldCheck, Bookmark, DollarSign
 } from 'lucide-react';
 
 export default function BuyerDashboardLayout({
@@ -27,6 +27,7 @@ export default function BuyerDashboardLayout({
     { name: 'المفضلات', icon: Heart, href: '/dashboard/buyer/favorites' },
     { name: 'المقارنات', icon: BarChart2, href: '/dashboard/buyer/compare' },
     { name: 'الرسائل', icon: MessageSquare, href: '/dashboard/buyer/messages', badge: 5 },
+    { name: 'المركز المالي', icon: DollarSign, href: '/dashboard/buyer/finance' },
     { name: 'إعدادات الحساب', icon: Settings, href: '/dashboard/buyer/settings' },
   ];
 

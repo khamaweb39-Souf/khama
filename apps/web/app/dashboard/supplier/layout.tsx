@@ -8,7 +8,7 @@ import {
   MessageSquare, BarChart2, Settings, 
   PlusCircle, LogOut, Bell, User,
   Menu, X, ChevronRight, ChevronLeft,
-  Store, ShieldCheck, Globe, Search
+  Store, ShieldCheck, Globe, Search, Truck, Wallet
 } from 'lucide-react';
 
 export default function SupplierDashboardLayout({
@@ -25,6 +25,8 @@ export default function SupplierDashboardLayout({
     { name: 'إدارة المنتجات', icon: Package, href: '/dashboard/supplier/products' },
     { name: 'الطلبات والعينات', icon: ShoppingBag, href: '/dashboard/supplier/orders' },
     { name: 'الرسائل والمناقصات', icon: MessageSquare, href: '/dashboard/supplier/rfqs', badge: 5 },
+    { name: 'الشحن واللوجستيك', icon: Truck, href: '/dashboard/supplier/shipping' },
+    { name: 'المركز المالي', icon: Wallet, href: '/dashboard/supplier/finance' },
     { name: 'تحليلات الأداء', icon: BarChart2, href: '/dashboard/supplier/analytics' },
     { name: 'المتجر الرقمي', icon: Store, href: '/supplier/tissage-de-lyon' },
     { name: 'إعدادات الحساب', icon: Settings, href: '/dashboard/supplier/settings' },

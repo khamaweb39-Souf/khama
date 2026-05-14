@@ -118,10 +118,13 @@ export default function Header() {
           { label: 'لوحة تحكم المشتري', link: '/dashboard/buyer', badge: 'جديد' },
           { label: 'إنشاء طلب عرض سعر (RFQ)', link: '/rfq/create' },
           { label: 'طلبات عروض الأسعار النشطة', link: '/rfq' },
-          { label: 'مقارن الأقمشة الذكي', link: '/dashboard/buyer/compare' }
+          { label: 'مقارن الأقمشة الذكي', link: '/dashboard/buyer/compare' },
+          { label: 'السجل المالي والمحاسبي', link: '/dashboard/buyer/finance', badge: 'جديد' }
         ]},
         { title: 'خدمات الموردين', items: [
           { label: 'لوحة تحكم المورد', link: '/dashboard/supplier', badge: 'PRO' },
+          { label: 'إدارة الشحن واللوجستيك', link: '/dashboard/supplier/shipping', badge: 'جديد' },
+          { label: 'المركز المالي للسحب', link: '/dashboard/supplier/finance', badge: 'جديد' },
           { label: 'إضافة منتج جديد', link: '/dashboard/supplier/products/new', badge: 'إدراج' },
           { label: 'إدارة المتجر الرقمي', link: '/dashboard/supplier' },
           { label: 'معرض الموردين (Showroom)', link: '/supplier/tissage-de-lyon' },
