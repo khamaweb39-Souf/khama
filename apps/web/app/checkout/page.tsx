@@ -6,7 +6,7 @@ import {
   CreditCard, Truck, MapPin, Phone, User as UserIcon, 
   ShieldCheck, Smartphone, Landmark, Banknote, 
   ChevronRight, ShoppingBag, Tag, Lock, CheckCircle2,
-  AlertCircle, Info, ChevronLeft
+  AlertCircle, Info, ChevronLeft, Package, Zap
 } from 'lucide-react';
 
 // Mock cart store hook (assuming it exists in the workspace)
