@@ -345,5 +345,7 @@ body {
 }
 
 .horizontal-scroll-mobile {
-  @apply flex overflow-x-auto snap-x snap-mandatory no-scrollbar;
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
 }
