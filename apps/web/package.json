@@ -12,6 +12,8 @@
     "@khama/shared": "*",
     "@khama/ui": "*",
     "@prisma/client": "latest",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
     "@tanstack/react-query": "^5.100.10",
     "date-fns": "^3.6.0",
     "i18next": "^26.1.0",
@@ -23,6 +25,7 @@
     "react-dom": "^18.3.1",
     "react-i18next": "^17.0.7",
     "socket.io-client": "^4.8.3",
+    "three": "^0.184.0",
     "zustand": "^4.5.7"
   },
   "devDependencies": {

@@ -4,9 +4,12 @@ import React, { useState } from 'react';
 import { 
   Heart, ShieldCheck, MapPin, Wind, 
   Layers, Package, Calendar, Plus, 
-  ChevronDown, ArrowRight, Star
+  ChevronDown, ArrowRight, Star, Rotate3D
 } from 'lucide-react';
 import { FabricCardProps } from '../types/fabric';
+import dynamic from 'next/dynamic';
+
+const Fabric3DViewer = dynamic(() => import('./product/Fabric3DViewer'), { ssr: false });
 
 export default function FabricCard(props: FabricCardProps) {
   const { 
@@ -18,6 +21,7 @@ export default function FabricCard(props: FabricCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [is3DOpen, setIs3DOpen] = useState(false);
 
   // GSM scale helper
   const getGsmLevel = (gsm: number) => {
@@ -68,6 +72,16 @@ export default function FabricCard(props: FabricCardProps) {
         >
           <Heart className={`w-5 h-5 ${isLiked ? 'fill-current' : ''}`} />
         </button>
+
+        {/* 3D View Button (Center Overlay) */}
+        <div className={`absolute inset-0 flex items-center justify-center z-20 transition-all duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
+           <button 
+             onClick={() => setIs3DOpen(true)}
+             className="px-6 py-3 bg-white text-charcoal rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] shadow-2xl hover:bg-gold hover:text-white transition-all transform hover:scale-110 flex items-center gap-3"
+           >
+              معاينة 3D <Rotate3D className="w-4 h-4" />
+           </button>
+        </div>
 
         {/* Bottom Certifications (Glassmorphism) */}
         <div className="absolute bottom-5 left-5 right-5 flex gap-2">
@@ -232,6 +246,14 @@ export default function FabricCard(props: FabricCardProps) {
         absolute bottom-0 left-0 w-full h-1.5
         ${commercial.stockStatus === 'IN_STOCK' ? 'bg-green-500' : 'bg-gold'}
       `} />
+
+      {/* 3D Viewer Modal */}
+      <Fabric3DViewer 
+        isOpen={is3DOpen} 
+        onClose={() => setIs3DOpen(false)} 
+        fabricName={name}
+        initialColor={technicalSpecs.colorsAvailable[0]}
+      />
     </div>
   );
 }
