@@ -1,7 +1,7 @@
 'use client';
 
 import React, { Suspense, useState, useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, ThreeElements } from '@react-three/fiber';
 import { 
   PerspectiveCamera, 
   Environment, 
