@@ -23,7 +23,7 @@ services:
       - key: CLOUDINARY_URL
         sync: false   # يُضاف يدوياً من لوحة Render
       - key: ALLOWED_ORIGINS
-        value: https://khama.onrender.com
+        value: https://khama-frontend-v1.onrender.com,https://khama.onrender.com
 
   # ─── Web Frontend (Render Web Service) ───────────────────────────
   - type: web
@@ -43,7 +43,7 @@ services:
       - key: NEXT_TELEMETRY_DISABLED
         value: 1
       - key: NODE_OPTIONS
-        value: --max-old-space-size=2048
+        value: --max-old-space-size=512
       - key: GENERATE_SOURCEMAP
         value: "false"
       - key: CI

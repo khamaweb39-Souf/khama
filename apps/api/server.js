@@ -37,9 +37,11 @@ const PORT = process.env.PORT || 3005;
 // ─── Middlewares ──────────────────────────────────────────────────────────────
 app.use(helmet());
 app.use(compression());
+const allowedOrigins = process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : ['https://khama.onrender.com'];
+
 app.use(cors({
   origin: [
-    'https://khama.onrender.com',
+    ...allowedOrigins,
     'http://localhost:3000',
     'http://localhost:8081', // Expo
   ],
