@@ -5,29 +5,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&family=Cairo:wght@400;700;900&display=swap');
 
 :root {
-  /* Khama Couture Palette */
+  /* Khama Couture Palette - ACCESSIBILITY UPDATED (WCAG 2.1 AA) */
   --color-primary: #F5F0E8;
   --color-secondary: #C9A84C;
   --color-accent: #2D3561;
-  --color-background: #FEFCF8;
-  --color-text: #1A1A2E;
-  --color-muted: #9E8E7E;
+  --color-background: #0A0A0A; /* Deep Midnight */
+  --color-text: #E0D9CC;       /* High Contrast Body (Pass AA) */
+  --color-text-heading: #F5F0E8;
+  --color-text-muted: #D6CFC2;  /* Subtitles (Pass AA) */
+  --color-text-on-light: #2C1E0F; /* Deep Espresso for Light Surfaces */
   --color-success: #4A7C59;
   --color-warning: #C4713A;
   --color-error: #B23B3B;
-  --color-surface: #FFFFFF;
-  --color-border: #E8E2D9;
+  --color-surface: #1A1A1A;    /* Dark Charcoal Card */
+  --color-border: rgba(255, 255, 255, 0.08);
   
-  /* Hero Specific Colors (Synced) */
+  /* Gold Accents System */
   --gold:          #C9A84C;
-  --gold-light:    #E8CC7A;
+  --gold-light:    #E8CC7A;    /* For Text on Dark (Pass AA) */
   --gold-dark:     #9A7A2E;
-  --ecru:          #F5F0E8;
-  --ecru-muted:    rgba(245, 240, 232, 0.72);
-  --ecru-ghost:    rgba(245, 240, 232, 0.14);
-  --silk:          #EDE6D6;
+  
+  /* Luxury Surface System */
+  --midnight:      #0A0A0A;
   --obsidian:      #0D0C0A;
   --charcoal:      #1A1917;
+  --ecru:          #F5F0E8;
+  --ecru-muted:    #D6CFC2;
+  --ecru-ghost:    rgba(245, 240, 232, 0.1);
   --warm-grey:     #6B6560;
   
   /* Typography Systems */
