@@ -5,30 +5,50 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
     "../../packages/ui/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        burgundy: {
-          DEFAULT: '#2D3561',
-          dark: '#1A1A2E',
+        // 2025 Luxury Textile Palette
+        midnight: {
+          DEFAULT: '#0D0C0A',
+          light: '#1A1917',
+          deep: '#050505',
         },
-        gold: {
+        amber: {
           DEFAULT: '#C9A84C',
-          light: '#F0E6C8',
-          dark: '#8B6914',
+          light: '#E8CC7A',
+          dark: '#9A7A2E',
         },
-        ecru: '#F5F0E8',
-        'off-white': '#FEFCF8',
+        terracotta: {
+          DEFAULT: '#C4713A',
+          light: '#D98E5F',
+          dark: '#A65A2B',
+        },
+        olive: {
+          DEFAULT: '#4A7C59',
+          light: '#6B9A7A',
+          dark: '#355C41',
+        },
+        burgundy: {
+          DEFAULT: '#5C0029',
+          dark: '#3D001B',
+        },
+        ecru: {
+          DEFAULT: '#F5F0E8',
+          muted: 'rgba(245, 240, 232, 0.72)',
+          ghost: 'rgba(245, 240, 232, 0.14)',
+        },
         charcoal: '#1A1A2E',
         obsidian: '#0D0C0A',
-        grege: '#9E8E7E',
-        sage: '#4A7C59',
-        sienna: '#C4713A',
-        garance: '#B23B3B',
+        silk: '#EDE6D6',
       },
       fontFamily: {
-        display: ['var(--font-display)', 'serif'],
-        body: ['var(--font-body)', 'sans-serif'],
+        display: ['Cormorant Garamond', 'serif'],
+        body: ['Outfit', 'Inter', 'sans-serif'],
+      },
+      backdropBlur: {
+        xs: '2px',
       },
     },
   },
