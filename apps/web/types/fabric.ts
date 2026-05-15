@@ -90,6 +90,9 @@ export interface FabricCardProps {
   technicalSpecs: {
     gsm: number;
     width: number;
+    rollLength?: number;
+    thickness?: string;
+    finish?: string;
     weave: string;
     colorsAvailable: string[];
     totalColors: number;

@@ -217,13 +217,33 @@ export default function FabricCard(props: FabricCardProps) {
                        <p className="text-[9px] text-muted font-black uppercase mb-1">العرض (Laize)</p>
                        <p className="text-xs font-black text-charcoal">{technicalSpecs.width} سم</p>
                     </div>
-                    <div className="p-3 bg-white rounded-xl border border-ecru/50">
+                    {technicalSpecs.rollLength && (
+                      <div className="p-3 bg-white rounded-xl border border-ecru/50">
+                         <p className="text-[9px] text-muted font-black uppercase mb-1">طول الرول</p>
+                         <p className="text-xs font-black text-charcoal">{technicalSpecs.rollLength} م</p>
+                      </div>
+                    )}
+                    {technicalSpecs.thickness && (
+                      <div className="p-3 bg-white rounded-xl border border-ecru/50">
+                         <p className="text-[9px] text-muted font-black uppercase mb-1">السمك</p>
+                         <p className="text-xs font-black text-charcoal">{technicalSpecs.thickness}</p>
+                      </div>
+                    )}
+                    {technicalSpecs.finish && (
+                      <div className="p-3 bg-white rounded-xl border border-ecru/50">
+                         <p className="text-[9px] text-muted font-black uppercase mb-1">التجهيز (Finish)</p>
+                         <p className="text-xs font-black text-charcoal">{technicalSpecs.finish}</p>
+                      </div>
+                    )}
+                    <div className="p-3 bg-white rounded-xl border border-ecru/50 col-span-2">
                        <p className="text-[9px] text-muted font-black uppercase mb-1">الألوان المتاحة</p>
                        <div className="flex items-center gap-1.5 mt-1">
-                          {technicalSpecs.colorsAvailable.slice(0, 3).map((c, i) => (
+                          {technicalSpecs.colorsAvailable.slice(0, 6).map((c, i) => (
                             <div key={i} className="w-3.5 h-3.5 rounded-full ring-1 ring-gray-200" style={{ backgroundColor: c }} />
                           ))}
-                          <span className="text-[9px] font-black text-gold">+{technicalSpecs.totalColors - 3}</span>
+                          {technicalSpecs.totalColors > 6 && (
+                            <span className="text-[9px] font-black text-gold">+{technicalSpecs.totalColors - 6} لون إضافي</span>
+                          )}
                        </div>
                     </div>
                  </div>

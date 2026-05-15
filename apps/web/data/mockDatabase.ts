@@ -1,173 +1,387 @@
 export const MOCK_PRODUCTS = [
-  // --- FABRICS (أقمشة) ---
+  // --- HIGH-FIDELITY TECHNICAL TEXTILES (15+ Items) ---
   {
     id: 'f1',
-    name: 'قطن جزائري فاخر - أبيض نقي',
-    reference: 'DZ-COT-001',
+    name: 'جاكارد ملكي - نقشة الزمرد',
+    reference: 'DZ-JAC-ROYAL-001',
     category: 'fabrics',
-    subcategory: 'cotton',
-    image: 'https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?q=80&w=800&auto=format&fit=crop',
-    collection: 'SS26',
-    certifications: ['GOTS', 'OEKO-TEX'],
+    subcategory: 'jacquard',
+    image: 'https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?q=80&w=800&auto=format&fit=crop',
+    collection: 'HERITAGE 2026',
+    certifications: ['GOTS', 'OEKO-TEX Standard 100'],
     sustainabilityScore: 5,
-    createdAt: '2024-01-01T00:00:00Z',
-    supplier: { id: 's1', name: 'بيوتيك الجزائر (BioTex)', isVerified: true, avatar: 'https://ui-avatars.com/api/?name=Bio+Tex&background=C9A84C&color=fff' },
+    supplier: { id: 's1', name: 'نسيج ليون - الجزائر', isVerified: true, avatar: '🏢' },
     origin: { country: 'الجزائر', flag: '🇩🇿' },
-    composition: [{ fiber: 'قطن عضوي', percentage: 100, color: '#FFFFFF' }],
-    technicalSpecs: { gsm: 140, width: 160, weave: 'Plain', colorsAvailable: ['#FFFFFF'], totalColors: 1 },
-    commercial: { price: 8.50, currency: '$', unit: 'm', moq: 100, stockStatus: 'IN_STOCK' }
+    composition: [
+      { fiber: 'حرير طبيعي', percentage: 60, color: '#004B49' },
+      { fiber: 'خيوط ذهبية', percentage: 40, color: '#C9A84C' }
+    ],
+    technicalSpecs: { 
+      gsm: 280, 
+      width: 140, 
+      rollLength: 50,
+      weave: 'Jacquard Complex', 
+      colorsAvailable: ['#004B49', '#5C0029', '#0D0C0A'], 
+      totalColors: 12 
+    },
+    commercial: { price: 6500, currency: 'DZD', unit: 'm', moq: 10, stockStatus: 'IN_STOCK', leadTimeWeeks: 1 }
   },
   {
     id: 'f2',
-    name: 'حرير ساتان ملكي - تلمسان',
-    reference: 'DZ-SILK-042',
+    name: 'نسيج صناعي مقاوم للحرارة (خالٍ من الأسبستوس)',
+    reference: 'IND-FIRE-ARAM-04',
     category: 'fabrics',
-    subcategory: 'silk',
-    image: 'https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?q=80&w=800&auto=format&fit=crop',
-    collection: 'PERMANENT',
-    certifications: ['OEKO-TEX'],
+    subcategory: 'industrial',
+    image: 'https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=800&auto=format&fit=crop',
+    collection: 'SAFE-TECH',
+    certifications: ['ISO 9001', 'UL Certified', 'ASTM'],
     sustainabilityScore: 4,
-    createdAt: '2024-01-01T00:00:00Z',
-    supplier: { id: 's2', name: 'حرير الأطلس', isVerified: true, avatar: 'https://ui-avatars.com/api/?name=Atlas+Silk&background=C9A84C&color=fff' },
-    origin: { country: 'الجزائر', flag: '🇩🇿' },
-    composition: [{ fiber: 'حرير طبيعي', percentage: 100, color: '#F5F0E8' }],
-    technicalSpecs: { gsm: 85, width: 140, weave: 'Satin', colorsAvailable: ['#F5F0E8', '#C9A84C'], totalColors: 12 },
-    commercial: { price: 45.00, currency: '$', unit: 'm', moq: 10, stockStatus: 'ON_ORDER', leadTimeWeeks: 4 }
+    supplier: { id: 's8', name: 'تجهيزات الشرق للنسيج', isVerified: true, avatar: '🏗️' },
+    origin: { country: 'ألمانيا', flag: '🇩🇪' },
+    composition: [
+      { fiber: 'أراميد (Aramid)', percentage: 100, color: '#D4AF37' }
+    ],
+    technicalSpecs: { 
+      gsm: 450, 
+      width: 150, 
+      rollLength: 100,
+      weave: 'Twill 2/2', 
+      colorsAvailable: ['#D4AF37'], 
+      totalColors: 1 
+    },
+    commercial: { price: 12000, currency: 'DZD', unit: 'm', moq: 50, stockStatus: 'ON_ORDER', leadTimeWeeks: 3 }
   },
   {
     id: 'f3',
-    name: 'كتان طبيعي مغسول - تونس',
-    reference: 'TN-LIN-005',
+    name: 'مزيج القطن العضوي والخيزران (Bamboo)',
+    reference: 'DZ-ECO-SOFT-12',
     category: 'fabrics',
-    subcategory: 'linen',
+    subcategory: 'organic',
     image: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=800&auto=format&fit=crop',
-    collection: 'ECO-FRIENDLY',
-    certifications: ['REACH', 'OEKO-TEX'],
+    collection: 'GREEN-FLOW',
+    certifications: ['GOTS', 'PETA-Approved Vegan'],
     sustainabilityScore: 5,
-    createdAt: '2024-01-01T00:00:00Z',
-    supplier: { id: 's3', name: 'قرطاج للمنسوجات', isVerified: true, avatar: 'https://ui-avatars.com/api/?name=Carthage&background=C9A84C&color=fff' },
-    origin: { country: 'تونس', flag: '🇹🇳' },
-    composition: [{ fiber: 'كتان', percentage: 100, color: '#9E8E7E' }],
-    technicalSpecs: { gsm: 210, width: 150, weave: 'Plain', colorsAvailable: ['#9E8E7E', '#4A7C59'], totalColors: 8 },
-    commercial: { price: 18.00, currency: '$', unit: 'm', moq: 50, stockStatus: 'IN_STOCK' }
+    supplier: { id: 's2', name: 'بيوتيك الجزائر (BioTex)', isVerified: true, avatar: '🌿' },
+    origin: { country: 'الجزائر', flag: '🇩🇿' },
+    composition: [
+      { fiber: 'قطن عضوي', percentage: 70, color: '#F5F5F5' },
+      { fiber: 'ألياف الخيزران', percentage: 30, color: '#F5F5F5' }
+    ],
+    technicalSpecs: { 
+      gsm: 160, 
+      width: 180, 
+      rollLength: 60,
+      weave: 'Single Jersey', 
+      colorsAvailable: ['#F5F5F5', '#E3DED1', '#4A7C59'], 
+      totalColors: 24 
+    },
+    commercial: { price: 2200, currency: 'DZD', unit: 'm', moq: 100, stockStatus: 'IN_STOCK', leadTimeWeeks: 1 }
   },
   {
     id: 'f4',
-    name: 'صوف ميرينو ممتاز - مغربي',
-    reference: 'MA-WOOL-011',
+    name: 'جوخ شتوي مبطن باللباد (Felt-lined)',
+    reference: 'DZ-WINT-FELT-02',
+    category: 'fabrics',
+    subcategory: 'winter',
+    image: 'https://images.unsplash.com/photo-1594932224011-042041c6ff9a?q=80&w=800&auto=format&fit=crop',
+    collection: 'ALPINE 2026',
+    certifications: ['ISO 14001'],
+    sustainabilityScore: 3,
+    supplier: { id: 's4', name: 'أصواف الأطلس', isVerified: true, avatar: '🐑' },
+    origin: { country: 'المغرب', flag: '🇲🇦' },
+    composition: [
+      { fiber: 'صوف بكر', percentage: 80, color: '#2C3E50' },
+      { fiber: 'بوليستر معاد تدويره', percentage: 20, color: '#2C3E50' }
+    ],
+    technicalSpecs: { 
+      gsm: 520, 
+      width: 145, 
+      rollLength: 30,
+      weave: 'Double Face / Felt', 
+      colorsAvailable: ['#2C3E50', '#5C0029', '#0D0C0A'], 
+      totalColors: 8 
+    },
+    commercial: { price: 4800, currency: 'DZD', unit: 'm', moq: 20, stockStatus: 'IN_STOCK', leadTimeWeeks: 2 }
+  },
+  {
+    id: 'f5',
+    name: 'دينيم ياباني خام (Raw Selvedge Denim)',
+    reference: 'JPN-DENIM-14OZ',
+    category: 'fabrics',
+    subcategory: 'denim',
+    image: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=800&auto=format&fit=crop',
+    collection: 'DENIM-HEAD',
+    certifications: ['BCI Cotton'],
+    sustainabilityScore: 4,
+    supplier: { id: 's9', name: 'المتحدة للنسيج', isVerified: true, avatar: '👖' },
+    origin: { country: 'اليابان', flag: '🇯🇵' },
+    composition: [
+      { fiber: 'قطن طويل التيلة', percentage: 100, color: '#002366' }
+    ],
+    technicalSpecs: { 
+      gsm: 410, 
+      width: 80, 
+      rollLength: 45,
+      weave: '3/1 Right Hand Twill', 
+      colorsAvailable: ['#002366'], 
+      totalColors: 1 
+    },
+    commercial: { price: 3500, currency: 'DZD', unit: 'm', moq: 100, stockStatus: 'PRE_ORDER', leadTimeWeeks: 6 }
+  },
+  {
+    id: 'f6',
+    name: 'مخمل مطرز - فاخر',
+    reference: 'DZ-VELVET-EMB-08',
+    category: 'fabrics',
+    subcategory: 'velvet',
+    image: 'https://images.unsplash.com/photo-1523450001312-faa4e2e31f0f?q=80&w=800&auto=format&fit=crop',
+    collection: 'GALA 2026',
+    certifications: ['OEKO-TEX'],
+    sustainabilityScore: 3,
+    supplier: { id: 's1', name: 'نسيج ليون - الجزائر', isVerified: true, avatar: '🏢' },
+    origin: { country: 'الجزائر', flag: '🇩🇿' },
+    composition: [
+      { fiber: 'بوليستر بريميوم', percentage: 90, color: '#800020' },
+      { fiber: 'إيلاستين', percentage: 10, color: '#800020' }
+    ],
+    technicalSpecs: { 
+      gsm: 380, 
+      width: 150, 
+      rollLength: 40,
+      weave: 'Pile Weave / Velvet', 
+      colorsAvailable: ['#800020', '#1A1A1A', '#4A0E0E'], 
+      totalColors: 15 
+    },
+    commercial: { price: 5500, currency: 'DZD', unit: 'm', moq: 15, stockStatus: 'IN_STOCK', leadTimeWeeks: 1 }
+  },
+  {
+    id: 'f7',
+    name: 'قماش كانفاس عسكري متين',
+    reference: 'IND-CANVAS-MIL-01',
+    category: 'fabrics',
+    subcategory: 'industrial',
+    image: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=800&auto=format&fit=crop',
+    collection: 'TACTICAL',
+    certifications: ['ISO 9001', 'Military Grade'],
+    sustainabilityScore: 4,
+    supplier: { id: 's8', name: 'تجهيزات الشرق للنسيج', isVerified: true, avatar: '🏗️' },
+    origin: { country: 'الجزائر', flag: '🇩🇿' },
+    composition: [
+      { fiber: 'قطن ثقيل', percentage: 60, color: '#4B5320' },
+      { fiber: 'بوليستر عالي الشد', percentage: 40, color: '#4B5320' }
+    ],
+    technicalSpecs: { 
+      gsm: 600, 
+      width: 160, 
+      rollLength: 50,
+      weave: 'Duck Weave', 
+      colorsAvailable: ['#4B5320', '#708090'], 
+      totalColors: 4 
+    },
+    commercial: { price: 2800, currency: 'DZD', unit: 'm', moq: 200, stockStatus: 'IN_STOCK', leadTimeWeeks: 2 }
+  },
+  {
+    id: 'f8',
+    name: 'جيرسي بوليستر معاد تدويره',
+    reference: 'DZ-RE-POLY-JRS',
+    category: 'fabrics',
+    subcategory: 'sport',
+    image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?q=80&w=800&auto=format&fit=crop',
+    collection: 'ACTIVE-ECO',
+    certifications: ['GRS (Global Recycled Standard)', 'OEKO-TEX'],
+    sustainabilityScore: 5,
+    supplier: { id: 's2', name: 'بيوتيك الجزائر (BioTex)', isVerified: true, avatar: '🌿' },
+    origin: { country: 'الجزائر', flag: '🇩🇿' },
+    composition: [
+      { fiber: 'بوليستر تدوير', percentage: 100, color: '#007FFF' }
+    ],
+    technicalSpecs: { 
+      gsm: 180, 
+      width: 170, 
+      rollLength: 80,
+      weave: 'Circular Knit', 
+      colorsAvailable: ['#007FFF', '#FF4500', '#32CD32'], 
+      totalColors: 32 
+    },
+    commercial: { price: 1450, currency: 'DZD', unit: 'm', moq: 300, stockStatus: 'IN_STOCK', leadTimeWeeks: 2 }
+  },
+  {
+    id: 'f9',
+    name: 'توييد صوف جزائري - نمط كلاسيكي',
+    reference: 'DZ-WOOL-TWEED-05',
     category: 'fabrics',
     subcategory: 'wool',
-    image: 'https://images.unsplash.com/photo-1594932224011-042041c6ff9a?q=80&w=800&auto=format&fit=crop',
-    collection: 'FW26',
-    certifications: ['ISO'],
-    sustainabilityScore: 4,
-    createdAt: '2024-01-01T00:00:00Z',
-    supplier: { id: 's4', name: 'أصواف الأطلس', isVerified: true, avatar: 'https://ui-avatars.com/api/?name=Atlas+Wool&background=C9A84C&color=fff' },
-    origin: { country: 'المغرب', flag: '🇲🇦' },
-    composition: [{ fiber: 'صوف ميرينو', percentage: 100, color: '#4A3728' }],
-    technicalSpecs: { gsm: 320, width: 150, weave: 'Twill', colorsAvailable: ['#4A3728', '#1A1A2E'], totalColors: 6 },
-    commercial: { price: 28.50, currency: '$', unit: 'm', moq: 20, stockStatus: 'IN_STOCK' }
-  },
-
-  // --- LEATHER (جلود) ---
-  {
-    id: 'l1',
-    name: 'جلد بقري طبيعي - مدبغة جيجل',
-    reference: 'DZ-LTH-COW-01',
-    category: 'leather',
-    subcategory: 'cowhide',
-    image: 'https://images.unsplash.com/photo-1590736962236-455b76662497?q=80&w=800&auto=format&fit=crop',
-    collection: 'PERMANENT',
-    certifications: ['ISO', 'REACH'],
-    sustainabilityScore: 4,
-    createdAt: '2024-01-01T00:00:00Z',
-    supplier: { id: 's5', name: 'مدابغ جيجل الكبرى', isVerified: true, avatar: 'https://ui-avatars.com/api/?name=Jijel+Leather&background=C9A84C&color=fff' },
+    image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=800&auto=format&fit=crop',
+    collection: 'SAVILE-DZ',
+    certifications: ['Handwoven Algerian'],
+    sustainabilityScore: 5,
+    supplier: { id: 's4', name: 'أصواف الأطلس', isVerified: true, avatar: '🐑' },
     origin: { country: 'الجزائر', flag: '🇩🇿' },
-    composition: [{ fiber: 'جلد طبيعي', percentage: 100, color: '#5C4033' }],
-    technicalSpecs: { thickness: '1.2mm - 1.4mm', finish: 'Full Grain', colorsAvailable: ['#5C4033', '#000000'], totalColors: 5 },
-    commercial: { price: 3.20, currency: '$', unit: 'sqft', moq: 500, stockStatus: 'IN_STOCK' }
+    composition: [
+      { fiber: 'صوف غنم محلي', percentage: 100, color: '#8B4513' }
+    ],
+    technicalSpecs: { 
+      gsm: 380, 
+      width: 150, 
+      rollLength: 25,
+      weave: 'Tweed Weave', 
+      colorsAvailable: ['#8B4513', '#A0522D', '#D2B48C'], 
+      totalColors: 10 
+    },
+    commercial: { price: 5200, currency: 'DZD', unit: 'm', moq: 5, stockStatus: 'ON_ORDER', leadTimeWeeks: 4 }
   },
   {
-    id: 'l2',
-    name: 'جلد الماعز نابا - ناعم',
-    reference: 'DZ-LTH-GOAT-05',
-    category: 'leather',
-    subcategory: 'nappa',
-    image: 'https://images.unsplash.com/photo-1524230572899-a752b3835840?q=80&w=800&auto=format&fit=crop',
-    collection: 'SS26',
-    certifications: ['REACH'],
+    id: 'f10',
+    name: 'قماش كوردروي ثقيل (Corduroy 8-Wale)',
+    reference: 'DZ-CORD-HEAVY-01',
+    category: 'fabrics',
+    subcategory: 'winter',
+    image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=800&auto=format&fit=crop',
+    collection: 'VINTAGE-VIBE',
+    certifications: ['BCI Cotton'],
+    sustainabilityScore: 4,
+    supplier: { id: 's1', name: 'نسيج ليون - الجزائر', isVerified: true, avatar: '🏢' },
+    origin: { country: 'الجزائر', flag: '🇩🇿' },
+    composition: [
+      { fiber: 'قطن', percentage: 98, color: '#3D2B1F' },
+      { fiber: 'ليكرا', percentage: 2, color: '#3D2B1F' }
+    ],
+    technicalSpecs: { 
+      gsm: 320, 
+      width: 155, 
+      rollLength: 40,
+      weave: 'Warp Pile Corduroy', 
+      colorsAvailable: ['#3D2B1F', '#DAA520', '#000000'], 
+      totalColors: 12 
+    },
+    commercial: { price: 2600, currency: 'DZD', unit: 'm', moq: 30, stockStatus: 'IN_STOCK', leadTimeWeeks: 1 }
+  },
+  {
+    id: 'f11',
+    name: 'حرير شيفون بريميوم - شفاف',
+    reference: 'DZ-SILK-CHIF-03',
+    category: 'fabrics',
+    subcategory: 'silk',
+    image: 'https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?q=80&w=800&auto=format&fit=crop',
+    collection: 'ETHEREAL',
+    certifications: ['OEKO-TEX'],
+    sustainabilityScore: 4,
+    supplier: { id: 's2', name: 'حرير الأطلس', isVerified: true, avatar: '🦋' },
+    origin: { country: 'الجزائر', flag: '🇩🇿' },
+    composition: [
+      { fiber: 'حرير دودة القز', percentage: 100, color: '#FFB6C1' }
+    ],
+    technicalSpecs: { 
+      gsm: 45, 
+      width: 140, 
+      rollLength: 60,
+      weave: 'Plain Sheer Weave', 
+      colorsAvailable: ['#FFB6C1', '#F0F8FF', '#FFFFFF'], 
+      totalColors: 40 
+    },
+    commercial: { price: 4200, currency: 'DZD', unit: 'm', moq: 10, stockStatus: 'IN_STOCK', leadTimeWeeks: 1 }
+  },
+  {
+    id: 'f12',
+    name: 'غابردين مقاوم للماء - تقني',
+    reference: 'DZ-GAB-TECH-WP',
+    category: 'fabrics',
+    subcategory: 'technical',
+    image: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=800&auto=format&fit=crop',
+    collection: 'STORM-PROOF',
+    certifications: ['REACH Compliance'],
     sustainabilityScore: 3,
-    createdAt: '2024-01-01T00:00:00Z',
-    supplier: { id: 's6', name: 'مصنع الأوراسي للجلود', isVerified: true, avatar: 'https://ui-avatars.com/api/?name=Aures+Leather&background=C9A84C&color=fff' },
+    supplier: { id: 's9', name: 'المتحدة للنسيج', isVerified: true, avatar: '🧥' },
     origin: { country: 'الجزائر', flag: '🇩🇿' },
-    composition: [{ fiber: 'جلد ماعز', percentage: 100, color: '#C9A84C' }],
-    technicalSpecs: { thickness: '0.6mm - 0.8mm', finish: 'Nappa', colorsAvailable: ['#C9A84C', '#8B0000'], totalColors: 10 },
-    commercial: { price: 2.80, currency: '$', unit: 'sqft', moq: 1000, stockStatus: 'PRE_ORDER', leadTimeWeeks: 6 }
+    composition: [
+      { fiber: 'قطن', percentage: 65, color: '#F5F5DC' },
+      { fiber: 'بوليستر', percentage: 35, color: '#F5F5DC' }
+    ],
+    technicalSpecs: { 
+      gsm: 240, 
+      width: 155, 
+      rollLength: 55,
+      weave: 'Twill 2/1', 
+      colorsAvailable: ['#F5F5DC', '#2F4F4F', '#000000'], 
+      totalColors: 6 
+    },
+    commercial: { price: 1950, currency: 'DZD', unit: 'm', moq: 50, stockStatus: 'IN_STOCK', leadTimeWeeks: 2 }
   },
   {
-    id: 'l3',
-    name: 'جلد نباتي (صبار) صديق للبيئة',
-    reference: 'MA-VEG-LTH-02',
+    id: 'f13',
+    name: 'بوبلين قطني - سهل الكي',
+    reference: 'DZ-POP-EZIRON',
+    category: 'fabrics',
+    subcategory: 'cotton',
+    image: 'https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?q=80&w=800&auto=format&fit=crop',
+    collection: 'OFFICE-PRO',
+    certifications: ['BCI Cotton'],
+    sustainabilityScore: 4,
+    supplier: { id: 's2', name: 'بيوتيك الجزائر (BioTex)', isVerified: true, avatar: '🌿' },
+    origin: { country: 'الجزائر', flag: '🇩🇿' },
+    composition: [
+      { fiber: 'قطن مصري طويل التيلة', percentage: 100, color: '#ADD8E6' }
+    ],
+    technicalSpecs: { 
+      gsm: 110, 
+      width: 150, 
+      rollLength: 70,
+      weave: 'Fine Plain Weave', 
+      colorsAvailable: ['#ADD8E6', '#FFFFFF', '#FFDAB9'], 
+      totalColors: 18 
+    },
+    commercial: { price: 1150, currency: 'DZD', unit: 'm', moq: 100, stockStatus: 'IN_STOCK', leadTimeWeeks: 1 }
+  },
+  {
+    id: 'f14',
+    name: 'قماش غير منسوج طبي (Spunbond PP)',
+    reference: 'MED-NONWOV-01',
+    category: 'fabrics',
+    subcategory: 'medical',
+    image: 'https://images.unsplash.com/photo-1582142306909-195724d339aa?q=80&w=800&auto=format&fit=crop',
+    collection: 'HEALTH-SAFE',
+    certifications: ['CE Medical Grade', 'ISO 13485'],
+    sustainabilityScore: 3,
+    supplier: { id: 's8', name: 'تجهيزات الشرق للنسيج', isVerified: true, avatar: '🏗️' },
+    origin: { country: 'الجزائر', flag: '🇩🇿' },
+    composition: [
+      { fiber: 'بولي بروبلين', percentage: 100, color: '#00BFFF' }
+    ],
+    technicalSpecs: { 
+      gsm: 40, 
+      width: 160, 
+      rollLength: 500,
+      weave: 'Spunbond Non-woven', 
+      colorsAvailable: ['#00BFFF', '#FFFFFF'], 
+      totalColors: 2 
+    },
+    commercial: { price: 85, currency: 'DZD', unit: 'm', moq: 2000, stockStatus: 'IN_STOCK', leadTimeWeeks: 1 }
+  },
+  {
+    id: 'f15',
+    name: 'جلد سويد نباتي (Eco-Suede)',
+    reference: 'VEG-SUEDE-ECO',
     category: 'leather',
     subcategory: 'vegan',
-    image: 'https://images.unsplash.com/photo-1584290867415-527a8475726d?q=80&w=800&auto=format&fit=crop',
-    collection: 'ECO-FRIENDLY',
-    certifications: ['GOTS', 'VEGAN'],
+    image: 'https://images.unsplash.com/photo-1524230572899-a752b3835840?q=80&w=800&auto=format&fit=crop',
+    collection: 'ANIMAL-FREE',
+    certifications: ['PETA-Approved Vegan', 'GRS'],
     sustainabilityScore: 5,
-    createdAt: '2024-01-01T00:00:00Z',
-    supplier: { id: 's7', name: 'جرين ليدر المغرب', isVerified: true, avatar: 'https://ui-avatars.com/api/?name=Green+Leather&background=C9A84C&color=fff' },
+    supplier: { id: 's7', name: 'جرين ليدر المغرب', isVerified: true, avatar: '🌱' },
     origin: { country: 'المغرب', flag: '🇲🇦' },
-    composition: [{ fiber: 'صبار', percentage: 80, color: '#4A7C59' }, { fiber: 'PU تدوير', percentage: 20, color: '#4A7C59' }],
-    technicalSpecs: { thickness: '1.0mm', finish: 'Matte', colorsAvailable: ['#4A7C59', '#F5F0E8'], totalColors: 4 },
-    commercial: { price: 22.00, currency: '$', unit: 'm', moq: 100, stockStatus: 'IN_STOCK' }
-  },
-
-  // --- MACHINERY (آلات) ---
-  {
-    id: 'm1',
-    name: 'ماكينة خياطة صناعية JUKI - DDL',
-    reference: 'MACH-SEW-001',
-    category: 'machinery',
-    subcategory: 'sewing',
-    image: 'https://images.unsplash.com/photo-1582142306909-195724d339aa?q=80&w=800&auto=format&fit=crop',
-    collection: 'PRO-TOOLS',
-    certifications: ['CE', 'ISO'],
-    sustainabilityScore: 4,
-    createdAt: '2024-01-01T00:00:00Z',
-    supplier: { id: 's8', name: 'تجهيزات الشرق للنسيج', isVerified: true, avatar: 'https://ui-avatars.com/api/?name=East+Tech&background=C9A84C&color=fff' },
-    origin: { country: 'اليابان (تجميع محلي)', flag: '🇯🇵' },
-    technicalSpecs: { speed: '5500 spm', power: '550W', type: 'Single Needle Lockstitch' },
-    commercial: { price: 850.00, currency: '$', unit: 'unit', moq: 1, stockStatus: 'IN_STOCK' }
-  },
-  {
-    id: 'm2',
-    name: 'نول نسيج دائري أوتوماتيكي',
-    reference: 'MACH-LOOM-04',
-    category: 'machinery',
-    subcategory: 'weaving',
-    image: 'https://images.unsplash.com/photo-1605147491621-5079a499368d?q=80&w=800&auto=format&fit=crop',
-    collection: 'INDUSTRIAL',
-    certifications: ['CE'],
-    sustainabilityScore: 3,
-    supplier: { id: 's9', name: 'المتحدة للآلات الصناعية', isVerified: true, avatar: 'https://ui-avatars.com/api/?name=United+Machinery&background=C9A84C&color=fff' },
-    origin: { country: 'الصين', flag: '🇨🇳' },
-    technicalSpecs: { diameter: '30 inch', needles: '22G', capacity: '200kg/day' },
-    commercial: { price: 12500.00, currency: '$', unit: 'unit', moq: 1, stockStatus: 'ON_ORDER', leadTimeWeeks: 12 }
-  },
-  {
-    id: 'm3',
-    name: 'جهاز قص بالليزر للأقمشة',
-    reference: 'MACH-LASER-02',
-    category: 'machinery',
-    subcategory: 'cutting',
-    image: 'https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?q=80&w=800&auto=format&fit=crop',
-    collection: 'HIGH-TECH',
-    certifications: ['ISO', 'FDA'],
-    sustainabilityScore: 5,
-    supplier: { id: 's8', name: 'تجهيزات الشرق للنسيج', isVerified: true, avatar: 'https://ui-avatars.com/api/?name=East+Tech&background=C9A84C&color=fff' },
-    origin: { country: 'ألمانيا', flag: '🇩🇪' },
-    technicalSpecs: { area: '1600x1000mm', power: '100W CO2', precision: '0.01mm' },
-    commercial: { price: 4200.00, currency: '$', unit: 'unit', moq: 1, stockStatus: 'IN_STOCK' }
+    composition: [
+      { fiber: 'بوليستر تدوير', percentage: 60, color: '#CD853F' },
+      { fiber: 'بولي يوريثين حيوي', percentage: 40, color: '#CD853F' }
+    ],
+    technicalSpecs: { 
+      thickness: '0.8mm', 
+      width: 140, 
+      rollLength: 30,
+      finish: 'Suede Matte', 
+      colorsAvailable: ['#CD853F', '#8B4513', '#000000'], 
+      totalColors: 8 
+    },
+    commercial: { price: 3200, currency: 'DZD', unit: 'm', moq: 50, stockStatus: 'IN_STOCK', leadTimeWeeks: 2 }
   }
 ];
 
