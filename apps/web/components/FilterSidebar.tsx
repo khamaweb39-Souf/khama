@@ -93,20 +93,20 @@ const SEASONS = ['SS26', 'AW26', 'Permanent'];
 const Section = ({ title, icon, children, badge }: { title: string, icon: any, children: React.ReactNode, badge?: string | number }) => {
   const [isOpen, setIsOpen] = useState(true);
   return (
-    <div className="border-b border-gray-100 py-6 last:border-0">
+    <div className="border-b border-white/5 py-6 last:border-0">
       <button 
         onClick={() => setIsOpen(!isOpen)} 
         className="flex w-full items-center justify-between group mb-4"
       >
         <div className="flex items-center gap-3">
-          <div className={`p-2 rounded-xl transition-colors ${isOpen ? 'bg-gold/10 text-gold' : 'bg-gray-50 text-muted'}`}>
+          <div className={`p-2 rounded-xl transition-colors ${isOpen ? 'bg-amber/10 text-amber' : 'bg-white/5 text-ecru-muted'}`}>
             {React.cloneElement(icon as React.ReactElement, { className: 'w-4 h-4' })}
           </div>
-          <span className="font-black text-charcoal group-hover:text-gold transition-colors text-sm uppercase tracking-wider">{title}</span>
+          <span className="font-black text-ecru group-hover:text-amber transition-colors text-sm uppercase tracking-wider">{title}</span>
         </div>
         <div className="flex items-center gap-3">
-          {badge && <span className="text-[10px] font-black text-gold bg-gold/5 px-2 py-0.5 rounded-full">{badge}</span>}
-          {isOpen ? <ChevronUp className="w-4 h-4 text-muted" /> : <ChevronDown className="w-4 h-4 text-muted" />}
+          {badge && <span className="text-[10px] font-black text-amber bg-amber/5 px-2 py-0.5 rounded-full">{badge}</span>}
+          {isOpen ? <ChevronUp className="w-4 h-4 text-ecru-muted" /> : <ChevronDown className="w-4 h-4 text-ecru-muted" />}
         </div>
       </button>
       <div className={`overflow-hidden transition-all duration-500 ${isOpen ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'}`}>
@@ -145,26 +145,26 @@ export default function FilterSidebar() {
       )}
 
       <aside className={`
-        fixed inset-y-0 right-0 w-[340px] bg-white z-[80] shadow-2xl transform transition-transform duration-500 lg:static lg:w-full lg:shadow-none lg:translate-x-0 lg:z-0
+        fixed inset-y-0 right-0 w-[340px] glass-morphism z-[80] shadow-2xl transform transition-transform duration-500 lg:static lg:w-full lg:shadow-none lg:translate-x-0 lg:z-0
         ${isMobileOpen ? 'translate-x-0' : 'translate-x-full'}
-        font-body border-r border-gray-100 flex flex-col h-screen lg:h-auto lg:sticky lg:top-24 lg:rounded-[2.5rem] lg:border
+        font-body border-r border-white/5 flex flex-col h-screen lg:h-auto lg:sticky lg:top-24 lg:rounded-[2.5rem] lg:border
       `} dir="rtl">
         
         {/* Header */}
-        <div className="p-8 border-b border-gray-100 flex items-center justify-between">
+        <div className="p-8 border-b border-white/5 flex items-center justify-between">
           <div>
-            <h2 className="text-xl font-black text-charcoal mb-1">فلاتر الخبراء</h2>
-            <p className="text-[10px] text-muted font-bold uppercase tracking-widest">تصفية دقيقة للأقمشة</p>
+            <h2 className="text-xl font-black text-ecru mb-1">فلاتر الخبراء</h2>
+            <p className="text-[10px] text-ecru-muted font-bold uppercase tracking-widest">تصفية دقيقة للأقمشة</p>
           </div>
-          {isMobileOpen && <button onClick={() => setIsMobileOpen(false)} className="p-2 hover:bg-gray-50 rounded-full"><X className="w-5 h-5" /></button>}
+          {isMobileOpen && <button onClick={() => setIsMobileOpen(false)} className="p-2 hover:bg-white/5 rounded-full"><X className="w-5 h-5 text-ecru" /></button>}
         </div>
 
         {/* Live Status Bar */}
-        <div className="px-8 py-3 bg-gold/5 flex items-center justify-between">
-           <span className="text-[10px] font-black text-gold-dark uppercase tracking-widest">الموردون الموثوقون فقط</span>
+        <div className="px-8 py-3 bg-amber/5 flex items-center justify-between border-b border-white/5">
+           <span className="text-[10px] font-black text-amber uppercase tracking-widest">الموردون الموثوقون فقط</span>
            <button 
              onClick={() => dispatch({ type: 'SET_VERIFIED', value: !state.verifiedOnly })}
-             className={`w-10 h-5 rounded-full transition-all relative ${state.verifiedOnly ? 'bg-gold' : 'bg-gray-200'}`}
+             className={`w-10 h-5 rounded-full transition-all relative ${state.verifiedOnly ? 'bg-amber' : 'bg-white/10'}`}
            >
              <div className={`absolute top-1 w-3 h-3 bg-white rounded-full transition-all ${state.verifiedOnly ? 'left-1' : 'left-6'}`} />
            </button>
@@ -181,7 +181,7 @@ export default function FilterSidebar() {
                     key={fiber}
                     onClick={() => dispatch({ type: 'TOGGLE_ARRAY', field: 'fiberTypes', value: fiber })}
                     className={`px-4 py-2 rounded-xl text-xs font-bold transition-all border
-                      ${state.fiberTypes.includes(fiber) ? 'bg-burgundy text-white border-burgundy shadow-lg shadow-burgundy/20' : 'bg-white border-gray-100 text-muted hover:border-gold'}`}
+                      ${state.fiberTypes.includes(fiber) ? 'bg-midnight text-amber border-amber shadow-lg shadow-amber/20' : 'bg-white/5 border-white/10 text-ecru-muted hover:border-amber'}`}
                   >
                     {fiber}
                   </button>
@@ -197,7 +197,7 @@ export default function FilterSidebar() {
                     key={weave.id}
                     onClick={() => dispatch({ type: 'TOGGLE_ARRAY', field: 'weaves', value: weave.id })}
                     className={`flex flex-col items-center gap-2 p-3 rounded-2xl border transition-all
-                      ${state.weaves.includes(weave.id) ? 'bg-gold/10 border-gold text-gold shadow-lg shadow-gold/10' : 'bg-white border-gray-100 text-muted hover:border-gold/30'}`}
+                      ${state.weaves.includes(weave.id) ? 'bg-amber/10 border-amber text-amber shadow-lg shadow-amber/10' : 'bg-white/5 border-white/10 text-ecru-muted hover:border-amber/30'}`}
                   >
                     <span className="text-2xl filter grayscale group-hover:grayscale-0 transition-all">{weave.img}</span>
                     <span className="text-[10px] font-black uppercase whitespace-nowrap">{weave.label.split(' ')[0]}</span>
@@ -214,9 +214,9 @@ export default function FilterSidebar() {
                    <span className="text-gold bg-gold/5 px-2 py-0.5 rounded-full">{state.gsm[1]} g/m²</span>
                    <span>ثقيل جداً</span>
                 </div>
-                <div className="relative h-2 bg-gray-100 rounded-full">
+                <div className="relative h-2 bg-white/10 rounded-full">
                    <div 
-                     className="absolute h-full bg-gold rounded-full" 
+                     className="absolute h-full bg-amber rounded-full" 
                      style={{ left: '0', right: `${100 - (state.gsm[1] / 600) * 100}%` }} 
                    />
                    <input 
@@ -241,7 +241,7 @@ export default function FilterSidebar() {
                     style={{ backgroundColor: color.hex }}
                     title={color.name}
                   >
-                    {state.colors.includes(color.name) && <CheckCircle2 className={`w-4 h-4 ${color.name === 'أبيض' ? 'text-charcoal' : 'text-white'}`} />}
+                    {state.colors.includes(color.name) && <CheckCircle2 className={`w-4 h-4 ${color.name === 'أبيض' ? 'text-midnight' : 'text-white'}`} />}
                   </button>
                 ))}
              </div>
@@ -254,10 +254,10 @@ export default function FilterSidebar() {
                   <button 
                     key={usage}
                     onClick={() => dispatch({ type: 'TOGGLE_ARRAY', field: 'usages', value: usage })}
-                    className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 group transition-all"
+                    className="flex items-center justify-between p-3 rounded-xl hover:bg-white/5 group transition-all"
                   >
-                    <span className={`text-xs font-bold transition-colors ${state.usages.includes(usage) ? 'text-burgundy' : 'text-muted'}`}>{usage}</span>
-                    <div className={`w-4 h-4 rounded-full border-2 transition-all ${state.usages.includes(usage) ? 'bg-burgundy border-burgundy' : 'border-gray-200 group-hover:border-gold'}`} />
+                    <span className={`text-xs font-bold transition-colors ${state.usages.includes(usage) ? 'text-amber' : 'text-ecru-muted'}`}>{usage}</span>
+                    <div className={`w-4 h-4 rounded-full border-2 transition-all ${state.usages.includes(usage) ? 'bg-amber border-amber' : 'border-white/10 group-hover:border-amber'}`} />
                   </button>
                 ))}
              </div>
@@ -271,13 +271,13 @@ export default function FilterSidebar() {
                     key={cert.id}
                     onClick={() => dispatch({ type: 'TOGGLE_ARRAY', field: 'certifications', value: cert.id })}
                     className={`flex items-center justify-between p-3 rounded-2xl border transition-all
-                      ${state.certifications.includes(cert.id) ? 'bg-green-50 border-green-500' : 'bg-white border-gray-100 hover:border-gold/30'}`}
+                      ${state.certifications.includes(cert.id) ? 'bg-amber/10 border-amber' : 'bg-white/5 border-white/10 hover:border-amber/30'}`}
                   >
                     <div className="flex items-center gap-3">
-                       <ShieldCheck className={`w-4 h-4 ${state.certifications.includes(cert.id) ? 'text-green-600' : 'text-muted'}`} />
-                       <span className="text-xs font-black text-charcoal">{cert.label}</span>
+                       <ShieldCheck className={`w-4 h-4 ${state.certifications.includes(cert.id) ? 'text-amber' : 'text-ecru-muted'}`} />
+                       <span className="text-xs font-black text-ecru">{cert.label}</span>
                     </div>
-                    <span className="text-[9px] font-black text-green-600 bg-green-100 px-2 py-0.5 rounded-full">{cert.badge}</span>
+                    <span className="text-[9px] font-black text-amber bg-amber/10 px-2 py-0.5 rounded-full">{cert.badge}</span>
                   </button>
                 ))}
              </div>
@@ -291,7 +291,7 @@ export default function FilterSidebar() {
                     key={s}
                     onClick={() => dispatch({ type: 'TOGGLE_ARRAY', field: 'seasons', value: s })}
                     className={`px-4 py-2 rounded-xl text-[10px] font-black transition-all border
-                      ${state.seasons.includes(s) ? 'bg-charcoal text-white border-charcoal' : 'bg-white border-gray-100 text-muted'}`}
+                      ${state.seasons.includes(s) ? 'bg-amber text-midnight border-amber' : 'bg-white/5 border-white/10 text-ecru-muted'}`}
                   >
                     {s}
                   </button>
@@ -301,22 +301,22 @@ export default function FilterSidebar() {
         </div>
 
         {/* Footer Actions */}
-        <div className="p-8 border-t border-gray-100 bg-white lg:rounded-b-[2.5rem]">
-           <div className="flex gap-3 mb-4">
-              <button 
-                onClick={() => dispatch({ type: 'CLEAR_ALL' })}
-                className="flex-1 py-4 border border-gray-100 rounded-2xl text-[10px] font-black uppercase tracking-widest text-muted hover:text-red-500 hover:border-red-100 transition-all flex items-center justify-center gap-2"
-              >
-                <RotateCcw className="w-3.5 h-3.5" /> مسح الكل
-              </button>
-              <button className="flex-1 py-4 border border-gray-100 rounded-2xl text-[10px] font-black uppercase tracking-widest text-muted hover:text-gold hover:border-gold transition-all flex items-center justify-center gap-2">
-                <Save className="w-3.5 h-3.5" /> حفظ البحث
-              </button>
-           </div>
-           <button className="w-full py-5 bg-burgundy text-white rounded-[1.5rem] font-black text-xs uppercase tracking-[0.2em] shadow-2xl shadow-burgundy/30 hover:bg-gold hover:shadow-gold/30 hover:-translate-y-1 transition-all active:scale-[0.98]">
-              عرض {getActiveCount() > 0 ? 'النتائج المفلترة' : 'الكل'}
-           </button>
-        </div>
+         <div className="p-8 border-t border-white/5 bg-midnight/50 lg:rounded-b-[2.5rem]">
+            <div className="flex gap-3 mb-4">
+               <button 
+                 onClick={() => dispatch({ type: 'CLEAR_ALL' })}
+                 className="flex-1 py-4 border border-white/10 rounded-2xl text-[10px] font-black uppercase tracking-widest text-ecru-muted hover:text-red-400 hover:border-red-400/20 transition-all flex items-center justify-center gap-2"
+               >
+                 <RotateCcw className="w-3.5 h-3.5" /> مسح الكل
+               </button>
+               <button className="flex-1 py-4 border border-white/10 rounded-2xl text-[10px] font-black uppercase tracking-widest text-ecru-muted hover:text-amber hover:border-amber transition-all flex items-center justify-center gap-2">
+                 <Save className="w-3.5 h-3.5" /> حفظ البحث
+               </button>
+            </div>
+            <button className="w-full py-5 bg-amber text-midnight rounded-[1.5rem] font-black text-xs uppercase tracking-[0.2em] shadow-2xl shadow-amber/30 hover:bg-amber-light hover:shadow-amber/50 hover:-translate-y-1 transition-all active:scale-[0.98]">
+               عرض {getActiveCount() > 0 ? 'النتائج المفلترة' : 'الكل'}
+            </button>
+         </div>
       </aside>
     </>
   );

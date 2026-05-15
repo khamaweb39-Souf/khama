@@ -15,10 +15,12 @@ import { TrendsSection, MarketDashboard, ActiveRFQs, Testimonials } from '../com
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col w-full overflow-x-hidden">
+    <div className="flex flex-col w-full overflow-x-hidden bg-midnight">
       <SEOHead type="WebSite" data={getHomeSchema()} />
       {/* Cinematic Hero Section */}
       <HeroSection />
+      
+      <div className="relative z-10 -mt-20">
       
       {/* Quick Categories Section */}
       <QuickCategories />
@@ -32,10 +34,9 @@ export default function HomePage() {
       {/* Trends Section (Editorial Dark) */}
       <TrendsSection />
 
-      {/* Main Catalog Section (Light Luxury) */}
-      <section className="bg-ecru/30 py-24" id="catalog">
-        <div className="max-w-7xl mx-auto w-full px-4 flex flex-col lg:flex-row gap-10">
-          <aside className="hidden lg:block w-[300px] shrink-0">
+      <section className="bg-midnight py-16" id="catalog">
+        <div className="max-w-7xl mx-auto w-full px-6 flex flex-col lg:flex-row gap-12">
+          <aside className="hidden lg:block w-[320px] shrink-0">
             <div className="sticky top-32">
               <FilterSidebar />
             </div>
@@ -66,6 +67,7 @@ export default function HomePage() {
 
       {/* Newsletter */}
       <NewsletterSection />
+      </div>
     </div>
   );
 }

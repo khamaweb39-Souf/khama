@@ -11,7 +11,7 @@ const COURSES = [
 
 export default function LatestCourses() {
   return (
-    <section className="py-24 bg-ecru/20" dir="rtl">
+    <section className="py-24 bg-midnight" dir="rtl">
       <div className="max-w-7xl mx-auto px-4">
         <div className="bg-charcoal rounded-[3rem] p-10 md:p-16 relative overflow-hidden shadow-2xl">
            {/* Decorative background circle */}
