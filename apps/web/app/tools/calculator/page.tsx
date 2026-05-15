@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   Calculator, Package, Truck, 
   ChevronRight, Info, AlertCircle,
-  FileText, ArrowRight
+  FileText, ArrowRight, Globe
 } from 'lucide-react';
 import Link from 'next/link';
 
