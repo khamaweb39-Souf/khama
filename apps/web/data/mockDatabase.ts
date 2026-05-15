@@ -10,6 +10,7 @@ export const MOCK_PRODUCTS = [
     collection: 'HERITAGE 2026',
     certifications: ['GOTS', 'OEKO-TEX Standard 100'],
     sustainabilityScore: 5,
+    createdAt: '2024-01-01T00:00:00Z',
     supplier: { id: 's1', name: 'نسيج ليون - الجزائر', isVerified: true, avatar: '🏢' },
     origin: { country: 'الجزائر', flag: '🇩🇿' },
     composition: [
@@ -36,6 +37,7 @@ export const MOCK_PRODUCTS = [
     collection: 'SAFE-TECH',
     certifications: ['ISO 9001', 'UL Certified', 'ASTM'],
     sustainabilityScore: 4,
+    createdAt: '2024-01-01T00:00:00Z',
     supplier: { id: 's8', name: 'تجهيزات الشرق للنسيج', isVerified: true, avatar: '🏗️' },
     origin: { country: 'ألمانيا', flag: '🇩🇪' },
     composition: [
@@ -61,6 +63,7 @@ export const MOCK_PRODUCTS = [
     collection: 'GREEN-FLOW',
     certifications: ['GOTS', 'PETA-Approved Vegan'],
     sustainabilityScore: 5,
+    createdAt: '2024-01-01T00:00:00Z',
     supplier: { id: 's2', name: 'بيوتيك الجزائر (BioTex)', isVerified: true, avatar: '🌿' },
     origin: { country: 'الجزائر', flag: '🇩🇿' },
     composition: [
@@ -87,6 +90,7 @@ export const MOCK_PRODUCTS = [
     collection: 'ALPINE 2026',
     certifications: ['ISO 14001'],
     sustainabilityScore: 3,
+    createdAt: '2024-01-01T00:00:00Z',
     supplier: { id: 's4', name: 'أصواف الأطلس', isVerified: true, avatar: '🐑' },
     origin: { country: 'المغرب', flag: '🇲🇦' },
     composition: [
@@ -113,6 +117,7 @@ export const MOCK_PRODUCTS = [
     collection: 'DENIM-HEAD',
     certifications: ['BCI Cotton'],
     sustainabilityScore: 4,
+    createdAt: '2024-01-01T00:00:00Z',
     supplier: { id: 's9', name: 'المتحدة للنسيج', isVerified: true, avatar: '👖' },
     origin: { country: 'اليابان', flag: '🇯🇵' },
     composition: [
@@ -138,6 +143,7 @@ export const MOCK_PRODUCTS = [
     collection: 'GALA 2026',
     certifications: ['OEKO-TEX'],
     sustainabilityScore: 3,
+    createdAt: '2024-01-01T00:00:00Z',
     supplier: { id: 's1', name: 'نسيج ليون - الجزائر', isVerified: true, avatar: '🏢' },
     origin: { country: 'الجزائر', flag: '🇩🇿' },
     composition: [
@@ -164,6 +170,7 @@ export const MOCK_PRODUCTS = [
     collection: 'TACTICAL',
     certifications: ['ISO 9001', 'Military Grade'],
     sustainabilityScore: 4,
+    createdAt: '2024-01-01T00:00:00Z',
     supplier: { id: 's8', name: 'تجهيزات الشرق للنسيج', isVerified: true, avatar: '🏗️' },
     origin: { country: 'الجزائر', flag: '🇩🇿' },
     composition: [
@@ -190,6 +197,7 @@ export const MOCK_PRODUCTS = [
     collection: 'ACTIVE-ECO',
     certifications: ['GRS (Global Recycled Standard)', 'OEKO-TEX'],
     sustainabilityScore: 5,
+    createdAt: '2024-01-01T00:00:00Z',
     supplier: { id: 's2', name: 'بيوتيك الجزائر (BioTex)', isVerified: true, avatar: '🌿' },
     origin: { country: 'الجزائر', flag: '🇩🇿' },
     composition: [
@@ -215,6 +223,7 @@ export const MOCK_PRODUCTS = [
     collection: 'SAVILE-DZ',
     certifications: ['Handwoven Algerian'],
     sustainabilityScore: 5,
+    createdAt: '2024-01-01T00:00:00Z',
     supplier: { id: 's4', name: 'أصواف الأطلس', isVerified: true, avatar: '🐑' },
     origin: { country: 'الجزائر', flag: '🇩🇿' },
     composition: [
@@ -240,6 +249,7 @@ export const MOCK_PRODUCTS = [
     collection: 'VINTAGE-VIBE',
     certifications: ['BCI Cotton'],
     sustainabilityScore: 4,
+    createdAt: '2024-01-01T00:00:00Z',
     supplier: { id: 's1', name: 'نسيج ليون - الجزائر', isVerified: true, avatar: '🏢' },
     origin: { country: 'الجزائر', flag: '🇩🇿' },
     composition: [
@@ -266,6 +276,7 @@ export const MOCK_PRODUCTS = [
     collection: 'ETHEREAL',
     certifications: ['OEKO-TEX'],
     sustainabilityScore: 4,
+    createdAt: '2024-01-01T00:00:00Z',
     supplier: { id: 's2', name: 'حرير الأطلس', isVerified: true, avatar: '🦋' },
     origin: { country: 'الجزائر', flag: '🇩🇿' },
     composition: [
@@ -291,6 +302,7 @@ export const MOCK_PRODUCTS = [
     collection: 'STORM-PROOF',
     certifications: ['REACH Compliance'],
     sustainabilityScore: 3,
+    createdAt: '2024-01-01T00:00:00Z',
     supplier: { id: 's9', name: 'المتحدة للنسيج', isVerified: true, avatar: '🧥' },
     origin: { country: 'الجزائر', flag: '🇩🇿' },
     composition: [
@@ -317,6 +329,7 @@ export const MOCK_PRODUCTS = [
     collection: 'OFFICE-PRO',
     certifications: ['BCI Cotton'],
     sustainabilityScore: 4,
+    createdAt: '2024-01-01T00:00:00Z',
     supplier: { id: 's2', name: 'بيوتيك الجزائر (BioTex)', isVerified: true, avatar: '🌿' },
     origin: { country: 'الجزائر', flag: '🇩🇿' },
     composition: [
@@ -342,6 +355,7 @@ export const MOCK_PRODUCTS = [
     collection: 'HEALTH-SAFE',
     certifications: ['CE Medical Grade', 'ISO 13485'],
     sustainabilityScore: 3,
+    createdAt: '2024-01-01T00:00:00Z',
     supplier: { id: 's8', name: 'تجهيزات الشرق للنسيج', isVerified: true, avatar: '🏗️' },
     origin: { country: 'الجزائر', flag: '🇩🇿' },
     composition: [
@@ -367,6 +381,7 @@ export const MOCK_PRODUCTS = [
     collection: 'ANIMAL-FREE',
     certifications: ['PETA-Approved Vegan', 'GRS'],
     sustainabilityScore: 5,
+    createdAt: '2024-01-01T00:00:00Z',
     supplier: { id: 's7', name: 'جرين ليدر المغرب', isVerified: true, avatar: '🌱' },
     origin: { country: 'المغرب', flag: '🇲🇦' },
     composition: [
