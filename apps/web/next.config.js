@@ -8,6 +8,7 @@ const nextConfig = {
       { hostname: 'res.cloudinary.com' },
       { hostname: 'images.unsplash.com' },
       { hostname: 'khama.dz' },
+      { hostname: 'www.transparenttextures.com' },
     ],
   },
   eslint: {

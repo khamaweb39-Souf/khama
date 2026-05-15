@@ -1,106 +1,133 @@
 'use client';
 
 import React from 'react';
-import { 
-  Target, Eye, Heart, 
-  Users, Globe, Zap, 
-  Award, Briefcase 
-} from 'lucide-react';
 import Link from 'next/link';
+import * as Icons from 'lucide-react';
+import Image from 'next/image';
+
+const { 
+  Target, Eye, Heart, 
+  History, Users, Globe,
+  ArrowRight, Sparkles, Building,
+  Factory, Zap, Palette, ShieldCheck
+} = Icons;
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-white pb-32 pt-32" dir="rtl">
-      <div className="max-w-7xl mx-auto px-6">
-        
-        {/* Story Section */}
-        <div className="grid lg:grid-cols-2 gap-20 items-center mb-32">
-           <div className="space-y-8">
-              <span className="text-[10px] font-black text-gold uppercase tracking-[0.3em]">قصة خامة</span>
-              <h1 className="text-6xl font-black text-burgundy tracking-tighter leading-tight">نعيد صياغة <br />مستقبل المنسوجات</h1>
-              <p className="text-xl text-charcoal/60 leading-relaxed font-medium">
-                 بدأت "خامة" كفكرة طموحة لسد الفجوة الرقمية في صناعة المنسوجات والجلود في أفريقيا. نحن نؤمن أن التكنولوجيا هي الخيط الذي سيربط بين الموردين المحليين والأسواق العالمية بذكاء واستدامة.
-              </p>
-              <div className="grid grid-cols-2 gap-8 pt-8 border-t border-ecru">
-                 <div className="space-y-2">
-                    <h4 className="text-4xl font-black text-burgundy">2024</h4>
-                    <p className="text-xs font-bold text-muted uppercase tracking-widest">تأسيس المنصة</p>
+    <div className="min-h-screen bg-white" dir="rtl">
+      
+      {/* Cinematic Hero */}
+      <section className="relative h-[80vh] flex items-center overflow-hidden bg-charcoal">
+         <div className="absolute inset-0">
+            <Image 
+              src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?q=80&w=1920&auto=format&fit=crop" 
+              fill
+              className="object-cover opacity-30 grayscale" 
+              alt="Khama Story"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/50 to-transparent" />
+         </div>
+         <div className="max-w-7xl mx-auto px-4 relative z-10 w-full">
+            <div className="max-w-3xl space-y-8 text-right">
+               <div className="inline-flex items-center gap-2 bg-gold/20 text-gold px-4 py-2 rounded-full border border-gold/30 backdrop-blur-md">
+                  <Sparkles className="w-4 h-4" />
+                  <span className="text-[10px] font-black uppercase tracking-widest">قصتنا وتوجهنا</span>
+               </div>
+               <h1 className="text-7xl font-black text-white tracking-tighter leading-[1.1]">
+                  خامة: الرؤية <br />
+                  <span className="text-gold">الرقمية للنسيج</span>
+               </h1>
+               <p className="text-white/60 text-xl font-medium leading-relaxed max-w-2xl">
+                  نحن لسنا مجرد منصة تجارية، بل نحن جسر تكنولوجي يربط بين إرث النسيج العريق في شمال أفريقيا ومستقبل الصناعة الرقمي العالمي.
+               </p>
+            </div>
+         </div>
+      </section>
+
+      <div className="max-w-7xl mx-auto px-4 py-32">
+         
+         {/* Stats Section */}
+         <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 mb-32">
+            {[
+              { label: 'مورد معتمد', value: '+500', Icon: Building },
+              { label: 'نوع نسيج', value: '+2,000', Icon: Palette },
+              { label: 'طلبات ناجحة', value: '+10k', Icon: Zap },
+              { label: 'دول أفريقية', value: '12', Icon: Globe }
+            ].map((stat, i) => (
+              <div key={i} className="space-y-4 text-center group">
+                 <div className="w-16 h-16 bg-ecru/30 rounded-[1.5rem] flex items-center justify-center text-gold mx-auto group-hover:bg-gold group-hover:text-white transition-all duration-500 transform group-hover:scale-110">
+                    <stat.Icon />
                  </div>
-                 <div className="space-y-2">
-                    <h4 className="text-4xl font-black text-burgundy">500+</h4>
-                    <p className="text-xs font-bold text-muted uppercase tracking-widest">مورد معتمد</p>
+                 <div className="space-y-1">
+                    <h3 className="text-4xl font-black text-burgundy">{stat.value}</h3>
+                    <p className="text-[10px] font-black text-muted uppercase tracking-[0.2em]">{stat.label}</p>
                  </div>
               </div>
-           </div>
-           <div className="relative">
-              <div className="absolute inset-0 bg-gold/10 rounded-[4rem] -rotate-3" />
-              <img 
-                src="https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?q=80&w=800&auto=format&fit=crop" 
-                className="relative z-10 rounded-[4rem] shadow-2xl object-cover aspect-square"
-                alt="Khama Vision"
-              />
-           </div>
-        </div>
+            ))}
+         </div>
 
-        {/* Mission & Vision */}
-        <div className="grid md:grid-cols-2 gap-8 mb-32">
-           <div className="p-16 bg-burgundy rounded-[4rem] text-white space-y-6 relative overflow-hidden">
-              <Target className="w-12 h-12 text-gold relative z-10" />
-              <h2 className="text-3xl font-black relative z-10">مهمتنا</h2>
-              <p className="text-white/60 text-lg leading-relaxed font-medium relative z-10">
-                 تمكين كافة أطراف صناعة النسيج في المنطقة من خلال توفير منصة رقمية متطورة تضمن الشفافية، الجودة، وسهولة الوصول للخامات المتميزة.
-              </p>
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
-           </div>
-           <div className="p-16 bg-[#FAF9F6] rounded-[4rem] border border-ecru space-y-6 group">
-              <Eye className="w-12 h-12 text-gold transition-transform group-hover:scale-110" />
-              <h2 className="text-3xl font-black text-burgundy">رؤيتنا</h2>
-              <p className="text-charcoal/60 text-lg leading-relaxed font-medium">
-                 أن نصبح المحرك الرقمي الأول لصناعة الأزياء والمنسوجات في أفريقيا، ونحولها إلى قطاع منافس عالمياً يعتمد على الابتكار والاستدامة.
-              </p>
-           </div>
-        </div>
+         {/* Mission & Vision */}
+         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 mb-40">
+            <div className="space-y-10 p-16 bg-burgundy rounded-[4rem] text-right relative overflow-hidden group">
+               <Target className="w-16 h-16 text-gold relative z-10" />
+               <div className="space-y-6 relative z-10">
+                  <h2 className="text-4xl font-black text-white">مهمتنا</h2>
+                  <p className="text-white/60 text-lg leading-relaxed font-medium">
+                     تمكين الحرفيين والمصانع من الوصول إلى أجود الخامات بأفضل الأسعار، عبر أتمتة سلاسل الإمداد وتقليل الوسطاء، لضمان نمو مستدام للصناعة الوطنية.
+                  </p>
+               </div>
+            </div>
+            <div className="space-y-10 p-16 bg-ecru/30 rounded-[4rem] text-right group hover:bg-gold transition-all duration-700">
+               <Eye className="w-16 h-16 text-burgundy group-hover:text-white transition-colors" />
+               <div className="space-y-6">
+                  <h2 className="text-4xl font-black text-burgundy group-hover:text-white transition-colors">رؤيتنا</h2>
+                  <p className="text-muted text-lg leading-relaxed font-medium group-hover:text-white/80 transition-colors">
+                     أن نكون المركز الرقمي الأول للمنسوجات والجلود في أفريقيا بحلول عام 2030، ومحركاً أساسياً في دفع عجلة التحول الصناعي الذكي في المنطقة.
+                  </p>
+               </div>
+            </div>
+         </div>
 
-        {/* Values */}
-        <div className="space-y-16">
-           <div className="text-center space-y-4">
-              <h2 className="text-4xl font-black text-burgundy">قيمنا الجوهرية</h2>
-              <div className="h-1.5 w-24 bg-gold mx-auto rounded-full" />
-           </div>
+         {/* Values */}
+         <div className="text-center space-y-4 mb-20">
+            <h2 className="text-4xl font-black text-burgundy">قيمنا الجوهرية</h2>
+            <p className="text-muted font-medium">المبادئ التي تقود كل قرار نتخذه في "خامة"</p>
+         </div>
 
-           <div className="grid md:grid-cols-4 gap-8">
-              {[
-                { title: 'الشفافية', icon: <Zap className="w-6 h-6" />, desc: 'وضوح تام في الأسعار والمواصفات.' },
-                { title: 'الجودة', icon: <Award className="w-6 h-6" />, desc: 'لا تنازل عن المعايير التقنية.' },
-                { title: 'الابتكار', icon: <Globe className="w-6 h-6" />, desc: 'استخدام أحدث تقنيات الجرافيك والـ 3D.' },
-                { title: 'المجتمع', icon: <Users className="w-6 h-6" />, desc: 'بناء شبكة علاقات مهنية قوية.' }
-              ].map((val, i) => (
-                <div key={i} className="text-center space-y-4 p-8 hover:bg-ecru/30 rounded-3xl transition-all">
-                   <div className="w-16 h-16 bg-gold/10 rounded-2xl flex items-center justify-center text-gold mx-auto">
-                      {val.icon}
-                   </div>
-                   <h4 className="text-xl font-black text-charcoal">{val.title}</h4>
-                   <p className="text-xs text-muted font-bold leading-relaxed">{val.desc}</p>
-                </div>
-              ))}
-           </div>
-        </div>
+         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-40">
+            {[
+              { title: 'الابتكار المستمر', desc: 'تطوير أدوات ذكاء اصطناعي ومعاينة 3D لتسهيل عملية التصميم والإنتاج.', Icon: Zap, color: 'text-gold' },
+              { title: 'الاحترافية المطلقة', desc: 'نظام صارم لتوثيق الموردين وضمان جودة المنتجات المتاحة على المنصة.', Icon: ShieldCheck, color: 'text-burgundy' },
+              { title: 'التركيز على العميل', desc: 'بناء علاقات طويلة الأمد قائمة على النجاح المشترك والنمو المتبادل.', Icon: Users, color: 'text-gold' }
+            ].map((value, i) => (
+              <div key={i} className="text-right space-y-6 p-8 border-2 border-ecru rounded-[2.5rem] hover:border-gold transition-all">
+                 <div className="w-12 h-12 bg-gray-100 rounded-2xl flex items-center justify-center">
+                    <value.Icon className={value.color} />
+                 </div>
+                 <h4 className="text-xl font-black text-burgundy">{value.title}</h4>
+                 <p className="text-muted text-sm font-medium leading-relaxed">{value.desc}</p>
+              </div>
+            ))}
+         </div>
 
-        {/* Team / Join CTA */}
-        <div className="mt-40 bg-charcoal rounded-[4rem] p-20 text-center space-y-10 relative overflow-hidden">
-           <div className="absolute inset-0 bg-gradient-to-br from-gold/5 to-transparent pointer-events-none" />
-           <div className="w-20 h-20 bg-white/5 rounded-3xl flex items-center justify-center mx-auto text-gold mb-4 rotate-12">
-              <Briefcase className="w-10 h-10" />
-           </div>
-           <h2 className="text-5xl font-black text-white tracking-tighter">هل تود المساهمة في <br />تغيير الصناعة؟</h2>
-           <p className="text-white/40 text-lg font-medium max-w-2xl mx-auto">
-              نحن نبحث دائماً عن المبدعين والمطورين وخبراء النسيج للانضمام لفريقنا المتنامي في الجزائر.
-           </p>
-           <div className="flex items-center justify-center gap-6 pt-6">
-              <Link href="/careers" className="bg-gold text-charcoal px-12 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:scale-105 transition-all">انضم إلينا</Link>
-              <Link href="/contact" className="text-white font-black hover:text-gold transition-colors underline underline-offset-8">تواصل معنا</Link>
-           </div>
-        </div>
+         {/* Partners CTA */}
+         <div className="bg-ecru/20 rounded-[5rem] p-20 flex flex-col items-center text-center gap-12 border-2 border-dashed border-ecru">
+            <div className="space-y-4">
+               <h2 className="text-4xl font-black text-burgundy">انضم إلى مستقبل النسيج</h2>
+               <p className="text-muted text-lg font-medium max-w-2xl">
+                  سواء كنت مصنعاً يبحث عن عملاء جدد، أو مصمماً يبحث عن خامات نادرة، "خامة" هي المكان الذي تبدأ فيه رحلة نجاحك.
+               </p>
+            </div>
+            <div className="flex gap-6">
+               <Link href="/register" className="px-12 py-6 bg-burgundy text-white font-black text-xs uppercase tracking-[0.2em] rounded-[2rem] shadow-2xl hover:scale-105 transition-all">
+                  ابدأ الآن مجاناً
+               </Link>
+               <Link href="/contact" className="px-12 py-6 bg-white border-2 border-ecru text-charcoal font-black text-xs uppercase tracking-[0.2em] rounded-[2rem] hover:border-gold transition-all">
+                  تحدث مع فريقنا
+               </Link>
+            </div>
+         </div>
 
       </div>
     </div>

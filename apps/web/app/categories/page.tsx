@@ -3,116 +3,150 @@
 import React from 'react';
 import Link from 'next/link';
 import { 
-  ChevronLeft, Layers, Wind, 
-  Palette, ShieldCheck, TrendingUp 
+  Wind, Layers, ShieldCheck, 
+  ArrowRight, Sparkles, TrendingUp,
+  Box, Zap, Search
 } from 'lucide-react';
 
 const CATEGORIES = [
-  { 
-    id: 'natural', 
-    title: 'ألياف طبيعية', 
-    desc: 'أقمشة مستخرجة من الطبيعة (قطن، صوف، حرير)',
-    icon: <Wind className="w-8 h-8" />,
+  {
+    id: 'natural',
+    title: 'ألياف طبيعية',
+    desc: 'الخامات المستمدة مباشرة من الطبيعة، تجمع بين الراحة والاستدامة.',
+    image: 'https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?q=80&w=800&auto=format&fit=crop',
     items: [
-      { name: 'قطن بريميوم', slug: 'cotton', count: 142 },
-      { name: 'صوف جزائري', slug: 'wool', count: 85 },
-      { name: 'حرير طبيعي', slug: 'silk', count: 64 },
-      { name: 'كتان عضوي', slug: 'linen', count: 42 }
+      { label: 'قطن بريميوم', link: '/cat/cotton', icon: <Wind className="w-4 h-4" /> },
+      { label: 'صوف جزائري', link: '/cat/wool', icon: <Layers className="w-4 h-4" /> },
+      { label: 'حرير طبيعي', link: '/cat/silk', icon: <Sparkles className="w-4 h-4" /> },
+      { label: 'كتان عضوي', link: '/cat/linen', icon: <ShieldCheck className="w-4 h-4" /> }
     ]
   },
-  { 
-    id: 'synthetic', 
-    title: 'ألياف اصطناعية', 
-    desc: 'حلول نسيجية تقنية ومعاد تدويرها',
-    icon: <Layers className="w-8 h-8" />,
+  {
+    id: 'synthetic',
+    title: 'ألياف اصطناعية',
+    desc: 'تقنيات نسيج متطورة توفر متانة عالية ومقاومة للظروف الصعبة.',
+    image: 'https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?q=80&w=800&auto=format&fit=crop',
     items: [
-      { name: 'بوليستر معاد تدويره', slug: 'poly', count: 210 },
-      { name: 'نايلون تقني', slug: 'nylon', count: 95 },
-      { name: 'ليكرا سبانديكس', slug: 'lycra', count: 76 }
+      { label: 'بوليستر معاد تدويره', link: '/cat/poly', icon: <Box className="w-4 h-4" /> },
+      { label: 'نايلون تقني', link: '/cat/nylon', icon: <Zap className="w-4 h-4" /> },
+      { label: 'ليكرا سبانديكس', link: '/cat/lycra', icon: <TrendingUp className="w-4 h-4" /> }
     ]
   },
-  { 
-    id: 'luxury', 
-    title: 'خامات فاخرة', 
-    desc: 'للمناسبات الراقية والأزياء المخصصة',
-    icon: <Palette className="w-8 h-8" />,
+  {
+    id: 'industrial',
+    title: 'منسوجات صناعية',
+    desc: 'حلول نسيجية مخصصة للمصانع والورش الكبرى، ذات مواصفات قياسية.',
+    image: 'https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=800&auto=format&fit=crop',
     items: [
-      { name: 'جاكارد ملكي', slug: 'jacquard', count: 34 },
-      { name: 'ساتان فاخر', slug: 'satin', count: 56 },
-      { name: 'مخمل مطرز', slug: 'velvet', count: 28 }
+      { label: 'جاكارد ملكي', link: '/cat/jacquard', icon: <Layers className="w-4 h-4" /> },
+      { label: 'غابردين متين', link: '/cat/gabardine', icon: <ShieldCheck className="w-4 h-4" /> },
+      { label: 'ساتان فاخر', link: '/cat/satin', icon: <Sparkles className="w-4 h-4" /> }
     ]
   }
 ];
 
 export default function CategoriesPage() {
   return (
-    <div className="min-h-screen bg-[#FDFCFB] pb-20 pt-32" dir="rtl">
-      <div className="max-w-7xl mx-auto px-6">
+    <div className="min-h-screen bg-white pt-32 pb-20" dir="rtl">
+      <div className="max-w-7xl mx-auto px-4">
         
         {/* Header Section */}
-        <div className="max-w-3xl mb-20 space-y-6">
-           <span className="text-[10px] font-black text-gold uppercase tracking-[0.3em]">دليل الخامات</span>
-           <h1 className="text-6xl font-black text-burgundy tracking-tighter">استكشف عالم <br />الأقمشة الرقمي</h1>
-           <p className="text-lg text-charcoal/60 leading-relaxed font-medium">تصفح أكبر قاعدة بيانات للأقمشة في المنطقة، مصنفة حسب المنشأ، التركيبة، والاستخدام التقني.</p>
+        <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">
+          <div className="space-y-4 max-w-2xl">
+            <h1 className="text-5xl font-black text-burgundy tracking-tight leading-tight">
+              استكشف عالم <br />
+              <span className="text-gold">المنسوجات والجلود</span>
+            </h1>
+            <p className="text-muted text-lg leading-relaxed font-medium">
+              دليل "خامة" الشامل لكافة أنواع الألياف والمنسوجات، مصنف وفق المعايير العالمية لصناعة النسيج.
+            </p>
+          </div>
+          
+          <div className="flex gap-4">
+            <div className="relative group">
+              <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted group-focus-within:text-gold transition-colors" />
+              <input 
+                type="text" 
+                placeholder="ابحث عن نوع نسيج..."
+                className="bg-ecru/30 border border-ecru py-4 pr-12 pl-6 rounded-2xl outline-none focus:border-gold transition-all text-sm font-bold w-64"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Categories Grid */}
-        <div className="grid lg:grid-cols-3 gap-8">
-           {CATEGORIES.map((cat) => (
-             <div key={cat.id} className="bg-white rounded-[3rem] p-10 border-2 border-burgundy/5 shadow-sm hover:shadow-2xl transition-all duration-500 group">
-                <div className="w-16 h-16 bg-burgundy/5 rounded-2xl flex items-center justify-center text-burgundy mb-8 group-hover:scale-110 group-hover:bg-gold group-hover:text-white transition-all duration-500">
-                   {cat.icon}
+        <div className="grid grid-cols-1 gap-20">
+          {CATEGORIES.map((category, idx) => (
+            <section key={category.id} className={`flex flex-col lg:flex-row gap-12 items-center ${idx % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
+              
+              {/* Visual Side */}
+              <div className="w-full lg:w-1/2 relative group overflow-hidden rounded-[3rem] aspect-[16/10] shadow-2xl">
+                <img 
+                  src={category.image} 
+                  alt={category.title} 
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-burgundy/80 via-burgundy/20 to-transparent" />
+                <div className="absolute bottom-10 right-10 left-10">
+                   <h2 className="text-4xl font-black text-white mb-2">{category.title}</h2>
+                   <p className="text-white/70 font-medium text-sm max-w-md">{category.desc}</p>
                 </div>
-                <h2 className="text-2xl font-black text-charcoal mb-4">{cat.title}</h2>
-                <p className="text-sm text-charcoal/40 mb-8 font-medium leading-relaxed">{cat.desc}</p>
-                
-                <div className="space-y-4">
-                   {cat.items.map((item) => (
-                     <Link 
-                       key={item.slug} 
-                       href={`/cat/${item.slug}`}
-                       className="flex items-center justify-between p-4 bg-gray-50 rounded-2xl hover:bg-gold/10 transition-colors group/item"
-                     >
-                        <div className="flex items-center gap-3">
-                           <div className="w-1.5 h-1.5 rounded-full bg-gold" />
-                           <span className="text-sm font-black text-charcoal group-hover/item:text-gold transition-colors">{item.name}</span>
-                        </div>
-                        <span className="text-[10px] font-black text-charcoal/20">{item.count} منتج</span>
-                     </Link>
-                   ))}
-                </div>
+              </div>
 
-                <Link 
-                  href="/fabrics" 
-                  className="mt-10 flex items-center gap-3 text-xs font-black text-gold uppercase tracking-widest hover:translate-x-[-8px] transition-all"
-                >
-                   عرض الكل <ChevronLeft className="w-4 h-4" />
-                </Link>
-             </div>
-           ))}
+              {/* Items Side */}
+              <div className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                 {category.items.map((item) => (
+                   <Link 
+                     key={item.label} 
+                     href={item.link}
+                     className="group flex items-center justify-between p-6 bg-white border-2 border-ecru rounded-[2rem] hover:border-gold hover:shadow-xl transition-all duration-300"
+                   >
+                      <div className="flex items-center gap-4">
+                         <div className="w-12 h-12 bg-ecru/30 rounded-2xl flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-white transition-all">
+                            {item.icon}
+                         </div>
+                         <span className="text-sm font-black text-charcoal">{item.label}</span>
+                      </div>
+                      <ArrowRight className="w-5 h-5 text-ecru group-hover:text-gold transition-colors" />
+                   </Link>
+                 ))}
+                 
+                 {/* Discover More Card */}
+                 <div className="sm:col-span-2 p-8 bg-burgundy rounded-[2rem] flex items-center justify-between group cursor-pointer hover:bg-burgundy-dark transition-colors">
+                    <div className="flex items-center gap-6">
+                       <div className="w-14 h-14 bg-gold rounded-2xl flex items-center justify-center shadow-lg">
+                          <TrendingUp className="w-6 h-6 text-white" />
+                       </div>
+                       <div className="text-right">
+                          <h4 className="text-white font-black">أحدث اتجاهات الـ {category.title}</h4>
+                          <p className="text-white/40 text-xs font-bold mt-1 uppercase tracking-widest">موسم ربيع/صيف 2026</p>
+                       </div>
+                    </div>
+                    <button className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">
+                       عرض التقرير
+                    </button>
+                 </div>
+              </div>
+
+            </section>
+          ))}
         </div>
 
-        {/* Featured Section */}
-        <div className="mt-24 bg-burgundy rounded-[4rem] p-16 relative overflow-hidden text-white">
-           <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-           <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12">
-              <div className="space-y-6 max-w-xl">
-                 <h2 className="text-4xl font-black">تبحث عن خامة مخصصة؟</h2>
-                 <p className="text-white/60 text-lg leading-relaxed font-medium">يمكنك إرسال طلب عرض سعر (RFQ) للموردين وتحديد المواصفات التقنية الدقيقة التي تحتاجها لمشروعك القادم.</p>
-                 <Link href="/rfq/create" className="inline-block bg-gold text-charcoal px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:scale-105 transition-all">ابدأ الآن</Link>
-              </div>
-              <div className="grid grid-cols-2 gap-4 w-full max-w-md">
-                 <div className="p-6 bg-white/5 rounded-3xl border border-white/10 space-y-3">
-                    <ShieldCheck className="w-8 h-8 text-gold" />
-                    <h4 className="font-black">موردون موثوقون</h4>
-                    <p className="text-[10px] text-white/40 leading-relaxed font-medium">نتحقق من السجلات التجارية وجودة المصانع.</p>
-                 </div>
-                 <div className="p-6 bg-white/5 rounded-3xl border border-white/10 space-y-3">
-                    <TrendingUp className="w-8 h-8 text-gold" />
-                    <h4 className="font-black">أسعار تنافسية</h4>
-                    <p className="text-[10px] text-white/40 leading-relaxed font-medium">احصل على أفضل الأسعار لطلبات الجملة.</p>
-                 </div>
-              </div>
+        {/* Bottom CTA */}
+        <div className="mt-32 p-12 bg-ecru/30 rounded-[4rem] border-2 border-dashed border-ecru flex flex-col items-center text-center gap-8">
+           <div className="space-y-4">
+              <h3 className="text-3xl font-black text-burgundy">لم تجد النوع الذي تبحث عنه؟</h3>
+              <p className="text-muted font-medium max-w-xl mx-auto">
+                 يمكنك التواصل مع فريق الدعم الفني لدينا لمساعدتك في إيجاد أفضل خامة تناسب احتياجات مشروعك الصناعي.
+              </p>
+           </div>
+           <div className="flex gap-4">
+              <Link href="/contact" className="px-10 py-5 bg-burgundy text-white font-black text-xs uppercase tracking-widest rounded-2xl shadow-xl hover:scale-105 transition-all">
+                 اتصل بنا
+              </Link>
+              <Link href="/rfq/create" className="px-10 py-5 bg-gold text-white font-black text-xs uppercase tracking-widest rounded-2xl shadow-xl hover:scale-105 transition-all">
+                 اطلب عرض سعر (RFQ)
+              </Link>
            </div>
         </div>
 

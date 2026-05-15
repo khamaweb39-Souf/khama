@@ -349,7 +349,14 @@ export default function HeroSection() {
             src="/images/loom-fallback.jpg"
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover object-[center_30%] transition-opacity duration-1000"
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center 30%',
+            }}
           />
 
           {/* Video (if available) */}
@@ -388,7 +395,21 @@ export default function HeroSection() {
         {/* Diagonal ecru overlay */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-br from-midnight/95 via-midnight/80 to-transparent z-[1] animate-[overlay-breathe_8s_ease-in-out_infinite]"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: `
+              linear-gradient(
+                125deg,
+                rgba(13,12,10,0.92)  0%,
+                rgba(26,25,23,0.82)  25%,
+                rgba(245,240,232,0.08) 58%,
+                rgba(13,12,10,0.65)  100%
+              )
+            `,
+            animation: 'overlay-breathe 8s ease-in-out infinite',
+            zIndex: 1,
+          }}
         />
         {/* Bottom gradient for stat section */}
         <div
@@ -452,14 +473,16 @@ export default function HeroSection() {
 
           {/* ── Badge ────────────────────────────────────────────── */}
           <div
-            className="badge-anim glass-morphism"
+            className="badge-anim"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
               gap: '0.55rem',
               marginBottom: '2rem',
-              padding: '0.6rem 1.5rem',
-              borderRadius: '999px',
+              padding: '0.45rem 1rem',
+              border: '1px solid rgba(201,168,76,0.45)',
+              background: 'rgba(201,168,76,0.08)',
+              backdropFilter: 'blur(8px)',
               opacity: 0,
               animation: contentVisible
                 ? 'badge-enter 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s forwards'
@@ -472,7 +495,7 @@ export default function HeroSection() {
                 fontSize: '0.7rem',
                 animation: reducedMotion ? 'none' : 'star-spin 4s linear infinite',
                 display: 'inline-block',
-                color: 'var(--amber)',
+                color: 'var(--gold)',
               }}
               aria-hidden="true"
             >
@@ -482,10 +505,10 @@ export default function HeroSection() {
               className="font-body"
               style={{
                 fontSize: '0.72rem',
-                letterSpacing: '0.2em',
+                letterSpacing: '0.12em',
                 textTransform: 'uppercase',
-                color: 'var(--ecru-muted)',
-                fontWeight: 800,
+                color: 'var(--gold-light)',
+                fontWeight: 500,
               }}
             >
               المنصة الاحترافية الأولى للمنسوجات في المغرب العربي وأفريقيا
@@ -508,12 +531,12 @@ export default function HeroSection() {
             className="font-display"
             style={{
               fontSize: 'clamp(2.8rem, 6vw, 5.2rem)',
-              fontWeight: 400,
-              lineHeight: 1,
-              letterSpacing: '-0.04em',
+              fontWeight: 300,
+              lineHeight: 1.08,
+              letterSpacing: '-0.01em',
               color: 'var(--ecru)',
-              marginBottom: '2rem',
-              perspective: '1000px',
+              marginBottom: '1.6rem',
+              perspective: '800px',
             }}
           >
             {contentVisible && (
@@ -522,14 +545,14 @@ export default function HeroSection() {
                 <span
                   className="block"
                   style={{
-                    background: `linear-gradient(135deg, var(--amber-light) 0%, var(--amber) 40%, var(--amber-dark) 70%, var(--amber-light) 100%)`,
+                    background: `linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 40%, var(--gold-dark) 70%, var(--gold-light) 100%)`,
                     backgroundSize: '200% auto',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
                     animation: reducedMotion ? 'none' : 'shimmer-gold 4s linear infinite',
-                    fontStyle: 'normal',
-                    fontWeight: 900,
+                    fontStyle: 'italic',
+                    fontWeight: 400,
                   }}
                 >
                   <AnimatedH1 line={H1_LINE_2} baseDelay={350 + H1_LINE_1.length * 42 + 100} />
@@ -576,19 +599,16 @@ export default function HeroSection() {
             {/* Primary CTA */}
             <Link
               href="/fabrics"
-              className="textile-hover font-body inline-flex items-center gap-3"
+              className="btn-gold font-body inline-flex items-center gap-2"
               style={{
-                fontSize: '0.85rem',
-                fontWeight: 900,
-                letterSpacing: '0.15em',
+                fontSize: '0.88rem',
+                fontWeight: 600,
+                letterSpacing: '0.08em',
                 textTransform: 'uppercase',
-                background: 'var(--amber)',
-                color: 'var(--midnight)',
+                color: 'var(--obsidian)',
                 textDecoration: 'none',
-                padding: '1.2rem 2.8rem',
-                borderRadius: '1rem',
+                padding: '0.9rem 2rem',
                 whiteSpace: 'nowrap',
-                boxShadow: '0 10px 30px rgba(201,168,76,0.2)'
               }}
             >
               استكشف الكتالوج
@@ -603,16 +623,15 @@ export default function HeroSection() {
             {/* Ghost CTA */}
             <Link
               href="/rfq/create"
-              className="glass-morphism textile-hover font-body inline-flex items-center gap-2"
+              className="btn-ghost font-body inline-flex items-center gap-2"
               style={{
-                fontSize: '0.85rem',
-                fontWeight: 700,
-                letterSpacing: '0.1em',
+                fontSize: '0.88rem',
+                fontWeight: 500,
+                letterSpacing: '0.08em',
                 textTransform: 'uppercase',
                 color: 'var(--ecru)',
                 textDecoration: 'none',
-                padding: '1.2rem 2.8rem',
-                borderRadius: '1rem',
+                padding: '0.9rem 2rem',
                 whiteSpace: 'nowrap',
               }}
             >

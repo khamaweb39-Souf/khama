@@ -38,8 +38,8 @@ export default function FabricCard(props: FabricCardProps) {
   return (
     <div 
       className={`
-        group relative flex flex-col bg-white rounded-[2rem] border-2 border-midnight/5 overflow-hidden transition-all duration-700
-        ${isHovered ? 'shadow-[0_40px_80px_rgba(13,12,10,0.12)] -translate-y-2 border-amber/20' : 'shadow-sm'}
+        group relative flex flex-col bg-white rounded-[2rem] border-2 border-burgundy/5 overflow-hidden transition-all duration-500
+        ${isHovered ? 'shadow-[0_20px_50px_rgba(201,168,76,0.15)] -translate-y-2 border-gold/20' : 'shadow-sm'}
       `}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -82,11 +82,11 @@ export default function FabricCard(props: FabricCardProps) {
         
         {/* Top Badges */}
         <div className="absolute top-5 right-5 flex flex-col gap-2 z-10">
-          <div className="glass-morphism text-white text-[10px] font-black px-4 py-1.5 rounded-full shadow-lg">
+          <div className="bg-white/20 backdrop-blur-md border border-white/30 text-white text-[10px] font-black px-4 py-1.5 rounded-full shadow-lg">
             {collection}
           </div>
-          <div className="bg-amber text-midnight text-[10px] font-black px-4 py-1.5 rounded-full shadow-lg flex items-center gap-1 animate-pulse">
-            جديد <Star className="w-3 h-3 fill-midnight" />
+          <div className="bg-gold text-white text-[10px] font-black px-4 py-1.5 rounded-full shadow-lg flex items-center gap-1 animate-pulse">
+            جديد <Star className="w-3 h-3 fill-white" />
           </div>
         </div>
 
@@ -94,18 +94,18 @@ export default function FabricCard(props: FabricCardProps) {
         <button 
           onClick={(e) => { e.stopPropagation(); setIsLiked(!isLiked); }}
           className={`
-            absolute top-5 left-5 p-3 rounded-full glass-morphism transition-all duration-500 z-10
-            ${isLiked ? 'bg-midnight text-amber scale-110' : 'bg-white/10 text-white hover:bg-white hover:text-midnight'}
+            absolute top-5 left-5 p-3 rounded-full backdrop-blur-md transition-all duration-300 z-10
+            ${isLiked ? 'bg-burgundy text-white scale-110' : 'bg-white/20 text-white border border-white/30 hover:bg-white hover:text-burgundy'}
           `}
         >
           <Heart className={`w-5 h-5 ${isLiked ? 'fill-current' : ''}`} />
         </button>
 
         {/* 3D View Button (Center Overlay) */}
-        <div className={`absolute inset-0 flex items-center justify-center z-20 transition-all duration-700 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
+        <div className={`absolute inset-0 flex items-center justify-center z-20 transition-all duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
            <button 
              onClick={() => setIs3DOpen(true)}
-             className="px-8 py-4 glass-morphism text-white rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] shadow-2xl hover:bg-amber hover:text-midnight transition-all transform hover:scale-110 flex items-center gap-3"
+             className="px-6 py-3 bg-white text-charcoal rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] shadow-2xl hover:bg-gold hover:text-white transition-all transform hover:scale-110 flex items-center gap-3"
            >
               معاينة 3D <Rotate3D className="w-4 h-4" />
            </button>
@@ -114,8 +114,8 @@ export default function FabricCard(props: FabricCardProps) {
         {/* Bottom Certifications (Glassmorphism) */}
         <div className="absolute bottom-5 left-5 right-5 flex gap-2">
           {certifications.map(cert => (
-            <div key={cert} className="flex items-center gap-1 glass-morphism px-3 py-1.5 rounded-xl shadow-inner">
-               <ShieldCheck className="w-3.5 h-3.5 text-amber" />
+            <div key={cert} className="flex items-center gap-1 bg-white/10 backdrop-blur-xl border border-white/20 px-3 py-1.5 rounded-xl shadow-inner">
+               <ShieldCheck className="w-3.5 h-3.5 text-green-400" />
                <span className="text-[10px] font-black text-white uppercase tracking-wider">{cert}</span>
             </div>
           ))}
@@ -130,14 +130,14 @@ export default function FabricCard(props: FabricCardProps) {
         {/* Product Identity */}
         <div className="space-y-2">
           <div className="flex justify-between items-start">
-            <h3 className="text-xl font-black text-midnight group-hover:text-amber transition-colors leading-tight font-display">
+            <h3 className="text-xl font-black text-charcoal group-hover:text-gold transition-colors leading-tight">
               {name}
-              <span className="block text-xs font-medium text-muted mt-1 opacity-60 font-body">Sergé de Soie Lyonnaise</span>
+              <span className="block text-xs font-medium text-muted mt-1 opacity-60">Sergé de Soie Lyonnaise</span>
             </h3>
             <div className="flex flex-col items-end gap-1">
                <div className="flex items-center gap-1.5 bg-ecru/50 px-2 py-1 rounded-lg">
-                  <Wind className="w-3.5 h-3.5 text-amber" />
-                  <span className="text-[10px] font-bold text-midnight">{technicalSpecs.weave}</span>
+                  <Wind className="w-3.5 h-3.5 text-gold" />
+                  <span className="text-[10px] font-bold text-charcoal">{technicalSpecs.weave}</span>
                </div>
             </div>
           </div>
@@ -206,7 +206,7 @@ export default function FabricCard(props: FabricCardProps) {
                     </div>
                     <div className="h-1.5 w-full bg-gray-200 rounded-full overflow-hidden">
                        <div 
-                         className="h-full bg-amber rounded-full transition-all duration-1000 delay-300" 
+                         className="h-full bg-gold rounded-full transition-all duration-1000 delay-300" 
                          style={{ width: isExpanded ? gsmLevel.width : '0%' }} 
                        />
                     </div>

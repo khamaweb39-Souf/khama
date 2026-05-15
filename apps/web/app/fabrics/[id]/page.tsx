@@ -93,7 +93,7 @@ export default function FabricDetailPage() {
           <ChevronRight className="w-3 h-3 flex-shrink-0" />
           <Link href="/fabrics" className="hover:text-gold transition-colors">الأقمشة</Link>
           <ChevronRight className="w-3 h-3 flex-shrink-0" />
-          <Link href="#" className="hover:text-gold transition-colors">حرير</Link>
+          <Link href="/cat/silk" className="hover:text-gold transition-colors">حرير</Link>
           <ChevronRight className="w-3 h-3 flex-shrink-0" />
           <span className="text-charcoal truncate">{MOCK_DETAIL.nameAr}</span>
         </div>

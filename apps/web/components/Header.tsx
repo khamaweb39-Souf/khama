@@ -131,9 +131,9 @@ export default function Header() {
           { label: 'الأدوات التقنية للمحترفين', link: '/tools' }
         ]},
         { title: 'الموردون', items: [
-          { label: 'موردون جزائريون معتمدون', link: '/suppliers' },
+          { label: 'موردون جزائريون معتمدون', link: '/suppliers/verified' },
           { label: 'مراكز التوزيع الكبرى', link: '/suppliers' },
-          { label: 'المتاجر الرسمية الموثقة', link: '/suppliers/verified' },
+          { label: 'المتاجر الرسمية', link: '/suppliers' },
           { label: 'نظام توثيق الموردين', link: '/trust' }
         ]}
       ],
