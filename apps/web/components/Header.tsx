@@ -133,8 +133,8 @@ export default function Header() {
         { title: 'الموردون', items: [
           { label: 'موردون جزائريون معتمدون', link: '/suppliers' },
           { label: 'مراكز التوزيع الكبرى', link: '/suppliers' },
-          { label: 'المتاجر الرسمية', link: '#' },
-          { label: 'نظام توثيق الموردين', link: '#' }
+          { label: 'المتاجر الرسمية الموثقة', link: '/suppliers/verified' },
+          { label: 'نظام توثيق الموردين', link: '/trust' }
         ]}
       ],
       promo: {
