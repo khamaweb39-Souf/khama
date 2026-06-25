@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone', 
   images: {
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 60,
@@ -9,6 +8,7 @@ const nextConfig = {
       { hostname: 'images.unsplash.com' },
       { hostname: 'khama.dz' },
       { hostname: 'www.transparenttextures.com' },
+      { hostname: 'ui-avatars.com' },
     ],
   },
   eslint: {
